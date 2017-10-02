@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{$page_title}</title>
+	<meta name="keywords" content="{$keywords}" />
+	<meta name="description" content="{$description}" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="blank" />
+    <meta name="format-detection" content="telephone=no" />  
+    <link href="images/style/reset_css.css" rel="stylesheet" />
+    <link href="images/style/jquery.bxslider.css" rel="stylesheet" />
+	<link href="images/style/swiper.min.css" rel="stylesheet" />
+	<link href="images/style/all.css" rel="stylesheet" />  
+    <script src="images/js/jquery.js"></script>
+    <script src="images/js/jquery.bxslider.js"></script>
+	<script src="images/js/swiper.min.js"></script>
+    <script src="images/js/load.js" defer></script>
+</head>
+<body>
+	<div id="banner">
+    	<div class="banner_nr">
+           <!-- {foreach from=$show_list name=show item=show} -->
+			<div class="slide_"><a href="{$show.show_link}"><img src="{$show.show_img}"/></a></div>
+			<!-- {/foreach} -->
+        </div>
+	</div>
+	<!-- banner结束 -->
+
+	<div id="nav">
+		<ul>
+		   <!-- {foreach from=$nav_list name=nav item=nav} --> 
+			<li><a href="{$nav.url}"{if $nav.target} target="_blank"{/if}><span></span>{$nav.nav_name}</a></li>
+			 <!-- {/foreach} -->
+			
+			
+		</ul>
+        <span class="clear"></span>
+	</div>
+	<!-- nav结束 -->
+
+	<div id="GongGao">
+		<strong>公告</strong>
+        <div id="scrollDiv">
+            <ul class="gonggaolist">
+                <!-- {foreach from=$play_article item=article} -->
+                <li><a href="{$article.url}">{$article.title}</a></li>
+                <!-- {/foreach} -->
+               
+            </ul>
+         </div>        
+		<span class="clear"></span>
+	</div>
+	<!-- GongGao结束 -->
+
+	<div id="AD">
+		<a href="{$fragment.homead.url}" ><img src="{$fragment.homead.image}" alt="图片描述" /></a>
+	</div>
+	<!-- AD结束 -->
+
+	<div id="news">
+			<h3 class="SubTitle">新闻速递 <a href="/m/news_category.php">更多 </a></h3>
+             <!-- {foreach from=$cat_3 item=article} -->
+
+			<div class="FocusNews">
+            	<a href="{$article.url}">
+                        <div class="photo">
+                           {if $article.image}
+                             <img src="{$article.image}" alt="图片描述" />
+                            <!--{else}-->
+                              <img src="{$fragment.none.image}" alt="图片描述" />
+                            {/if}
+                        </div>
+                        <h5> {$article.title}</h5>
+                        <p>{$article.description|truncate:26:"..."} </p>
+                        <span> 时间：{$article.add_time} {if $article.source}作者：{$article.source}{/if}</span>
+                </a>
+			</div>
+            <!-- {/foreach} -->
+            
+            
+			
+            
+            
+            
+            
+	</div>
+	<!-- news结束 -->
+
+	<div id="Teacher">
+			<h3 class="SubTitle">我们的老师 <a href="/m/article_category.php?id=3">更多 </a></h3>
+			<div class="swiper-container">
+               <div class="swiper-wrapper">
+			    <!-- {foreach from=$teacher item=article} -->
+			     <div class="swiper-slide">
+					<div class="Teacher">
+						<a href="{$article.url}" class="pic">
+						{if $article.image}
+							<img src="{$article.image}" alt="图片描述" />
+							<!--{else}-->
+								<img src="{$fragment.none.image}" alt="图片描述" class="photo"/>
+							{/if}
+						</a>
+						<strong>{$article.title}</strong>
+					</div>
+				 </div>
+			     <!-- {/foreach} -->
+		      </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+            </div>  
+		<span class="clear"></span>
+	</div>
+	<!-- Teacher结束 -->
+	{include file="inc/footer.tpl"}
+	<!-- footer结束 -->
+	{include file="inc/menu.tpl"}
+	<!-- menu结束 -->
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{$page_title}</title>
+	<meta name="keywords" content="{$keywords}" />
+	<meta name="description" content="{$description}" />
+	<link href="images/style/reset_css.css" rel="stylesheet" />
+	<link href="images/style/all.css" rel="stylesheet" />
+	<link href="images/style/blog.css" rel="stylesheet" />
+    <script src="images/js/jquery.js"></script>
+    <script src="images/js/jquery.easing.1.3.js"></script>
+    <script src="images/js/jquerycookie.js"></script>
+    <script src="images/js/load.js"></script>
+    
+    
+	<!--[if IE]>
+	<script src="images/js/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	 {include file="inc/header2.tpl"}
+	<!-- header2结束 -->
+	<div id="banner2">
+		<img src="../images/ad10.jpg" alt="图片描述" />
+	</div>
+	<!-- banner2结束 -->
+    
+   
+    <h2 class="maintitle"></h2>
+    <!--
+       <div id="weizi">
+       <p> 您现在的位置：<a href="#">首页 </a>&gt; <a href="#">校务公开</a> &gt; 上级通知</p>
+    </div>
+    -->
+    <!-- weizi结束 -->
+    
+    
+    
+	<div id="blog_header" style="margin-top:-80px;">
+    	<div class="center">
+                    <div class="blog_headerpic"><img src="../images/blog/headerbg.jpg" /></div>
+                    <div id="blogLogo">
+                        <a href="#" class="photo" >
+						<!-- {if $USER.face} -->
+                            <img src=" {$USER.face}" alt="图片描述" /> 
+                        <!--{else}-->
+                            <img src="{$fragment.dface.image}" alt="图片描述" />
+                          <!-- {/if} -->
+						</a>
+                        <strong>{$USER.nick_name}老师的博客</strong>
+            
+                    </div>
+                    <!-- blogLogo结束 -->
+            
+                    <div id="blog_total">
+                        <ul>
+                            <li style="padding: 0 16px;"><a href="blog_index.php"><span><img src="../images/blog/icon_home.png"/> </span> 博客首页</a></li>
+                             <li style="padding: 0 16px;"><a href="blog_category.php?id={$USER.user_id}"><span><img src="../images/blog/icon_user.png"/> </span> 个人主页</a></li>
+                            <li style="padding: 0 16px;"><ins>{$article_count}</ins> 文章总数</li>
+                            <li class="no_bg" style="padding: 0 16px;"><ins>{$click_count}</ins> 文章阅读数</li>
+                        </ul>
+                    </div>
+                    <!-- blog_total结束 -->
+            
+                    <span class="clear"></span>
+                    
+                    <div class="weizi">您现在所在的位置:<a href="/">首页</a> &gt;  <a href="blog_index.php">博客</a> &gt; {$USER.nick_name}老师的博客</div>
+        </div>
+	</div>
+	<!-- blog_header结束 -->
+
+
+	<div id="blog_Content">
+		<div id="blog_neirong">
+        
+            <div id="DocContent">
+                <h1 class="DocmainTitle">{$article.title}</h1>
+                <ul class="Doc_value">
+                    <li>作者：{$USER.nick_name}</li>
+                    <li>日期：{$article.add_time}</li>
+                    <li>栏目：{$article.cat_name}</li>
+                </ul>
+                <div class="content">
+                <!-- 文章内容开始 -->
+                    {$article.content}
+                 <!-- 文章内容结束 -->
+                </div>
+                
+                
+                     <div id="PrevNext">
+                    <p>{$lang.article_previous}：{if $lift.previous}<a href="{$lift.previous.url}">{$lift.previous.title}</a>{else}没有了{/if}</p>
+                    <p>{$lang.article_next}：{if $lift.next}<a href="{$lift.next.url}">{$lift.next.title}</a>{else}没有了{/if}</p>
+                
+                    </div>
+                    <!-- PrevNext结束 -->
+                
+                    <div id="Share">
+                                <!-- Baidu Button BEGIN -->
+                                <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+                                <span class="bds_more">分享到：</span>
+                                <a class="bds_qzone"></a>
+                                <a class="bds_tsina"></a>
+                                <a class="bds_tqq"></a>
+                                <a class="bds_renren"></a>
+                                <a class="bds_t163"></a>
+                                <a class="shareCount"></a>
+                                </div>
+                                <script type="text/javascript" id="bdshare_js" data="type=tools&uid=627946" ></script>
+                                <script type="text/javascript" id="bdshell_js"></script>
+                                <script type="text/javascript">
+                                document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+                                </script>
+                                <!-- Baidu Button END -->                    
+                    
+                        <a href="#" class="btn_more">更多动态&gt;</a>
+                    </div>
+                    <!-- Share结束 -->
+                
+            </div>
+            <!-- DocContent结束 -->
+			<!-- 畅言评论框 start -->
+			<div id="SOHUCS" sid="{$article.id}"></div>	
+			<!-- 畅言评论框 end -->
+           
+            <!-- Docpinlun结束 -->
+            
+		</div>
+		<!-- blog_neirong结束 -->
+
+		<div id="blog_sidebar">
+			<div id="blog_fenlei">
+				<h4 class="SortTitle">栏目 </h4>
+				<ul>
+					<li {if $cur_blog_id eq '-1'}class="change"{/if}><a href="blog_category.php?id={$USER.user_id}">全部博文（{$article_count}）</a></li>
+					{foreach from=$cate_info item=row}
+					<li {if $cur_blog_id eq $row.blog_id}class="change"{/if}><a href="blog_category.php?id={$USER.user_id}&blog_id={$row.blog_id}">{$row.cat_name}（{$row.article_count}）</a></li>
+					{/foreach}
+				</ul>
+			</div>
+			<!-- blog_fenlei结束 -->
+
+			<div id="friend">
+					<h4 class="SortTitle">同系老师 </h4>
+					<ul class="friendlist">
+						 {foreach from=$teachers item=teacher}
+							<li><a href="/blog_category.php?id={$teacher.user_id}">
+							<!-- {if $teacher.face} -->
+                            <img src=" {$teacher.face}" alt="图片描述" /> 
+							<!--{else}-->
+                            <img src="{$fragment.dface.image}" alt="图片描述" />
+                          <!-- {/if} -->
+							</a></li>
+						 {/foreach}
+					</ul>
+					<span class="clear"></span>
+
+			</div>
+			<!-- friend结束 -->
+
+			<div id="DocRanking">
+				<h4 class="SortTitle">个人排行 </h4>
+				<ol class="rankinglist">
+				     {foreach from=$list item=article}
+					<li><span>{$article.click}</span> <a href="{$article.url}">{$article.title}</a></li>
+					 {/foreach}
+				
+				
+				</ol>
+			</div>
+			<!-- DocRanking结束 -->
+
+		</div>
+		<!-- blog_sidebar结束 -->
+
+		<span class="clear"></span>
+        <span class="icon_hua"></span>
+        <span class="icon_hua2"></span>
+	</div>
+	<!-- blog_Content结束 -->
+
+
+	<span class="container_bg"></span>
+
+
+{include file="inc/footer.tpl"}
+{literal}
+		
+		<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+		<script type="text/javascript">
+			window.changyan.api.config({
+			appid: 'cysUEb6tU',
+			conf: 'prod_9546aefae1f16aad68200c218fdd89e4'
+			});
+		</script>
+		
+{/literal}
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

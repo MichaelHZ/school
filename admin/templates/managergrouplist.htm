@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{if $ur_here}{$ur_here} {/if}</title>
+<link href="templates/public.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="templates/js/jquery.js" ></script>
+</head>
+<style>
+{literal}
+	/*内容区域*/
+	#container{width:94.00%;position:relative;margin:0 auto;padding-top:13px;}
+	#container .btn_adduser{top:13px;right:0px;}
+		/*您所在位置*/
+		#weizi{height:34px;line-height:34px;overflow:hidden;padding-left:20px;background-color:#f5f5f5;}
+		#weizi a{color:#a0a0a0;}
+		#weizi a:last-child{font-weight:bold;}
+		/*筛选*/
+		#Filter{margin-bottom:11px;}
+		#Filter .form{padding-top:9px;}
+		#Filter .form .lm_title{margin-right:10px;vertical-align:middle;display:inline;}
+		#Filter .form .select{padding:2px;}
+		#Filter .form .text{width:132px;height:21px;line-height:21px;padding:0 5px;border:1px solid #ccc;}
+		#Filter .form .btn_send{width:44px;height:23px;line-height:23px;color:#fff;background-color:#0072c5;border:0;}
+		#Filter .form .btn_send:hover{background-color:#4cb0fd;}
+		/**/
+		/*表格样式*/
+		.tablestyle{line-height:34px;color:#666666;margin-bottom:10px;border-top:1px dotted #cccccc;border-left:1px dotted #cccccc;}
+		.tablestyle tr td{padding:5px 0;line-height:22px;text-align:center;background-color:#f9f9f9;border-right:1px dotted #cccccc;border-bottom:1px dotted #cccccc;}
+		.tablestyle tr td .text{width:35px;height:23px;line-height:23px;text-align:center;border:1px solid #cccccc;}
+		.tablestyle tr td a{color:#0067cc;}
+		.tablestyle tr td .select{padding:3px;border:1px solid #dbdbdb;}
+		.tablestyle tr td .btn_more{padding-right:11px;background:url(../images/0.gif) no-repeat right center;}
+		.tablestyle tr th{font-weight:bold;color:#676767;background-color:#eeeeee;border-right:1px dotted #cccccc;border-bottom:1px dotted #cccccc;}
+		.tablestyle tr:hover td{background-color:#ffffff;}
+		/*选项列表*/
+		.optionlist{text-align:left;}
+		.optionlist li{margin-left:15px;display:inline;}
+		/*功能*/
+		.fn{padding-bottom:10px;}
+		.fn .select{padding:3px;}
+		/*更多菜单*/
+		.more_menu{padding:10px 0;position:fixed;top:91px;background-color:#ffffff;border:1px solid #cccccc;display:none; z-index:6000;}
+		.more_menu ul li a{padding:0 21px;width:110px;height:36px;line-height:36px;overflow:hidden;display:block;}
+		.more_menu ul li a:hover{background-color:#f9f9f9;text-decoration:none;}
+		/*按钮*/
+		.btn_{width:121px;height:38px;line-height:38px;text-align:center;position:absolute;}
+		.btn_color_green{font-weight:bold;color:#fff;background-color:#28b779;}
+		.btn_color_green:hover{background-color:#23a26b;text-decoration:none;}
+		.icon_add{width:21px;height:21px;vertical-align:middle;background:url(../images/icon_add.png) no-repeat center center;display:inline-block;}
+		.btn{width:202px;height:39px;font-size:14px;font-weight:bold;border:0;}
+		.btn.btn_color_blue{color:#fff;background-color:#0073c6;}
+		.btn.btn_color_blue:hover{background-color:#2da7ff;}
+		/*翻页*/
+		.pages{padding:0 10px;float:right;height:39px;line-height:39px;color:#656565;}
+		.pages a{margin:0 6px;}
+		.pages a:hover{color:#0167cc;}
+{/literal}
+</style>
+<body>
+	<div id="dcWrap">
+		{include file="header.htm"}
+		<div id="dcLeft">{include file="menu.htm"}</div>
+		<div id="dcMain">
+			{include file="ur_here.htm"}
+			<div class="mainBox" style="">
+				<div id="container">
+					<h3 style="margin:0px;">权限设置</h3>
+
+					<div id="QuanXian">
+					     <form action="" method="post">
+						<table width="100%" class="tablestyle" border="0" cellspacing="0"
+							cellpadding="0">
+							<tr>
+								<td width="115"><strong>快速设置</strong></td>
+								<td>
+									<ul class="optionlist">
+										<li><select class="select" name="group_select" id="group_select">
+										        {foreach from=$list item=row}
+												<option value="{$row.gid}" {if $row.gid eq $cur}selected="true"{/if} >{$row.groupname}</option>
+												{/foreach}
+												
+										</select></li>
+									</ul>
+								</td>
+							</tr>
+							<tr>
+								<td><strong>博客</strong></td>
+								<td>
+									<ul class="optionlist">
+										<li><input name="ckboxBlok_open"  type="checkbox" {if $group.ckboxBlok_open} checked {/if}/>
+											开通</li>
+									</ul>
+								</td>
+							</tr>
+							<tr>
+								<td><strong>栏目管理</strong></td>
+								<td>
+									<ul class="optionlist">
+										<li><input id="ckboxCatAll" name="ckboxCatAll" type="checkbox"  />
+											所有</li>
+									</ul>
+
+
+								</td>
+							</tr>
+							  <!-- {foreach from=$article_list item=article} 文章栏目开始-->
+							  {if $article neq ''}
+							<tr>
+								<td><input name="ckboxCat[]" class="article_cat" value="{$article.cat_id}" type="checkbox" {$article.checked} /> {$article.cat_name}</td>
+								<td>
+								    {if $article.child}
+									<ul class="optionlist">
+									    {foreach from=$article.child item=child}
+										<li><input name="ckboxCat[]" class="article_cat" value="{$child.cat_id}" type="checkbox" {$child.checked} /> {$child.cat_name}</li>
+										{/foreach}
+									</ul>
+									 {/if}
+								</td>
+							</tr>
+							{/if}
+							 <!-- {/foreach} 文章栏目结束-->
+							
+							<tr>
+								<td><strong>栏目权限</strong></td>
+								<td>
+									<ul class="optionlist">
+										<li><input name="ckboxCatAuth_add" type="checkbox"  {if $group.ckboxCatAuth_add} checked {/if}/>
+											发布</li>
+										<li><input name="ckboxCatAuth_edit" type="checkbox" {if $group.ckboxCatAuth_edit} checked {/if}/>
+											修改</li>
+										<li><input name="ckboxCatAuth_del" type="checkbox" {if $group.ckboxCatAuth_del} checked {/if}/>
+											删除</li>
+										<li><input name="ckboxCatAuth_adt" type="checkbox"  {if $group.ckboxCatAuth_adt} checked {/if}/>
+											审核</li>
+									</ul>
+								</td>
+							</tr>
+							<tr>
+								<td><strong>集团会员</strong></td>
+								<td>
+									<ul class="optionlist">
+										<li><input name="ckboxGroup_add" type="checkbox" {if $group.ckboxGroup_add} checked {/if}/>
+											集团动态发布(需管理员审核)</li>
+									</ul>
+
+								</td>
+							</tr>
+							<tr>
+								<td><strong>创建中心</strong></td>
+								<td>
+
+									<ul class="optionlist">
+										<li><input name="ckboxCreate_add" type="checkbox" {if $group.ckboxCreate_add} checked {/if}/>
+											添加</li>
+										<li><input name="ckboxCreate_edit" type="checkbox" {if $group.ckboxCreate_edit} checked {/if}/>
+											修改</li>
+										<li><input name="ckboxCreate_del" type="checkbox" {if $group.ckboxCreate_del} checked {/if}/>
+											删除</li>
+									</ul>
+								</td>
+							</tr>
+							<tr>
+								<td><strong>栏目分类</strong></td>
+								<td>
+
+									<ul class="optionlist">
+										<li><input name="ckboxCat_add" type="checkbox" {if $group.ckboxCat_add} checked {/if}/>
+											添加</li>
+										<li><input name="ckboxCat_edit" type="checkbox" {if $group.ckboxCat_edit} checked {/if}/>
+											修改</li>
+										<li><input name="ckboxCat_del" type="checkbox" {if $group.ckboxCat_del} checked {/if}/>
+											删除</li>
+									</ul>
+								</td>
+							</tr>
+							<tr>
+								<td><strong>留言板管理</strong></td>
+								<td>
+
+									<ul class="optionlist">
+										<li><input name="ckboxMsg_look" type="checkbox" {if $group.ckboxMsg_look} checked {/if}/>
+											查看</li>
+										<li><input name="ckboxMsg_reply" type="checkbox" {if $group.ckboxMsg_reply} checked {/if}/>
+											回复</li>
+									</ul>
+
+								</td>
+							</tr>
+							<tr>
+								<td><strong>系统管理</strong></td>
+								<td><ul class="optionlist">
+										<li><input name="ckboxSys_nav" type="checkbox" {if $group.ckboxSys_nav} checked {/if}/>
+											自定义导航</li>
+										<li><input name="ckboxSys_banner" type="checkbox" {if $group.ckboxSys_banner} checked {/if}/>
+											首页幻灯广告</li>
+										<li><input name="ckboxSys_single" type="checkbox" {if $group.ckboxSys_single} checked {/if}/>
+											网站成员管理</li>
+										<li><input name="ckboxSys_dbbackup" type="checkbox" {if $group.ckboxSys_dbbackup} checked {/if}/>
+											数据库备份</li>
+										<li><input name="ckboxSys_cleancache" type="checkbox" {if $group.ckboxSys_cleancache}checked {/if} />
+											清除缓存</li>
+										<li><input name="ckboxSys_record" type="checkbox" {if $group.ckboxSys_record} checked {/if}/>
+											操作记录</li>
+									</ul></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align: left;">
+									<button class="btn btn_color_blue" type="submit">提交</button>
+								</td>
+							</tr>
+
+						</table>
+                        </form>
+					</div>
+					<!-- QuanXian结束 -->
+
+				</div>
+				<!-- container结束 -->
+			</div>
+		</div>
+		{include file="footer.htm"}
+	</div>
+	<script type="text/javascript" src="templates/js/group.js" ></script>
+</body>
+</html>
