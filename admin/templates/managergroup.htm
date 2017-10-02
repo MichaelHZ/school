@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{$lang.home}{if $ur_here} - {$ur_here} {/if}</title>
+<meta name="Copyright" content="Douco Design." />
+<link href="templates/public.css" rel="stylesheet" type="text/css">
+{include file="javascript.htm"}
+</head>
+<body>
+<div id="dcWrap">
+ {include file="header.htm"}
+ <div id="dcLeft">{include file="menu.htm"}</div>
+ <div id="dcMain">
+   {include file="ur_here.htm"}
+   <div id="manager" class="mainBox" style="{$workspace.height}">
+    <h3><!-- {if $rec neq 'manager_log'} 管理员列表 --><a href="{$action_link.href}" class="actionBtn">{$action_link.text}</a><!-- {/if} -->{$ur_here}</h3>
+    <!-- {if $rec eq 'default'} 管理员列表 -->
+    <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+     <tr>
+      <th width="30" align="center">ID</th>
+   
+      <th align="center">权限组名</th>
+      <th align="center">{$lang.handler}</th>
+     </tr>
+     <!-- {foreach from=$manager_list item=manager_list} -->
+     <tr>
+     <td align="center">{$manager_list.gid}</td>
+      <td align="center">{$manager_list.groupname}</td>
+      <td align="center"><a href="managergroup.php?rec=edit&id={$manager_list.gid}">{$lang.edit}</a> 
+      | <a href="managergroup.php?rec=del&id={$manager_list.gid}">{$lang.del}</a>
+  
+      </td>
+     </tr>
+     
+     <!-- {/foreach} -->
+    </table>
+    {literal}
+      <style>
+      	.active{cursor:pointer;}
+      </style>
+      <script>
+      	$(function(){
+      		yes = '/admin/images/yes.gif';
+      		no = '/admin/images/no.gif';
+      		$(".active").click(function(){
+      			val = $(this).attr("data_val");
+      			id = $(this).attr("data_id");
+      			obj = $(this);
+      			$.post("/admin/manager.php",{rec:'active',val:val,id:id},function(data){
+      				   if(data == 'success'){
+      					   if(val == 1){
+      						 obj.attr("src",no).attr('data_val',0);
+      					   }else{
+      						 obj.attr("src",yes).attr('data_val',1);
+      					   }
+      				   }else{
+      					 alert(data); 
+      				   }
+      				   
+      				
+      			});
+      		});
+      	    $(".sort").blur(function(){
+			    uid = $(this).attr('data');
+				sort = $(this).val();
+				obj = $(this);
+				$.post("/admin/manager.php",{rec:'sort',uid:uid,sort:sort},function(data){
+      				   if(data == 'success'){
+      					  obj.val(sort);
+      				   }else{
+      					 alert(data); 
+      				   }
+      				   
+      				
+      			});
+			});
+      	})
+      </script>
+    {/literal}
+    {include file="pager.htm"}
+    <!-- {/if} -->
+    <!-- {if $rec eq 'add'} 管理员添加 -->
+    <form action="managergroup.php?rec=insert" method="post" enctype="multipart/form-data">
+     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+      <tr>
+       <td width="100" align="right">* 权限组名</td>
+       <td>
+        <input type="text" name="groupname" size="40" class="inpMain" />
+       </td>
+      </tr>
+      <tr>
+       <td></td>
+       <td>
+        <input type="hidden" name="token" value="{$token}" />
+        <input type="submit" name="submit" class="btn" value="{$lang.btn_submit}" />
+       </td>
+      </tr>
+     </table>
+    </form>
+    <!-- {/if} -->
+    <!-- {if $rec eq 'edit'} 管理员编辑 -->
+    <form action="managergroup.php?rec=update" method="post" enctype="multipart/form-data">
+     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+      <tr>
+       <td width="100" align="right">权限组名</td>
+       <td>
+        <input type="text" name="groupname" value="{$manager_info.groupname}" size="40" class="inpMain" />
+       </td>
+      </tr>
+      <tr>
+       <td></td>
+       <td>
+        <input type="hidden" name="token" value="{$token}" />
+		
+        <input type="hidden" name="id" value="{$manager_info.gid}" />
+        <input type="submit" name="submit" class="btn" value="{$lang.btn_submit}" />
+       </td>
+      </tr>
+     </table>
+    </form>
+    <!-- {/if} -->
+    <!-- {if $rec eq 'manager_log'} 操作日志 -->
+    <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+     <tr>
+      <th width="30" align="center">{$lang.record_id}</th>
+      <th width="150" align="left">{$lang.manager_log_create_time}</th>
+      <th width="100" align="center">{$lang.manager_log_user_id}</th>
+      <th align="left">{$lang.manager_log_action}</th>
+      <th width="100" align="center">{$lang.manager_log_ip}</th>
+     </tr>
+     <!-- {foreach from=$log_list item=log_list} -->
+     <tr>
+      <td align="center">{$log_list.id}</td>
+      <td>{$log_list.create_time}</td>
+      <td align="center">{$log_list.user_name}</td>
+      <td align="left">{$log_list.action}</td>
+      <td align="center">{$log_list.ip}</td>
+     </tr>
+     <!-- {/foreach} -->
+    </table>
+    {include file="pager.htm"}
+    <!-- {/if} -->
+   </div>
+ </div>
+ {include file="footer.htm"}
+ </div>
+</body>
+</html>

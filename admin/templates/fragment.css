@@ -1,0 +1,49 @@
+#fragment h3 .delBtn {
+ float: right;
+ display: inline-block;
+ background-color: #EEE;
+ padding: 0 20px;
+ height: 27px;
+ line-height: 27px;
+ color: #666;
+ font-size: 13px;
+ font-weight: bold;
+ margin-right:10px;
+}
+#fragment .list dl {
+ zoom:1;
+ width:100%;
+ overflow:hidden;
+ margin-bottom:10px;
+}
+#fragment .list dl dd {
+ float:left;
+ margin:0 15px 15px 0;
+}
+#fragment .list dl img {
+ height:100px;
+}
+#fragment .list dl dd span {
+ display:block;
+ overflow:hidden;
+ background-color:#F5F5F5;
+ height:90px;
+ padding:5px;
+ line-height:155%;
+ color:#666;
+}
+#fragment .list dl dd p {
+ background-color:#EEEEEE;
+ padding:5px;
+}
+#fragment .list dl dd p em {
+ color:#999;
+ float:right;
+}
+#fragment .image {
+ display:inline-block;
+}
+#fragment .image p {
+ background-color:#FFF;
+ padding:10px;
+}

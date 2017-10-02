@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{$lang.home}{if $ur_here} - {$ur_here} {/if}</title>
+<meta name="Copyright" content="Douco Design." />
+<link href="templates/public.css" rel="stylesheet" type="text/css">
+{include file="javascript.htm"}
+</head>
+<body>
+<div id="dcWrap">
+ {include file="header.htm"}
+ <div id="dcLeft">{include file="menu.htm"}</div>
+ <div id="dcMain">
+   {include file="ur_here.htm"}
+   <div id="manager" class="mainBox" style="{$workspace.height}">
+    <h3><!-- {if $rec neq 'manager_log'} 管理员列表 --><a href="{$action_link.href}" class="actionBtn">{$action_link.text}</a><!-- {/if} -->{$ur_here}</h3>
+    <!-- {if $rec eq 'default'} 管理员列表 -->
+	<div class="filter">
+    <form action="manager.php" method="post">
+     <input name="keyword" type="text" class="inpMain" value="{$keyword}" size="20" />
+     <input name="submit" class="btnGray" type="submit" value="{$lang.btn_filter}" />
+    </form>
+    <span>
+    <!-- {if $if_sort} -->
+	<!--
+    <a class="btnGray" href="article.php?rec=sort">{$lang.sort_close}</a>
+	-->
+    <!-- {else} -->
+	<!--
+    <a class="btnGray" href="article.php?rec=sort">{$lang.sort_article}</a>
+	-->
+    <!-- {/if} -->
+    </span>
+    </div>
+    <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+     <tr>
+      <th width="30" align="center">{$lang.record_id}</th>
+      <th align="center">姓名</th>
+      <th align="center">账号</th>
+      <th align="center">教学职务</th>
+      <th align="center">网站权限</th>
+      <th align="center">电话</th>
+      <th align="center">{$lang.manager_email}</th>
+      <th align="center">{$lang.manager_add_time}</th>
+      <th align="center">{$lang.manager_last_login}</th>
+	  <th align="center" width="100">排序|<a href="manager.php?sort=sort">排序(升)</a></th>
+      <th align="center">状态</th>
+	  
+      <th align="center">{$lang.handler}</th>
+     </tr>
+     <!-- {foreach from=$manager_list item=manager_list} -->
+     <tr>
+     <td align="center">{$manager_list.user_id}</td>
+      <td align="center">{$manager_list.nick_name}</td>
+       <td align="center">{$manager_list.user_name}</td>
+       <td align="center">{$manager_list.job_name}</td>
+      <td align="center">{$manager_list.group_name}</td>
+      <td align="center">{$manager_list.mobile}</td>
+     
+      <td align="center">{$manager_list.email}</td>
+      <td align="center">{$manager_list.add_time}</td>
+      <td align="center">{$manager_list.last_login}</td>
+	  <td align="center"><input type="text" value="{$manager_list.sort}" style="width:100%;height:100%;" data="{$manager_list.user_id}" class="sort"/></td>
+      <td align="center">{if $manager_list.status}<img   class="active" data_id = "{$manager_list.user_id}" data_val="1" src="/admin/images/yes.gif">{else}<img class="active" data_id = "{$manager_list.user_id}" data_val="0" src="/admin/images/no.gif">{/if}</td>
+      <td align="center"><a href="manager.php?rec=edit&id={$manager_list.user_id}">{$lang.edit}</a> 
+      | <a href="manager.php?rec=del&id={$manager_list.user_id}">{$lang.del}</a>
+  
+      </td>
+     </tr>
+     
+     <!-- {/foreach} -->
+    </table>
+    {literal}
+      <style>
+      	.active{cursor:pointer;}
+      </style>
+      <script>
+      	$(function(){
+      		yes = '/admin/images/yes.gif';
+      		no = '/admin/images/no.gif';
+      		$(".active").click(function(){
+      			val = $(this).attr("data_val");
+      			id = $(this).attr("data_id");
+      			obj = $(this);
+      			$.post("/admin/manager.php",{rec:'active',val:val,id:id},function(data){
+      				   if(data == 'success'){
+      					   if(val == 1){
+      						 obj.attr("src",no).attr('data_val',0);
+      					   }else{
+      						 obj.attr("src",yes).attr('data_val',1);
+      					   }
+      				   }else{
+      					 alert(data); 
+      				   }
+      				   
+      				
+      			});
+      		});
+      	    $(".sort").blur(function(){
+			    uid = $(this).attr('data');
+				sort = $(this).val();
+				obj = $(this);
+				$.post("/admin/manager.php",{rec:'sort',uid:uid,sort:sort},function(data){
+      				   if(data == 'success'){
+      					  obj.val(sort);
+      				   }else{
+      					 alert(data); 
+      				   }
+      				   
+      				
+      			});
+			});
+      	})
+      </script>
+    {/literal}
+    {include file="pager.htm"}
+    <!-- {/if} -->
+    <!-- {if $rec eq 'add'} 管理员添加 -->
+    <form action="manager.php?rec=insert" method="post" enctype="multipart/form-data">
+     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+      <tr>
+       <td width="100" align="right">* 姓名</td>
+       <td>
+        <input type="text" name="nick_name" size="40" class="inpMain" />
+       </td>
+      </tr>
+       <tr>
+       <td align="right">头像</td>
+       <td>
+        <input type="file" name="image" size="38" class="inpFlie" />
+        {if $article.image}<a href="../{$article.image}" target="_blank"><img src="images/icon_yes.png"></a>{else}<img src="images/icon_no.png">{/if}</td>
+      </tr>
+      <tr>
+       <td width="100" align="right">性别</td>
+       <td>
+        <input type="radio" name="sex"   value="1" checked/>男 
+        <input type="radio" name="sex"  value="2"/>女
+       </td>
+      </tr>
+      <tr>
+       <td width="100" align="right">* 账号</td>
+       <td>
+        <input type="text" name="user_name" size="40" class="inpMain" />
+       </td>
+      </tr>
+      <tr>
+       <td align="right">* 密码</td>
+       <td>
+        <input type="password" name="password" size="40" class="inpMain" />
+       </td>
+      </tr>
+      <tr>
+       <td align="right">* 教学职务</td>
+       <td>
+        <select name="job_id">
+       {foreach from=$job_list item=job}
+        <option value="{$job.jid}">{$job.job_name}</option>
+        {/foreach}
+        
+        </select>
+       </td>
+      </tr>
+      <tr>
+       <td align="right">电话</td>
+       <td>
+        <input type="number" name="mobile" size="40" class="inpMain" />
+       </td>
+      </tr>
+      
+      <tr>
+       <td width="100" align="right">{$lang.manager_email}</td>
+       <td>
+        <input type="text" name="email" size="40" class="inpMain" />
+       </td>
+      </tr>
+      <tr>
+       <td align="right">简介链接</td>
+       <td>
+        <input type="text" name="about" size="80" class="inpMain" />
+       </td>
+      </tr>
+      
+       <tr>
+       <td align="right">* 网站权限</td>
+       <td>
+        <select name="group_id">
+        {foreach from=$group_list item=group}
+        <option value="{$group.gid}">{$group.groupname}</option>
+         {/foreach}
+        </select>
+       </td>
+      </tr>
+      <tr>
+       <td></td>
+       <td>
+        <input type="hidden" name="token" value="{$token}" />
+        <input type="submit" name="submit" class="btn" value="{$lang.btn_submit}" />
+       </td>
+      </tr>
+     </table>
+    </form>
+    <!-- {/if} -->
+    <!-- {if $rec eq 'edit'} 管理员编辑 -->
+    <form action="manager.php?rec=update" method="post" enctype="multipart/form-data">
+     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+      <tr>
+       <td width="100" align="right">姓名</td>
+       <td>
+        <input type="text" name="nick_name" value="{$manager_info.nick_name}" size="40" class="inpMain" />
+       </td>
+      </tr>
+      <tr>
+       <td align="right">头像</td>
+       <td>
+        <input type="file" name="image" size="38" class="inpFlie" value="{$manager_info.face}"/>
+        {if $manager_info.face}<a href="../{$manager_info.face}" target="_blank"><img src="images/icon_yes.png"></a>{else}<img src="images/icon_no.png">{/if}</td>
+      </tr>
+       <tr>
+       <td width="100" align="right">性别</td>
+       <td>
+        <input type="radio" name="sex"   value="1" {if $manager_info.sex eq 1}checked {/if}/>男 
+        <input type="radio" name="sex"  value="2" {if $manager_info.sex eq 2}checked {/if} />女
+       </td>
+      </tr>
+       <td width="100" align="right">账号</td>
+       <td>
+        <input type="text" name="user_name" value="{$manager_info.user_name}" size="40" class="inpMain" {if $user.action_list neq 'ALL'}readonly="true"{/if}/>
+       </td>
+      </tr>
+       <!-- {if $if_check} -->
+      <tr>
+       <td align="right">* {$lang.manager_old_password}</td>
+       <td>
+        <input type="password" name="old_password" size="40" class="inpMain" /> 修改请填写密码
+       </td>
+      </tr>
+      <!-- {/if} -->
+      <tr>
+       <td align="right">密码</td>
+       <td>
+        <input type="password" name="password" size="40" class="inpMain" /> 无需修改请留空
+       </td>
+      </tr>
+      <tr>
+       <td align="right">* 教学职务</td>
+       <td>
+        <select name="job_id">
+       {foreach from=$job_list item=job}
+        <option value="{$job.jid}" {if $manager_info.job_id eq $job.jid}selected{/if}>{$job.job_name}</option>
+        {/foreach}
+        
+        </select>
+       </td>
+      </tr>
+      <tr>
+       <td align="right">电话</td>
+       <td>
+        <input type="number" name="mobile" size="40" class="inpMain"  value="{$manager_info.mobile}"/>
+       </td>
+      </tr>
+      <tr>
+       <td width="100" align="right">{$lang.manager_email}</td>
+       <td>
+        <input type="text" name="email" size="40" class="inpMain" value="{$manager_info.email}"/>
+       </td>
+      </tr>
+      <tr>
+       <td align="right">简介链接</td>
+       <td>
+        <input type="text" name="about" size="80" value="{$manager_info.about}" class="inpMain" />
+       </td>
+      </tr>
+      <!-- {if !$if_check} -->
+       <tr>
+       <td align="right">* 网站权限</td>
+       <td>
+        <select name="group_id">
+        {foreach from=$group_list item=group}
+        <option value="{$group.gid}" {if $manager_info.group_id eq $group.gid}selected{/if}>{$group.groupname}</option>
+         {/foreach}
+        </select>
+       </td>
+      </tr>
+       <!-- {/if} -->
+      <tr>
+       <td></td>
+       <td>
+        <input type="hidden" name="token" value="{$token}" />
+		<input type="hidden" name="image" value="{$manager_info.face}" />
+        <input type="hidden" name="id" value="{$manager_info.user_id}" />
+        <input type="submit" name="submit" class="btn" value="{$lang.btn_submit}" />
+       </td>
+      </tr>
+     </table>
+    </form>
+    <!-- {/if} -->
+    <!-- {if $rec eq 'manager_log'} 操作日志 -->
+    <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+     <tr>
+      <th width="30" align="center">{$lang.record_id}</th>
+      <th width="150" align="left">{$lang.manager_log_create_time}</th>
+      <th width="100" align="center">{$lang.manager_log_user_id}</th>
+      <th align="left">{$lang.manager_log_action}</th>
+      <th width="100" align="center">{$lang.manager_log_ip}</th>
+     </tr>
+     <!-- {foreach from=$log_list item=log_list} -->
+     <tr>
+      <td align="center">{$log_list.id}</td>
+      <td>{$log_list.create_time}</td>
+      <td align="center">{$log_list.user_name}</td>
+      <td align="left">{$log_list.action}</td>
+      <td align="center">{$log_list.ip}</td>
+     </tr>
+     <!-- {/foreach} -->
+    </table>
+    {include file="pager.htm"}
+    <!-- {/if} -->
+   </div>
+ </div>
+ {include file="footer.htm"}
+ </div>
+</body>
+</html>

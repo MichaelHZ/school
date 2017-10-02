@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="keywords" content="{$keywords}" />
+	<meta name="description" content="{$description}" />
+	<title>{$page_title}</title>
+	<link href="images/style/reset_css.css" rel="stylesheet" />
+	<link href="images/style/all.css" rel="stylesheet" />
+    <script src="images/js/jquery.js"></script>
+    <script src="images/js/jqueryXslider.js"></script>
+    <script src="images/js/jquery.easing.1.3.js"></script>
+    <script src="images/js/jcarousellite.js"></script>
+    <script src="images/js/gundongnew.js"></script>
+    <script src="images/js/load.js"></script>
+    <script type="text/javascript" src="images/js/global.js"></script>
+	<!--[if IE]>
+	<script src="images/js/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	 {include file="inc/header.tpl"}
+	<!-- header结束 -->
+     {include file="inc/banner.tpl"}
+	<!-- banner结束 -->
+    
+    
+    
+  
+     <form name="search" id="search" class="Searchform" method="get" action="{$site.root_url}">
+        <input name="s" type="text" id="keys" class="text" title="{$lang.search_product_cue}" autocomplete="off" onclick="formClick(this,'文章搜索')" value="{if $keyword}{$keyword|escape}{else}请输入要搜索的关键字{/if}" size="32" maxlength="128">
+       <button class="btn_send"  type="submit">搜索</button>
+    </form>    
+        
+    
+        <div class="bgpic">
+        
+            <div id="quicklink">
+                <ul>
+                  <!-- {foreach from=$nav_top_list item=top} -->
+                    <li  {if $top.index eq 6}class="no_bg"{/if} ><a href="{$top.url}"><span id="btn0{$top.sort}"><i></i></span>{$top.nav_name}</a></li>
+                    <!-- {/foreach} -->
+                </ul>
+                <span class="clear"></span>
+            </div>
+            <!-- quicklink结束 -->
+            
+            
+        
+            <div id="Hot">
+                <h3 class="MainTitle"> <strong>新闻速递</strong> <img src="images/txt.png"></h3>
+                
+                
+                <div class="Hot_header">
+                
+                          <div class="gonggao" id="gonggao_scroll">
+                            <strong class="gonggao_tit">公告：</strong>
+                          
+                                <div class="gundong">
+                                            {if $public_notice}
+                                            <div class="jCarouselLite">
+                                                <!-- 滚动开始 -->
+                                                    
+                                  
+                                                        
+                                                        <ul>
+                                                                <!-- {foreach from=$public_notice item=notice} -->
+                                                                <li><a href="{$notice.url}">{$notice.title}</a></li>
+                                                                <!-- {/foreach} -->
+                                                               
+                                                        </ul>
+                            
+        
+        
+                                               <!-- 滚动结束 -->
+                                            </div>
+                                            {/if}
+                                <span class="clear"></span>
+                                </div>
+                                <!-- .gundong结束 -->        
+                                 <a href="javascript:;"  class="move_rights" id="btn_prev2"><span></span></a>
+                                <a href="javascript:;" class="move_lefts" id="btn_next2"><span></span></a>
+                        
+                        
+                                                
+                        </div>
+                        
+                         <form name="search" id="search" class="Searchform2" method="get" action="{$site.root_url}">
+            				<input name="s" type="text" id="keys" class="text" title="{$lang.search_product_cue}" autocomplete="off" onclick="formClick(this,'文章搜索')" value="" placeholder="请输入要搜索的关键字" size="32" maxlength="128">
+      						 <button class="btn_send"  type="submit">搜索</button>
+                         
+                        </form>               
+              
+                <span class="clear"></span>
+                </div>
+                
+                                
+                
+                <div id="playBanner">
+                    <div class="conbox">
+                             <!-- {foreach from=$play_article item=article} -->
+                             	
+                            <div><a title="图片展示" href="{$article.url}">
+                            <!-- {if $article.image} -->
+                                <img src="{$article.image}" alt="石梅小学" />
+                            <!--{else}-->
+                                <img src="{$fragment.none.image}" alt="石梅小学" />
+                            <!-- {/if} -->
+                            <strong>{$article.title}</strong>
+                            </a>
+                            </div>
+                             <!-- {/foreach} -->
+          
+                    </div>
+                    
+                </div>
+                <!-- playBanner结束 -->
+        
+                <div id="News">
+                            <ul class="TextList">
+                                 <!-- {foreach from=$play_article_words item=article} -->
+                                 <li><a href="{$article.url}">{$article.title}</a></li>
+                                 <!-- {/foreach} -->
+                            </ul>
+        
+                </div>
+                <!-- News结束 -->
+        
+                <span class="clear"></span>
+                <!-- 清除浮动 -->
+            </div>
+            <!-- Hot结束 -->
+        
+        
+        </div>
+        <!-- .bgpic结束 -->
+        
+        
+
+	<div id="History">
+		<h3>石梅小学发展历史</h3>
+		<h4>since 1720</h4>
+		<p>石梅小学坐落于虞山东南麓，梁昭明太子读书台旁。其前身是清雍正三年（1725年），粮储道杨本植所建的&ldquo;游文书院&rdquo;。两代帝师翁同和曾就读于此。光绪二十八年（1902年），邑人庞鸿文、
+邵松年修建斋舍，将游文书院改办为常昭学堂。是当时常熟较早创办的新学之一。一百多年来学校历经社会变迁、校名更改、人事更迭，而优良的办学传统、良好的校风、教风、学风则一脉相承代代相传且不断发扬光大。</p>
+
+		<ol>
+			<li><strong>1720 </strong><span></span><div class="txt">康熙五十九年（1720年）邑人陶贞一、言德坚等集资契买蹑云山房，经修缮后作为邑人子弟读书场舍。<i class="arrow"></i></div></li>
+			<li style="margin-left:48px;"><strong>1725 </strong><span></span><div class="txt">雍正三年（1725年），粮储道杨本值捐银五百两作修缮蹑云山房和课士之费，并将山房正式命名为“游文书院”。<i class="arrow"></i></div></li>
+			<li style="margin-left:100px;"><strong>1902 </strong><span></span><div class="txt">光绪二十八年（1902年），“游文书院”改名为“常昭学堂”。<i class="arrow"></i></div></li>
+			<li style="margin-left:45px;"><strong>1909 </strong><span></span><div class="txt">宣统元年（1909年），石梅高等小学堂改名为“常昭公立高等小学堂细校”，统称“石梅公校”<i class="arrow"></i></div></li>
+			<li style="margin-left:100px;"><strong>1928 </strong><span></span><div class="txt">民国17年（1928年），学校更名为“常熟县立石梅小学”。<i class="arrow"></i></div></li>
+			<li style="margin-left:105px;"><strong>1949 </strong><span></span><div class="txt">新中国建立后，石梅小学的历史揭开了新的一页。<i class="arrow"></i></div></li>
+			<li style="margin-left:125px;"><strong>1967  </strong><span></span><div class="txt">学校更名为“常熟县红梅小学”。<i class="arrow"></i></div></li>
+			<li style="margin-left:125px;"><strong>1983  </strong><span></span><div class="txt">学校更名为“常熟市石梅小学”<i class="arrow"></i></div></li>
+			<li style="margin-left:165px;"><strong>2007  </strong><span></span><div class="txt">学校进行就地改扩建工程，确立了“营造诗化校园”的目标，力求从生态和文化的角度进行环境建设，凸显学校内涵。<i class="arrow"></i></div></li>
+		</ol>
+		<span class="clear"></span>
+	</div>
+	<!-- History结束 -->
+
+	<div id="SchoolPhoto">
+    
+
+            <div id="Faq">
+    				<div class="ad">
+                    <img src="images/ad.jpg">
+                    </div>
+                    
+                    
+                    <div class="center">
+                            
+                            <h4>留言板</h4>
+                            <p>/ 我们的负责老师会在三个工作日内给你答复，请勿重复提交问题，谢谢！</p>
+                            <form  class="form"  id="form1">
+                                <ul>
+                                    <li><span>*</span><input name="name" type="text" class="text"  id="name_" value=""/></li>
+                                    <li><input name="email" type="text" class="text"  id="mail_"  value=""/></li>
+                                    <li><span></span><input name="tel" type="text" id="tel_" class="text"  value=""/></li>
+                                    <li><span>*</span>
+                                     <input type="text" name="captcha" class="text" size="10" id="yzm_" value="">
+                                <img id="vcode"  class="yzm_pic" src="{$site.root_url}captcha.php" alt="{$lang.captcha}" border="1" onClick="refreshimage()" title="{$lang.captcha_refresh}">
+      
+                                  
+                                    </li>
+                                </ul>
+                                <span>*</span><textarea name="content" cols="" rows="" id="problem_"  value=""></textarea>
+                                <input type="hidden" name="token" value="{$token}" id="token_" />
+                                <input class="btn_send" type="submit" value="提交">
+                            </form>
+                            <script>
+                            {literal}
+                            $(function(){
+                                
+                            	$("#form1").submit(function(){
+                            	    name = $("#name_").val();
+                            	    if(name == '称呼' || name == ''){
+                            	    	alert('称呼不能为空');
+                            	    	return false;
+                            	    }
+                            	    
+                            	    email = $("#mail_").val();
+                            	    if(email == '邮箱' || email == ''){
+                            	    	email = '';
+                            	    }
+                            	    tel = $("#tel_").val();
+                            	    if(tel == '手机' || tel == ''){
+                            	    	tel = '';
+                            	    }
+                             		captcha = $("#yzm_").val();
+                             		if(captcha == '验证码' || captcha == ''){
+                            	    	alert('验证码不能为空');
+                            	    	return false;
+                            	    }
+                             		content = $("#problem_").val();
+                             		if( content == ''){
+                            	    	alert('内容不能为空');
+                            	    	return false;
+                            	    }
+                             		token = $("#token_").val();
+                            		$.post(
+                             		'/guestbook.php?rec=ajax_insert',{
+                             			name:name,
+                             			email: email,
+                             			tel: tel,
+                             			captcha: captcha,
+                             			content: $("#problem_").val(),
+                             			token : token
+                             			},function(data){
+                             			alert(data);
+                             		},'json')
+                            		return false;
+                            	})
+                            })
+                             
+                             {/literal}
+                            </script>
+                    
+                            
+                            <div id="float_menu">
+                                <img src="images/logo2.png">
+                                <h5>创建中心</h5>
+                                <div class="float_menu">
+                                        <ul>
+                                        
+                                             <!-- {foreach from=$create item=article} -->
+                                 				<li><a href="{if $article.ctype}/article_category.php?id={$get_cat.child}&ctype=create_{$article.id}{else}{$article.url}{/if}">{$article.title}</a></li>
+                                 			<!-- {/foreach} -->
+                                           
+                                        </ul>
+                                </div>
+                                
+                                
+                                <a href="#" class="btn_more"></a>                    
+                            </div>
+                             <!-- float_menu结束 -->
+                            
+                    
+                    </div>
+                    <!-- .center结束 -->
+                    
+                    
+                    
+            </div>
+            <!-- Faq结束 -->
+            
+            
+    
+            <div class="center">
+                        <h3 class="MainTitle"> <strong>校园剪影</strong>  <img src="images/txt.png"></h3>
+                        <ul class="Tab" id="SchoolPhotoTab">
+                            <li class="change"><a href="#">所有</a></li>
+                            <li><a href="#">管理纪事</a></li>
+                            <li><a href="#">多彩活动</a></li>
+                            <li><a href="#">社团动态</a></li>
+                            <li><a href="#">童化课堂</a></li>
+                        </ul>
+                        <span class="clear"></span>
+                        
+                        <div class="Tab_nr">
+                        
+                                <ul class="PictureList">
+                                     <!-- {foreach from=$all item=article} -->
+                                    <li><a href="{$article.url}" class="photo">
+                                      {if $article.image}
+                                      <img src="{$article.image}" alt="石梅小学" />
+                                       <!--{else}-->
+                                		<img src="{$fragment.none.image}" alt="石梅小学" />
+                                   {/if}
+                                    
+                                    <strong>
+                                    {$article.title}
+                                    </strong>
+									</a>
+                                    <a href="{$article.url}" class="btn_browse"><span></span></a></li>
+                                    <!-- {/foreach} -->
+                                     </ul>
+                                
+                                <span class="clear"></span>
+                                <!--
+                                <a href="/article_category.php?id=32" class="btn_more">浏览更多</a>
+								-->
+                        </div>
+                        <!-- .Tab_nr结束 -->
+                        
+                        <div class="Tab_nr">
+                        
+                                <ul class="PictureList">
+                                    <!-- {foreach from=$manage item=article} -->
+                                    <li><a href="{$article.url}" class="photo">
+                                      {if $article.image}
+                                      <img src="{$article.image}" alt="石梅小学" />
+                                       <!--{else}-->
+                                		<img src="{$fragment.none.image}" alt="石梅小学" />
+                                   		{/if}
+                                   
+                                    <strong>
+                                     {$article.title}
+                                    </strong>
+									 </a>
+                                    <a href="{$article.url}" class="btn_browse"><span></span></a></li>
+                                    <!-- {/foreach} -->
+                                    </ul>
+                                
+                                <span class="clear"></span>
+                                
+                                <a href="/article_category.php?id=19" class="btn_more">浏览更多</a>
+                        </div>
+                        <!-- .Tab_nr结束 -->
+                        
+                        <div class="Tab_nr">
+                        
+                                <ul class="PictureList">
+                                     <!-- {foreach from=$active item=article} -->
+                                    <li><a href="{$article.url}" class="photo">
+                                      {if $article.image}
+                                      <img src="{$article.image}" alt="石梅小学" />
+                                       <!--{else}-->
+                                		<img src="{$fragment.none.image}" alt="石梅小学" />
+                                   		{/if}
+                                   
+                                    <strong>
+                                     {$article.title}
+                                    </strong>
+									 </a>
+                                    <a href="{$article.url}" class="btn_browse"><span></span></a></li>
+                                    <!-- {/foreach} -->
+                                </ul>
+                                
+                                <span class="clear"></span>
+                                
+                                <a href="/article_category.php?id=33" class="btn_more">浏览更多</a>
+                        </div>
+                        <!-- .Tab_nr结束 -->
+                        
+                        <div class="Tab_nr">
+                        
+                                <ul class="PictureList">
+                                       <!-- {foreach from=$dynamic item=article} -->
+                                    <li><a href="{$article.url}" class="photo">
+                                      {if $article.image}
+                                      <img src="{$article.image}" alt="石梅小学" />
+                                       <!--{else}-->
+                                		<img src="{$fragment.none.image}" alt="石梅小学" />
+                                   		{/if}
+                      
+                                    <strong>
+                                     {$article.title}
+                                    </strong>
+									 </a>
+                                    <a href="{$article.url}" class="btn_browse"><span></span></a></li>
+                                    <!-- {/foreach} -->
+                                    </ul>
+                                
+                                <span class="clear"></span>
+                                
+                                <a href="/article_category.php?id=34" class="btn_more">浏览更多</a>
+                        </div>
+                        <!-- .Tab_nr结束 -->
+                        
+                        <div class="Tab_nr">
+                        
+                                <ul class="PictureList">
+                                     <!-- {foreach from=$class item=article} -->
+                                    <li><a href="{$article.url}" class="photo">
+                                      {if $article.image}
+                                      <img src="{$article.image}" alt="石梅小学" />
+                                       <!--{else}-->
+                                		<img src="{$fragment.none.image}" alt="石梅小学" />
+                                   		{/if}
+                                  
+                                    <strong>
+                                     {$article.title}
+                                    </strong>
+									 </a>
+                                    <a href="{$article.url}" class="btn_browse"><span></span></a></li>
+                                    <!-- {/foreach} -->
+                                    
+                                 </ul>
+                                
+                                <span class="clear"></span>
+                                
+                                <a href="/article_category.php?id=43" class="btn_more">浏览更多</a>
+                        </div>
+                        <!-- .Tab_nr结束 -->
+                        
+            </div>
+            <!-- .center结束 -->
+
+	</div>
+	<!-- SchoolPhoto结束 -->
+
+	<div id="Teacher">
+			<h3 class="MainTitle"><strong>教师风采</strong><img src="images/txt.png"></h3>
+            
+            
+                 <div class="scrollleft">
+                    <ul class="PhotoList">
+                        <!-- {foreach from=$teacher item=article} -->
+                        <li>
+                        {if $article.image}
+                                      <img src="{$article.image}" alt="石梅小学" class="photo"/>
+                                       <!--{else}-->
+                                		<img src="{$fragment.none.image}" alt="石梅小学" class="photo" />
+                                   {/if}
+                       
+                            <div class="txt">
+                                <strong>  {$article.title}</strong><span>{if $article.keywords}（{$article.keywords}）{/if} </span>
+                                <p>  {$article.description}</p>
+                                <a href="{$article.url}" class="more">更多 </a>
+                            </div>
+                        </li>
+                         <!-- {/foreach} -->
+                        
+        
+                    </ul>
+                <span class="clear"></span>
+                </div>            
+        
+                
+         <a href="javascript:;" class="move_left"><span></span></a> 
+         <a href="javascript:;" class="move_right"><span></span></a>                    
+                                
+
+        
+        <span class="line"></span>
+	</div>
+	<!-- Teacher结束 -->
+
+	<div id="Column">
+    	<div class="center">
+        
+              <div class="gundong">
+                            <div class="jCarouselLite">
+                                <!-- 滚动开始 -->
+                        
+                                        
+                                        <div class="column_show">
+                                            <div class="pic"><img src="{$fragment.homeschool.image}" alt="石梅小学"/></div>
+                                            <h5>学校</h5>
+                                              
+                                                <!-- {foreach from=$cat_1 item=article} -->
+                                               <p><a href="{$article.url}">{$article.title}</a></p>
+                                               <!-- {/foreach} -->
+											  
+                                            <a href="/article_category.php?id=1" class="btn_browsemore"> 浏览更多 </a>
+                                        </div>
+                                        <!-- .column_show结束 -->
+                                        
+                                         <div class="column_show">
+                                            <div class="pic"><img src="{$fragment.homecreate.image}" alt="石梅小学"/></div>
+                                            <h5>党建</h5>
+                                              
+                                                <!-- {foreach from=$cat_2 item=article} -->
+                                               <p><a href="{$article.url}">{$article.title}</a></p>
+                                               <!-- {/foreach} -->
+											  
+                                            <a href="/article_category.php?id=1" class="btn_browsemore"> 浏览更多 </a>
+                                        </div>
+                                        <!-- .column_show结束 -->
+                                        
+                                        <div class="column_show">
+                                            <div class="pic"><img src="{$fragment.homestudent.image}" alt="石梅小学"/></div>
+                                            <h5>学生</h5>
+                                                
+                                                <!-- {foreach from=$cat_3 item=article} -->
+                                               <p><a href="{$article.url}">{$article.title}</a></p>
+                                               <!-- {/foreach} -->
+                                            <a href="/article_category.php?id=2" class="btn_browsemore"> 浏览更多 </a>
+                                        </div>
+                                        <!-- .column_show结束 -->
+                                        
+                                        
+                                        
+                                        <div class="column_show">
+                                            <div class="pic"><img src="{$fragment.hometeacher.image}" alt="石梅小学"/></div>
+                                            <h5>教师</h5>
+                                                <!-- {foreach from=$cat_4 item=article} -->
+                                               <p><a href="{$article.url}">{$article.title}</a></p>
+                                               <!-- {/foreach} -->
+                                            <a href="/article_category.php?id=3" class="btn_browsemore"> 浏览更多 </a>
+                                        </div>
+                                        <!-- .column_show结束 -->
+                                        
+                                        
+                                        
+                                        <div class="column_show">
+                                            <div class="pic"><img src="{$fragment.homehistoy.image}" alt="石梅小学"/></div>
+                                            <h5>回眸</h5>
+                                               <!-- {foreach from=$cat_6 item=article} -->
+                                               <p><a href="{$article.url}">{$article.title}</a></p>
+                                               <!-- {/foreach} -->
+                                            <a href="/article_category.php?id=4" class="btn_browsemore"> 浏览更多 </a>
+                                        </div>
+                                        <!-- .column_show结束 -->
+                                        
+										<div class="column_show">
+                                            <div class="pic"><img src="{$fragment.homehope.image}" alt="石梅小学"/></div>
+                                            <h5>家长</h5>
+                                               <!-- {foreach from=$cat_5 item=article} -->
+                                               <p><a href="{$article.url}">{$article.title}</a></p>
+                                               <!-- {/foreach} -->
+                                            <a href="/article_category.php?id=5" class="btn_browsemore"> 浏览更多 </a>
+                                        </div>
+                                        <!-- .column_show结束 -->
+                                       
+                               <!-- 滚动结束 -->
+                            </div>
+                <span class="clear"></span>
+            	</div>
+                <!-- .gundong结束 -->        
+                         <a href="javascript:;"  class="move_right"><span></span></a>
+                        <a href="javascript:;" class="move_left"><span></span></a>
+          <span class="clear"></span> 
+        </div>
+	</div>
+	<!-- Column结束 -->
+	 {include file="inc/friendlink.tpl"}
+	<!-- friendlink结束 -->
+     {include file="inc/footer.tpl"}
+	 <!-- copyright结束 -->
+	 <div id="float_bar">
+    	<div class="box">
+                <ul>
+				   <!-- {foreach from=$nav_right_list item=right} -->
+                    <li><a href="{$right.guide}">{$right.nav_name}</a></li>
+				  <!-- {/foreach} -->
+           
+                
+                </ul>
+                <div class="erweima"><img src="images/erweima.png" /></div>
+                <a href="#" class="backtop"></a>
+               <span class="close"><span></span></span> 
+        </div>
+        <!-- .box结束 -->
+        
+    </div>
+    <!-- float_bar结束 -->
+</body>
+</html>

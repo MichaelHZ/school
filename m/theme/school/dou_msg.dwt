@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{$page_title}</title>
+	<meta name="keywords" content="{$keywords}" />
+	<meta name="description" content="{$description}" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="blank" />
+    <meta name="format-detection" content="telephone=no" />  
+    <link href="images/style/reset_css.css" rel="stylesheet" />
+	<link href="images/style/all.css" rel="stylesheet" />    
+    <script src="images/js/jquery.js"></script>
+    <script src="images/js/easyscroll.js"></script>
+    <script src="images/js/pullToRefresh.min.js"></script>
+    <script src="images/js/iscroll.js"></script>
+    <script src="images/js/load.js" defer></script>
+    <script>var cat_id = {$cat_id};page = 1;</script>
+</head>
+<body>
+	<div id="top">
+		<h3>信息提示</h3>
+		<a href="#" class="top_btn btn_menu"></a>
+		<a href="/" class="top_btn btn_home"></a>
+	</div>
+	<!-- top结束 -->
+    <div id="topSpaces"></div>
+    
+    
+    
+
+	<div id="banner2">
+		<img src="images/banner2.jpg" alt="图片描述" />
+		<p><a href="#">首页</a> &gt; <a href="#">学生</a> &gt; 石梅之星</p>
+
+	</div>
+	<!-- banner2结束 -->
+    
+    <div class="main_content">
+    
+            
+                      
+            <div id="Success">
+			    <!--
+                <h4><span></span>留言成功</h4>
+				-->
+                <p><div id="douMsg" class="wrap">
+						<dl>
+						<dt>{$text}</dt>
+						<dd>{$cue}<a href="{if $url}{$url}{else}javascript:history.go(-1);{/if}">{$lang.dou_msg_back}</a></dd>
+						</dl>
+						</div>
+				</p>
+        
+            </div>
+            <!-- Success结束 -->
+    
+    </div>
+    <!-- .main_content结束 -->
+    
+    
+    
+	{include file="inc/menu.tpl"}
+	<!-- menu结束 -->
+    
+
+
+</body>
+</html>

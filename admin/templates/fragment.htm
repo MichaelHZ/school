@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{$lang.home}{if $ur_here} - {$ur_here} {/if}</title>
+<meta name="Copyright" content="Douco Design." />
+<link href="templates/public.css" rel="stylesheet" type="text/css">
+<link href="templates/fragment.css" rel="stylesheet" type="text/css">
+{include file="javascript.htm"}
+</head>
+<body>
+<div id="dcWrap">
+ {include file="header.htm"}
+ <div id="dcLeft">{include file="menu.htm"}</div>
+ <div id="dcMain">
+   {include file="ur_here.htm"}
+   <div id="fragment" class="mainBox" style="{$workspace.height}">
+    <h3><a href="{$action_link.href}" class="actionBtn">{$action_link.text}</a><!-- {if $rec eq 'edit'} --><a href="fragment.php?rec=del&id={$fragment.id}" class="delBtn">{$lang.del}</a><!-- {/if} -->{$ur_here}</h3>
+    <!-- {if $rec eq 'default'} 数据列表 -->
+    <div class="list">
+     <!-- {foreach from=$fragment_list item=fragment} -->
+     <dl>
+      <dd>{$fragment.content}<p><em>{$fragment.fragment_name}</em><a href="fragment.php?rec=edit&id={$fragment.id}">{$lang.edit}</a></p></dd>
+      <!-- {foreach from=$fragment.child item=child} -->
+      <dd>{$child.content}<p><em>{$child.fragment_name}</em><a href="fragment.php?rec=edit&id={$child.id}">{$lang.edit}</a></p></dd>
+      <!-- {/foreach} -->
+     </dl>
+     <!-- {/foreach} -->
+    </div>
+    <!-- {/if} -->
+    <!-- {if $rec eq 'add' || $rec eq 'edit'} 数据添加或编辑 -->
+    <form action="fragment.php?rec={$form_action}" method="post" enctype="multipart/form-data">
+     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+      <tr>
+       <td width="80" align="right">{$lang.fragment_name}</td>
+       <td colspan="2">
+        <input type="text" name="fragment_name" value="{$fragment.fragment_name}" size="40" class="inpMain" />
+        <p class="cue">{$lang.fragment_name_cue}</p>
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.fragment_mark}</td>
+       <td colspan="2">
+        <input type="text" name="mark" value="{$fragment.mark}" size="40" class="inpMain" />
+        <p class="cue">{$lang.fragment_mark_cue}</p>
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.fragment_image}</td>
+       <td>
+        <div class="image">
+        <!-- {if $fragment.image} -->
+        <a href="../{$fragment.image}" target="_blank"><img src="../{$fragment.image}" height="100" /></a>
+        <!-- {/if} -->
+        <p><input type="file" name="image" /></p>
+        </div>
+        <p class="cue">{$lang.fragment_image_cue}</p>
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.fragment_text}</td>
+       <td colspan="2">
+        <textarea name="text" cols="92" rows="4" class="textArea">{$fragment.text}</textarea>
+        <p class="cue">{$lang.fragment_text_cue}</p>
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.fragment_link}</td>
+       <td colspan="2">
+        <input type="text" name="link" value="{$fragment.link}" size="90" class="inpMain" />
+        <p class="cue">{$lang.fragment_link_cue}</p>
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.fragment_parent}</td>
+       <td colspan="2">
+        <select name="parent_id">
+         <option value="0">{$lang.empty}</option>
+         <!-- {foreach from=$fragment_list item=list} -->
+         <!-- {if $list.id eq $fragment.parent_id} -->
+         <option value="{$list.id}" selected="selected">{$list.fragment_name}</option>
+         <!-- {else} -->
+         <option value="{$list.id}">{$list.fragment_name}</option>
+         <!-- {/if} -->
+         <!-- {/foreach} -->
+        </select>
+        <span class="cue">{$lang.fragment_parent_cue}</span>
+       </td>
+      </tr>
+      <tr>
+       <td></td>
+       <td colspan="2">
+        <input type="hidden" name="token" value="{$token}" />
+        <input type="hidden" name="id" value="{$fragment.id}">
+        <input name="submit" class="btn" type="submit" value="{$lang.btn_submit}" />
+       </td>
+      </tr>
+     </table>
+    </form>
+    <!-- {/if} -->
+   </div>
+ </div>
+ {include file="footer.htm"}
+ </div>
+</body>
+</html>
