@@ -38,7 +38,7 @@ class Captcha {
         
         // 把验证码字符串写入session
         $_SESSION['captcha'] = md5($word . DOU_SHELL);
-        
+
         // 绘制基本框架
         $im = imagecreatetruecolor($this->captcha_width, $this->captcha_height);
         $bg_color = imagecolorallocate($im, 235, 236, 237);

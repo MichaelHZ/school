@@ -21,7 +21,7 @@
 	 {include file="inc/header2.tpl"}
 	<!-- header2结束 -->
 	<div id="banner2">
-		<img src="{$banner_info.banner}" alt="图片描述" />
+		<img src="{$banner}" alt="图片描述" />
 	</div>
 	<!-- banner2结束 -->
     

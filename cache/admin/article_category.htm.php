@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-09-28 11:59:20
+<?php /* Smarty version 2.6.26, created on 2017-10-29 12:53:01
          compiled from article_category.htm */ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -145,6 +145,40 @@ unset($_smarty_tpl_vars);
        </td>
       </tr>
       <tr>
+       <td height="35" align="right">首页位置</td>
+       <td>
+
+        <div id="homePosition">
+         <?php if ($this->_tpl_vars['cat_info']['home_position'] != ''): ?>
+
+         <?php $_from = $this->_tpl_vars['selectPosition']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['selectPosition']):
+?>
+         <span style='border:1px solid #c9c9c9;padding: 2px;cursor: pointer;margin-right:1em; '><input type='hidden' value='<?php echo $this->_tpl_vars['selectPosition']; ?>
+' name='homePosition[]'><?php echo $this->_tpl_vars['homePosition'][$this->_tpl_vars['selectPosition']]['position_name']; ?>
+</span>
+         <?php endforeach; endif; unset($_from); ?>
+         <?php endif; ?>
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td height="35" align="right">位置选择</td>
+       <td>
+
+
+        <div id="selectPosition">
+         <?php $_from = $this->_tpl_vars['homePosition']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['homePosition']):
+?>
+         <span id="<?php echo $this->_tpl_vars['homePosition']['id']; ?>
+p" style="border:1px solid #c9c9c9;padding: 2px;cursor: pointer;"><?php echo $this->_tpl_vars['homePosition']['position_name']; ?>
+</span>&nbsp;&nbsp;
+         <?php endforeach; endif; unset($_from); ?>
+        </div>
+       </td>
+      </tr>
+      <tr>
        <td align="right"><?php echo $this->_tpl_vars['lang']['parent']; ?>
 </td>
        <td>
@@ -203,6 +237,13 @@ unset($_smarty_tpl_vars);
        </td>
       </tr>
       <tr>
+       <td align="right">模版</td>
+       <td>
+        <input type="text" name="template" value="<?php echo $this->_tpl_vars['cat_info']['template']; ?>
+" size="40" class="inpMain" />
+       </td>
+      </tr>
+      <tr>
        <td></td>
        <td>
         <input type="hidden" name="token" value="<?php echo $this->_tpl_vars['token']; ?>
@@ -226,4 +267,24 @@ unset($_smarty_tpl_vars);
  </div>
 
 </body>
+<script type="text/javascript">
+    <?php echo '
+    $(function(){
+        $(\'#selectPosition span\').click(function(){
+            var sid = parseInt($(this).attr(\'id\'));
+
+            if(\'undefined\' != typeof($(\'#\'+sid+\'s\').val()) &&  $(\'#\'+sid+\'s\').val() != \'\'){
+                return false;
+            }
+            var sname = $(this).html();
+            $(\'#homePosition\').append("<span style=\'border:1px solid #c9c9c9;padding: 2px;cursor: pointer;margin-right:1em; \'><input type=\'hidden\' value=\'"+sid+"\' id=\'"+sid+"s\' name=\'homePosition[]\'>"+sname+"</span>");
+        });
+
+        $(\'#homePosition\').on(\'click\',\'span\',function(){
+            $(this).remove();
+        })
+    })
+    '; ?>
+
+</script>
 </html>

@@ -16,13 +16,13 @@
 $dbhost   = "localhost";
 
 // database name
-$dbname   = "cssmxx";
+$dbname   = "baoci";
 
 // database username
 $dbuser   = "root";
 
 // database password
-$dbpass   = "@cssmxx";
+$dbpass   = "Harrypotter2017";
 
 // table prefix
 $prefix   = "sm_";
@@ -37,4 +37,26 @@ define('ADMIN_PATH','admin');
 define('M_PATH','m');
 
 
+// 兼容DEDE的全局变量
+$cfg_basehost = "http://www.bc.com";
+$cfg_multi_site = 'N';
+
+
+//上传的普通图片的路径,建议按默认
+$cfg_image_dir = $cfg_basedir .'/images/imgall';
+//上传的缩略图
+$ddcfg_image_dir = $cfg_basedir .'/images/litimg';
+
+$cfg_ddimg_width = 240;
+$cfg_ddimg_height = 180;
+$cfg_auot_description = 240;
+$cfg_addon_savetype = 'ymd';
+$cfg_soft_lang = 'utf-8';
+
+$cfg_photo_type['gif'] = true;
+$cfg_photo_type['jpeg'] = true;
+$cfg_photo_type['png'] = true;
+$cfg_photo_type['wbmp'] = true;
+$cfg_photo_typenames = Array();
+$cfg_ddimg_bgcolor = 0;
 ?>

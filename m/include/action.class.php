@@ -28,14 +28,16 @@ class Action extends Common {
     function get_nav($type = 'mobile') {
         $sql = "SELECT * FROM " . $this->table('nav') . " WHERE type = '$type' AND parent_id = '0' ORDER BY sort ASC, id ASC";
         $query = $this->query($sql);
+        $index = 1;
         while ($row = $this->fetch_array($query)) {
             $nav[] = array (
+                    'index' => $index++,
                     "nav_name" => $row['nav_name'],
                     "target" => $row['module'] == 'nav' ? true : false,
-                    "url" => $row['module'] == 'nav' ? $row['guide'] : $this->rewrite_url($row['module'], $row['guide']) 
+                    "url" => $row['module'] == 'nav' ? $row['guide'] : $this->rewrite_url($row['module'], $row['guide'])
             );
         }
-        
+        //var_dump($nav);
         return $nav;
     }
     

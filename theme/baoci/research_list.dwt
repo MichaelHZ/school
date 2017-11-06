@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+    <meta name="keywords" content="{$keywords}"/>
+    <meta name="description" content="{$description}"/>
+    <title>{$page_title}</title>
+	<link href="images/style/reset_css.css" rel="stylesheet" />
+	<link href="images/style/all.css" rel="stylesheet" />
+	<script src="images/js/jquery.js"></script>
+	<script src="images/js/load.js"></script>
+	<!--[if lt IE 9]>  
+		<script language="javascript" type="text/javascript" src="images/js/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<body class="huibg">
+    {include file="inc/header.tpl"}
+    <!-- header结束 -->
+    {include file="inc/banner2.tpl"}
+	<!-- Banner2结束 -->
+
+
+
+	<div id="container2">
+		<aside id="sidebarFenlei">
+            <!-- {foreach from=$article_category item=left_nav} -->
+            {if $get_cat.two.cat_id == $left_nav.cat_id}
+                <h4 class="blueTitle"><em>{$left_nav.cat_name}  </em> {$left_nav.unique_id} </h4>
+            {else}
+                    <!-- {foreach from=$left_nav.child item=child} -->
+                {if $child.cur}
+                    <h4 class="blueTitle"><em>{$child.cat_name}  </em> {$child.unique_id} </h4>
+                {/if}
+                <!-- {/foreach} -->
+            {/if}
+            <!-- {/foreach} -->
+
+
+            <ul class="SortList3">
+                <li><a href="/">学校首页</a></li>
+                <!-- {foreach from=$article_category item=left_nav} -->
+                <li>
+                    <a href="{if $left_nav.child == ''}{$left_nav.url}{else}#{/if}" class="{if $get_cat.two.cat_id == $left_nav.cat_id}change{elseif $get_cat.root.cat_id == $left_nav.cat_id}change{/if}">{$left_nav.cat_name}</a>
+                    {if $left_nav.child}
+                        <ol>
+                            <!-- {foreach from=$left_nav.child item=child} -->
+                            <li {if $child.cur}class="change2"{/if} ><a
+                                        href="{if $child.custom_url}{$child.custom_url}?cat_id={$child.cat_id}{else}{$child.url}{/if}">{$child.cat_name}</a>
+                            </li>
+
+                            <!-- {/foreach} -->
+                        </ol>
+                    {/if}
+                </li>
+                <!-- {/foreach} -->
+
+            </ul>
+		<span class="bombg"></span>
+		</aside>
+		<!-- sidebarFenlei结束 -->
+
+		<article id="neirong2">
+
+                <div id="Location">
+                    <i class="icon_"></i> 您现在的位置：<a href="/">首页</a> &gt; <a
+                            href="{$cat_root.url}">{$cat_root.cat_name}</a> {if  $get_cat.two.cat_id != $get_cat.root.cat_id}&gt;<a
+                        href="{$cat_two.url}">{$cat_two.cat_name}</a>{if $get_cat.two.cat_id != $get_cat.child.cat_id && $get_cat.two.cat_id != $get_cat.root.cat_id} &gt; {$cat_child.cat_name}{/if}{/if}
+                </div>
+                <!-- Location结束 -->
+             
+             
+            
+                <section id="project">
+                    {foreach from=$article_list item=c}
+                    <div class="project">
+
+                                <h4> <a href="{$c.url}">{$c.title} </a> </h4>
+                                <h5>{$c.description} </h5>
+                                {if $c.child}
+                                <dl>
+                                    {foreach from=$c.child item=sub}
+                                    <dt>{$sub.title}：</dt>
+                                    <dd><a href="{$c.url}">{$sub.description}</a></dd>
+                                    {/foreach}
+
+                                </dl>
+                                {/if}
+                    </div>
+                    {/foreach}
+
+                    
+                    
+                    
+                    <span class="clear"></span>
+
+                    {include file="inc/pager.tpl"}
+                
+               </section>
+                <!-- project结束 -->
+                                     
+                
+		</article>
+		<!-- neirong2结束 -->
+
+
+		<span class="clear"></span>
+		<span class="float_pic9"></span>
+		<span class="float_pic10"></span>
+	</div>
+	<!-- container2结束 -->
+
+    {include file="inc/footer2.tpl"}
+    <!-- footer2结束 -->
+
+
+    </body>
+</html>

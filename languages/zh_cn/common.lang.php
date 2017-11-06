@@ -14,7 +14,7 @@
 
 // 公共语言项
 $_LANG['ur_here'] = '当前位置';
-$_LANG['home'] = '首页';
+$_LANG['home'] = '校园首页';
 $_LANG['add_time'] = '发布时间';
 $_LANG['click'] = '点击数';
 $_LANG['price'] = '价格';
@@ -22,7 +22,7 @@ $_LANG['price_format'] = '￥d% 元';
 $_LANG['price_discuss'] = '面议';
 $_LANG['copyright'] = '© d% 2016 All Rights Reserved.';
 $_LANG['powered_by'] = "<a href='' target='_blank'></a>";
-$_LANG['home'] = '首页';
+$_LANG['home'] = '校园首页';
 $_LANG['add_favorite'] = '收藏本站';
 $_LANG['link'] = '友情链接';
 $_LANG['site_closed'] = '站点维护升级中，请您稍后再来...';

@@ -62,7 +62,35 @@ class Action extends Common {
         
         return $nav;
     }
-    
+
+    /**
+     * +----------------------------------------------------------
+     * 获取当前栏目上级栏目图
+     * +----------------------------------------------------------
+     *
+     * @var integer $cate_id
+     *
+     * @return boolean | string
+     * +----------------------------------------------------------
+     */
+    function get_parent_image($cate_id) {
+        if(empty($cate_id)){
+            return false;
+        }
+
+        $cateInfo = $this->get_row("select parent_id,image From ".$this->table('nav')." where guide = '$cate_id'");
+
+        if(empty($cateInfo)){
+            return false;
+        }
+
+        if($cateInfo['parent_id'] == 0 || !empty($cateInfo['image'])){
+            return $cateInfo['image'];
+        }
+
+        return $this->get_one("Select image From ".$this->table('nav')." where id=".$cateInfo['parent_id']);
+
+    }
     /**
      * +----------------------------------------------------------
      * 高亮当前菜单
@@ -286,6 +314,97 @@ class Action extends Common {
         
         // 如果比对$shell吻合，则返回会员信息，否则返回空
         return $check_shell ? $user : NULL;
+    }
+
+    /**
+     * +----------------------------------------------------------
+     * 获取栏目菜单
+     * +----------------------------------------------------------
+     * $table 模块名
+     * $parent_id 默认获取一级导航
+     * $current_module 当前页面模型名称，用于高亮导航栏
+     * $current_id 当前页面栏目ID
+     * +----------------------------------------------------------
+     */
+    function get_home_category($module, $parent_id = 0, $current_module = '', $current_id = '', $current_parent_id = '') {
+
+        $nav = array ();
+        $data = $this->fetch_array_all($this->table('blog_category'), 'sort ASC');
+        $i = 2;
+        foreach ((array) $data as $value) {
+            $cats[$value['cat_id']] = $value;
+            // 根据$parent_id和$type筛选父级导航
+            if ($value['parent_id'] == $parent_id) {
+                if($value['custom_url']){
+                    $value['url'] = $value['custom_url'];
+                }else{
+                    $value['url'] = $this->rewrite_url($module, $value['cat_id']);
+                }
+
+                $value['cur'] = $this->dou_current($value['module'], $value['cat_id'], $current_module, $current_id, $current_parent_id);
+
+
+                foreach ($data as $child) {
+                    // 筛选下级导航
+                    if ($child['parent_id'] == $value['id']) {
+                        $value['child'] = $this->get_category($module, $value['cat_id']);
+                        break;
+                    }
+                }
+                $value['index'] = $i++;
+                $nav[] = $value;
+            }
+        }
+
+        return array($nav,$cats);
+    }
+
+    /**
+     * +----------------------------------------------------------
+     * 获取博客栏目菜单
+     * +----------------------------------------------------------
+     * $table 模块名
+     * $parent_id 默认获取一级导航
+     * $current_module 当前页面模型名称，用于高亮导航栏
+     * $current_id 当前页面栏目ID
+     * +----------------------------------------------------------
+     */
+    function get_blog_category($module, $parent_id = 0, $current_module = '', $current_id = '', $current_parent_id = '') {
+
+        $nav = array ();
+        $data = $this->fetch_array_all($this->table('blog_category'), 'sort ASC');
+        $i = 2;
+        foreach ((array) $data as $value) {
+            $cats[$value['cat_id']] = $value;
+            // 根据$parent_id和$type筛选父级导航
+            if ($value['parent_id'] == $parent_id) {
+                if($value['custom_url']){
+                    $value['url'] = $value['custom_url'];
+                }else{
+                    $value['url'] = $this->rewrite_url($module, $value['cat_id']);
+                }
+
+                $value['cur'] = $this->dou_current($value['module'], $value['cat_id'], $current_module, $current_id, $current_parent_id);
+
+
+                foreach ($data as $child) {
+                    // 筛选下级导航
+                    if ($child['parent_id'] == $value['cat_id']) {
+                        if($child['custom_url']){
+                            $child['url'] = $child['custom_url'];
+                        }else{
+                            $child['url'] = $this->rewrite_url($module, $child['cat_id']);
+                        }
+                        $value['child'][] = $child;
+
+                    }
+                }
+                $value['index'] = $i++;
+                $nav[] = $value;
+            }
+        }
+
+        return array($nav,$cats);
     }
 }
 ?>

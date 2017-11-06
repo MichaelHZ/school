@@ -135,7 +135,7 @@ elseif ($rec == 'reply') {
 	if($guess['email'] && empty($reply)){
 		 // 发送回复内容邮件
 		 $body = $content;
-        if ($dou->send_mail($guess['email'],'石梅小学留言回复', $body)) {
+        if ($dou->send_mail($guess['email'],'报慈小学留言回复', $body)) {
 			$msg = "回复邮件发送成功";
             $reply = 'email';
         } else {

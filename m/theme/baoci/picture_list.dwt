@@ -1,0 +1,30 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+                <div data-page-content="1"> 
+
+                         <ul class="PhotoList">
+                             {foreach from=$article_list name=article_list item=list}
+                            <li> <a href="#" class="photo" >
+                                    {if $list.image}
+                                    <img src="{$list.image} " alt="{$list.title}" />
+                                    {/if}
+                                    <strong> {$list.title}</strong>
+                                </a>
+                            </li>
+                             {/foreach}
+
+                        </ul>
+            
+            
+
+                </div>
+
+</body>
+</html>

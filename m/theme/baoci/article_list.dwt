@@ -1,0 +1,31 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+</head>
+
+<body>
+
+
+<div data-page-content="1">
+    {foreach from=$article_list name=article_list item=list}
+        <div class="docs">
+            <a href="{$list.url}">
+                {if $list.image}
+                    <div class="photo"><img src="{$list.image} " alt="{$list.title}"/></div>
+                {/if}
+                <h4>{$list.title} </h4>
+                <p>{$list.description} </p>
+                <time> {$list.add_time}</time>
+
+            </a>
+        </div>
+    {/foreach}
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,452 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+    <meta name="keywords" content="{$keywords}" />
+    <meta name="description" content="{$description}" />
+    <title>{$page_title}</title>
+	<link href="images/style/reset_css.css" rel="stylesheet" />
+	<link href="images/style/all.css" rel="stylesheet" />
+	<script src="images/js/jquery.js"></script>
+    <script src="images/js/jqueryslider.js"></script>
+    <script src="images/js/gundong.js"></script>
+	<script src="images/js/load.js"></script>
+	<!--[if lt IE 9]>  
+		<script language="javascript" type="text/javascript" src="images/js/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	 {include file="inc/header.tpl"}
+	<!-- header结束 -->
+     {include file="inc/banner.tpl"}
+	<!-- banner结束 -->
+
+	<div id="m1">
+    	<div class="center">
+    
+    
+		<section id="News">
+        
+            <form action="" class="Searchform" method="post">
+                <input name="s" type="text" class="text" id="keys" placeholder="请输入关键词" autocomplete="off"/> <button class="btn_send"  type="submit">搜索</button>
+                </form>
+                        
+ 			<h3 class="PartTitle"> <em>最新动态 </em> <span>新闻中心</span> <a href="#"> MORE +</a> </h3>
+       
+  
+        		<div class="Tab_nr">
+					<div class="FocusNews">
+                    	<span class="icon"><img src="images/icon_topic.png" ></span>
+						<a href="{$news_top.url}" class="photo"><img src="{$news_top.image}" alt="{$news_top.title}" /></a>
+						<h4><time>{$news_top.add_time}</time><a href="{$news_top.url}">{$news_top.title|truncate:16:"..."}</a></h4>
+						<p>{$news_top.description}<a href="{$news_top.url}">【了解详情】</a>
+						</p>
+					</div>
+					<ul class="NewsList">
+                        <!-- {foreach from=$news_list item=news_list} -->
+						<li><time>{$news_list.add_time}</time><a href="{$news_list.url}">{$news_list.title|truncate:26:"..."}</a></li>
+                        <!-- {/foreach} -->
+					</ul>
+                
+                </div>
+                <!-- .Tab_nr结束 -->
+		</section>
+		<!-- News结束 -->
+
+		<section id="Gonggao">
+			<h3 class="PartTitle"> <em>校园公告 </em> <a href="#"> MORE +</a> </h3>
+            <div id="GonggaoGundong">
+                <!-- {foreach from=$notice_list item=notice_list} -->
+                    <div class="gonggaoList">
+                            <h5><a href="{$notice_list.url}">{$notice_list.title} </a> </h5>
+                            <p>{$notice_list.description}<a href="{$notice_list.url}">【了解详情】 </a> </p>
+                            <time>{$notice_list.add_time_ym} <em> {$notice_list.add_time_d}</em></time>
+                    </div>
+                <!-- {/foreach} -->
+
+            </div>
+            
+		</section>
+		<!-- Gonggao结束 -->
+
+		<span class="clear"></span>
+        
+        </div>
+		<span class="line_x_bai"></span>
+        <span class="left_top_pic"><img src="images/float_pic7.png" ></span>
+	</div>
+	<!-- m1结束 -->
+
+	<section id="Cheerforyou">
+    	<div class="center">
+			<h3 class="MainTitle"><span>Cheer for you</span><em>为您喝彩 </em></h3>
+            
+            
+			<div class="FocusColumn">
+				<a href="{$fragment.tstyle.link}" class="photo" > <img src="{$fragment.tstyle.image}" alt="{$fragment.tstyle.text} " /><i class="icon_fdj"></i></a>
+				<div class="text">
+                    <h5>{$fragment.tstyle.name}</h5>
+
+                    <p>{$fragment.tstyle.text}</p><i class="arrow"></i>
+                </div>
+			</div>
+            
+            
+			<div class="FocusColumn">
+				<div class="text"><i class="arrow2"></i>
+                    <h5>{$fragment.taward.name}</h5>
+                    <p>{$fragment.taward.text}</p>
+                </div>
+				<a href="{$fragment.taward.link}" class="photo" > <img src="{$fragment.taward.image}" alt="{$fragment.taward.text} " /><i class="icon_fdj"></i></a>
+			</div>
+
+
+            <div class="FocusColumn">
+                <a href="{$fragment.sstyle.link}" class="photo" > <img src="{$fragment.sstyle.image}" alt="{$fragment.sstyle.text} " /><i class="icon_fdj"></i></a>
+                <div class="text">
+                    <h5>{$fragment.sstyle.name}</h5>
+
+                    <p>{$fragment.sstyle.text}</p><i class="arrow"></i>
+                </div>
+            </div>
+
+
+            <div class="FocusColumn">
+                <div class="text"><i class="arrow2"></i>
+                    <h5>{$fragment.saward.name}</h5>
+                    <p>{$fragment.saward.text}</p>
+                </div>
+                <a href="{$fragment.saward.link}" class="photo" > <img src="{$fragment.saward.image}" alt="{$fragment.saward.text} " /><i class="icon_fdj"></i></a>
+            </div>
+            
+            
+          <span class="clear"></span>  
+		<span class="line_x_hui"></span>
+		</div>
+        <span class="right_top_pic"><img src="images/float_pic8.png"></span>
+	</section>
+	<!-- Cheerforyou结束 -->
+
+	<section id="Interest">
+    	<div class="center">
+                <h3 class="MainTitle"> <span> your interest</span><em>请您关注  </em></h3>
+                <div id="InterestBanner">
+                    <div class="conbox">
+
+                        <!-- {foreach from=$school_list item=school_list} -->
+                            <div class="Slide_"> <a title="{$school_list.title}" href="{$school_list.url}"> <img src="{$school_list.image}" class="mainpic"></a></div>
+                        <!-- {/foreach} -->
+
+                        <!-- {foreach from=$teacher_list item=teacher_list} -->
+                        <div class="Slide_"> <a title="{$teacher_list.title}" href="{$teacher_list.url}"> <img src="{$teacher_list.image}" class="mainpic"></a></div>
+                        <!-- {/foreach} -->
+
+                        <!-- {foreach from=$team_list item=team_list} -->
+                        <div class="Slide_"> <a title="{$team_list.title}" href="{$team_list.url}"> <img src="{$team_list.image}" class="mainpic"></a></div>
+                        <!-- {/foreach} -->
+
+                        <!-- {foreach from=$genearch_list item=genearch_list} -->
+                        <div class="Slide_"> <a title="{$genearch_list.title}" href="{$genearch_list.url}"> <img src="{$genearch_list.image}" class="mainpic"></a></div>
+                        <!-- {/foreach} -->
+
+                    </div>
+                    
+                    <ul class="nav_text">
+                    	<li class="change">美丽校园</li>
+                    	<li>教师团队</li>
+                    	<li>社团掠影</li>
+                    	<li>家长园地</li>
+                    </ul>
+                </div>
+        
+        
+                 <div id="InterestDoc">
+                        <ul class="InterestTab">
+                            <li class="change"><a href="#">校务文件</a></li>
+                            <li><a href="#">校务公开</a></li>
+                        </ul>         	    	
+                        <span class="clear"></span>  
+                        <div class="Tab_nr">
+                            <ul class="NewsList">
+                                <!-- {foreach from=$file_list item=file_list} -->
+                                <li> <time>{$file_list.add_time}</time><a href="#">{$file_list.title|truncate:26:"..."}</a></li>
+                                <!-- {/foreach} -->
+
+                            </ul>   
+                        </div>
+                        <!-- .Tab_nr结束 -->
+                        
+                     
+                        <div class="Tab_nr">
+                            <ul class="NewsList">
+                                <!-- {foreach from=$public_list item=public_list} -->
+                                <li> <time>{$public_list.add_time}</time><a href="#">{$public_list.title|truncate:26:"..."}</a></li>
+                                <!-- {/foreach} -->
+
+                            </ul>   
+                        </div>
+                        <!-- .Tab_nr结束 -->
+                        
+                      <a href="#" class="btn_more">more+</a>
+                </div>
+                <!-- InterestDoc结束 -->
+                
+                <span class="clear"></span>
+		<span class="line_x_bai"></span>
+		</div>
+        <span class="left_bom_pic"><img src="images/float_pic5.png"></span>
+        <span class="right_bom_pic"><img src="images/float_pic6.png"></span>
+	</section>
+	<!-- Interest结束 -->
+
+	<nav id="quicklink">
+    	<div class="center">
+            <!-- {foreach from=$nav_top_list name=nav_top_list item=nav} -->
+            <!-- {assign var=index value=$smarty.foreach.nav_top_list.index+1} -->
+                <dl>
+                    <dt><span class="icon"><i class="icons_ icons_{$index}x1"></i></span> {$nav.nav_name}</dt>
+                    <dd> {$nav.nav_alias}
+                </dd>
+                </dl>
+            <!-- {/foreach} -->
+
+        
+       
+        <span class="clear"></span>
+        </div>
+        
+	</nav>
+	<!-- quicklink结束 -->
+
+	<div id="SpecialtyCourses">
+    	<div class="center">
+                
+                <h3 class="MainTitle"> <span> Speclalty courses</span><em>特色课程  </em></h3>
+                        <ul class="fenlei">
+                            <li class="change"> <a href="javascript:;">木子版画</a></li>
+                            <li><a href="javascript:;">预留栏目</a></li>
+                            <li><a href="javascript:;">木子版画</a></li>
+                            <li><a href="javascript:;">预留栏目</a></li>
+                            <li><a href="javascript:;">木子版画</a></li>
+                            <li><a href="javascript:;">预留栏目</a></li>
+                        </ul>
+                
+                	<div class="Intr_nr">
+                            <div class="Intr_fenlei">
+                                <h5 class="Title">木子版画 </h5>
+                                <ul class="SortList2">
+                                    <li class="change"><a href="#">&bull; 木子简介</a></li>
+                                    <li><a href="#">&bull; 木子作品</a></li>
+                                    <li><a href="#">&bull; 木子大师</a></li>
+                                    <li><a href="#">&bull; 木子画家</a></li>
+                                    <li><a href="#">&bull; 木子课程</a></li>
+                                    <li><a href="#">&bull; 木子技法</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="conbox">
+                                    <div class="Slide_"> <a title="图片展示" href="#"> <img src="images/banner.jpg" class="mainpic"></a></div>
+                                    <div class="Slide_"> <a title="图片展示" href="#"><img src="images/banner.jpg" class="mainpic"></a></div>
+                                    <div class="Slide_"> <a title="图片展示" href="#"><img src="images/banner.jpg" class="mainpic"></a></div>
+                            </div>
+                    
+                    </div>
+                    <!-- .Intr_nr结束 -->
+
+
+                	<div class="Intr_nr">
+                            <div class="Intr_fenlei">
+                                <h5 class="Title">2木子版画 </h5>
+                                <ul class="SortList2">
+                                    <li class="change"><a href="#">&bull; 木子简介</a></li>
+                                    <li><a href="#">&bull; 木子作品</a></li>
+                                    <li><a href="#">&bull; 木子大师</a></li>
+                                    <li><a href="#">&bull; 木子画家</a></li>
+                                    <li><a href="#">&bull; 木子课程</a></li>
+                                    <li><a href="#">&bull; 木子技法</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="conbox">
+                                    <div class="Slide_"> <a title="图片展示" href="#"> <img src="images/banner.jpg" class="mainpic"></a></div>
+                                    <div class="Slide_"> <a title="图片展示" href="#"><img src="images/banner.jpg" class="mainpic"></a></div>
+                                    <div class="Slide_"> <a title="图片展示" href="#"><img src="images/banner.jpg" class="mainpic"></a></div>
+                            </div>
+                    
+                    </div>
+                    <!-- .Intr_nr结束 -->
+
+
+                	<div class="Intr_nr">
+                            <div class="Intr_fenlei">
+                                <h5 class="Title">3木子版画 </h5>
+                                <ul class="SortList2">
+                                    <li class="change"><a href="#">&bull; 木子简介</a></li>
+                                    <li><a href="#">&bull; 木子作品</a></li>
+                                    <li><a href="#">&bull; 木子大师</a></li>
+                                    <li><a href="#">&bull; 木子画家</a></li>
+                                    <li><a href="#">&bull; 木子课程</a></li>
+                                    <li><a href="#">&bull; 木子技法</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="conbox">
+                                    <div class="Slide_"> <a title="图片展示" href="#"> <img src="images/banner.jpg" class="mainpic"></a></div>
+                                    <div class="Slide_"> <a title="图片展示" href="#"><img src="images/banner.jpg" class="mainpic"></a></div>
+                                    <div class="Slide_"> <a title="图片展示" href="#"><img src="images/banner.jpg" class="mainpic"></a></div>
+                            </div>
+                    
+                    </div>
+                    <!-- .Intr_nr结束 -->
+
+                	<div class="Intr_nr">
+                            <div class="Intr_fenlei">
+                                <h5 class="Title">4木子版画 </h5>
+                                <ul class="SortList2">
+                                    <li class="change"><a href="#">&bull; 木子简介</a></li>
+                                    <li><a href="#">&bull; 木子作品</a></li>
+                                    <li><a href="#">&bull; 木子大师</a></li>
+                                    <li><a href="#">&bull; 木子画家</a></li>
+                                    <li><a href="#">&bull; 木子课程</a></li>
+                                    <li><a href="#">&bull; 木子技法</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="conbox">
+                                    <div class="Slide_"> <a title="图片展示" href="#"> <img src="images/banner.jpg" class="mainpic"></a></div>
+                                    <div class="Slide_"> <a title="图片展示" href="#"><img src="images/banner.jpg" class="mainpic"></a></div>
+                                    <div class="Slide_"> <a title="图片展示" href="#"><img src="images/banner.jpg" class="mainpic"></a></div>
+                            </div>
+                    
+                    </div>
+                    <!-- .Intr_nr结束 -->
+
+                	<div class="Intr_nr">
+                            <div class="Intr_fenlei">
+                                <h5 class="Title">5木子版画 </h5>
+                                <ul class="SortList2">
+                                    <li class="change"><a href="#">&bull; 木子简介</a></li>
+                                    <li><a href="#">&bull; 木子作品</a></li>
+                                    <li><a href="#">&bull; 木子大师</a></li>
+                                    <li><a href="#">&bull; 木子画家</a></li>
+                                    <li><a href="#">&bull; 木子课程</a></li>
+                                    <li><a href="#">&bull; 木子技法</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="conbox">
+                                    <div class="Slide_"> <a title="图片展示" href="#"> <img src="images/banner.jpg" class="mainpic"></a></div>
+                                    <div class="Slide_"> <a title="图片展示" href="#"><img src="images/banner.jpg" class="mainpic"></a></div>
+                                    <div class="Slide_"> <a title="图片展示" href="#"><img src="images/banner.jpg" class="mainpic"></a></div>
+                            </div>
+                    
+                    </div>
+                    <!-- .Intr_nr结束 -->
+
+                	<div class="Intr_nr">
+                            <div class="Intr_fenlei">
+                                <h5 class="Title">木子版画 </h5>
+                                <ul class="SortList2">
+                                    <li class="change"><a href="#">&bull; 木子简介</a></li>
+                                    <li><a href="#">&bull; 木子作品</a></li>
+                                    <li><a href="#">&bull; 木子大师</a></li>
+                                    <li><a href="#">&bull; 木子画家</a></li>
+                                    <li><a href="#">&bull; 木子课程</a></li>
+                                    <li><a href="#">&bull; 木子技法</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="conbox">
+                                    <div class="Slide_"> <a title="图片展示" href="#"> <img src="images/banner.jpg" class="mainpic"></a></div>
+                                    <div class="Slide_"> <a title="图片展示" href="#"><img src="images/banner.jpg" class="mainpic"></a></div>
+                                    <div class="Slide_"> <a title="图片展示" href="#"><img src="images/banner.jpg" class="mainpic"></a></div>
+                            </div>
+                    
+                    </div>
+                    <!-- .Intr_nr结束 -->
+
+                <span class="clear"></span>
+                <!-- 清除浮动 -->
+        
+        </div>
+       <span class="line"></span> 
+       <span class="jiao_left"></span> 
+       <span class="jiao_right"></span> 
+       <span class="yezi_left"></span>
+       <span class="yezi_right"></span>
+	</div>
+	<!-- SpecialtyCourses结束 -->
+
+	<section id="PhotoCenter">
+    	<div class="center">
+			<h3 class="MainTitle"><span>photo center</span><em>图片中心 </em></h3>
+			<ul class="PicList">
+                <!-- {foreach from=$image_list item=image_list} -->
+                <li><a href="#" class="photo"><img src="{$image_list.image}" alt="{$image_list.title|truncate:26:"..."} " /><em>{$image_list.title|truncate:26:"..."}</em></a></li>
+                <!-- {/foreach} -->
+
+			</ul>
+		<span class="clear"></span>
+		</div>
+        <span class="line_x_hui"></span>
+	</section>
+	<!-- PhotoCenter结束 -->
+
+	<section id="AboutUs">
+    	<div class="center">
+                
+                <div class="jieshao">
+                        <div class="school_logo"><img src="images/logo2.png"></div>
+                        
+                        <h4>常熟市报慈小学 </h4>
+                        <p> 常熟市报慈小学是一所教育局的直属学校，建于1989年，当时为九年一贯制学校，
+                        学校处于虞山镇的菱塘和林场的张坝、丁坝三个村之间。学校初建时，只有5个班级，小
+                        学1-3年级各1个班，初一年级2个班，全校共有208名学生，其中小学生112名，中学生96名
+                        ，共有教职工18名，中学编制的7名，小学编制的11......<a href="#">【查看详情】 </a></p>
+                        
+                <span class="clear"></span>
+                </div>
+                
+                
+                
+                <div class="about_us_nav">
+                <h5>走进我们 <span>About us </span> </h5>
+                <ul class="SortList">
+                    <!-- {foreach from=$nav_bottom_list name=bnav item=bnav} -->
+                    <li> <a href="{$bnav.url}">{$bnav.nav_name}</a></li>
+                    <!-- {/foreach} -->
+                </ul>
+                </div>
+                
+                
+                <div id="AboutUsBanner">
+
+                    <div class="conbox">
+                        <!-- {foreach from=$show_list_bottom name=show item=show} -->
+                        <div class="Slide_"> <a title="{$show.show_name}" href="{$show.show_link}" target="_blank"> <img src="{$show.show_img}" class="mainpic"></a></div>
+                        <!-- {/foreach} -->
+                    </div>
+               
+                
+                </div>
+                
+        </div>
+        
+                <span class="line_x_bai"></span>
+	</section>
+	<!-- AboutUs结束 -->
+    {include file="inc/firendlink.tpl"}
+	<!-- firendlink结束 -->
+
+	 {include file="inc/footer.tpl"}
+	<!-- footer结束 -->
+
+</body>
+</html>
+
+
+
+
+
+
+

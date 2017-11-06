@@ -21,7 +21,14 @@ $rec = $check->is_rec($_REQUEST['rec']) ? $_REQUEST['rec'] : 'default';
 // 赋值给模板
 $smarty->assign('rec', $rec);
 $smarty->assign('cur', $cur = 'nav');
-
+// 图片上传
+include_once (ROOT_PATH . 'include/upload.class.php');
+$images_dir = 'images/nav/'; // 文件上传路径，结尾加斜杠
+$thumb_dir = ''; // 缩略图路径（相对于$images_dir） 结尾加斜杠，留空则跟$images_dir相同
+$img = new Upload(ROOT_PATH . $images_dir, $thumb_dir); // 实例化类文件
+if (!file_exists(ROOT_PATH . $images_dir)) {
+    mkdir(ROOT_PATH . $images_dir, 0777);
+}
 /**
  * +----------------------------------------------------------
  * 导航列表
@@ -58,7 +65,7 @@ elseif ($rec == 'add') {
     
     // CSRF防御令牌生成
     $smarty->assign('token', $firewall->set_token('nav_add'));
-    
+
     // 赋值给模板
     $smarty->assign('catalog', $dou->get_catalog());
     $smarty->assign('nav_list', $dou->get_nav('middle'));
@@ -73,11 +80,31 @@ elseif ($rec == 'insert') {
     
     if (empty($_POST['nav_name']))
         $dou->dou_msg($_LANG['nav_name'] . $_LANG['is_empty']);
-        
+
+    // 判断是否有上传图片/上传图片生成
+    if ($_FILES['image']['name'] != "") {
+        // 生成图片文件名
+        $file_name = date('Ymd');
+        for($i = 0; $i < 6; $i++) {
+            $file_name .= chr(mt_rand(97, 122));
+        }
+
+        // 其中image指的是上传的文本域名称，$file_name指的是生成的图片文件名
+        $upfile = $img->upload_image('image', $file_name);
+        $file = $images_dir . $upfile;
+        // $img->make_thumb($upfile, 100, 100); // 生成缩略图
+    }
+
+    if(!empty($_POST['file'])){
+        $file = trim(str_replace('http://'.$_SERVER['HTTP_HOST'],'',$_POST['file']),'/');
+    }
+
+
     // CSRF防御令牌验证
     $firewall->check_token($_POST['token'], 'nav_add');
-    
-    $sql = "INSERT INTO " . $dou->table('nav') . " (id, module, nav_name, guide, parent_id, type, sort,nav_alias)" . " VALUES (NULL, '$module', '$_POST[nav_name]', '$guide', '$_POST[parent_id]', '$_POST[type]', '$_POST[sort]','$_POST[nav_alias]')";
+    $position = '';
+
+    $sql = "INSERT INTO " . $dou->table('nav') . " (id, module, nav_name, guide, parent_id, type, sort,nav_alias,image)" . " VALUES (NULL, '$module', '$_POST[nav_name]', '$guide', '$_POST[parent_id]', '$_POST[type]', '$_POST[sort]','$_POST[nav_alias]','$file')";
     $dou->query($sql);
     
     $dou->create_admin_log($_LANG['nav_add'] . ': ' . $_POST['nav_name']);
@@ -123,7 +150,22 @@ elseif ($rec == 'update') {
         
     // CSRF防御令牌验证
     $firewall->check_token($_POST['token'], 'nav_edit');
-    
+    // 上传图片生成
+    if ($_FILES['image']['name'] != "") {
+        // 获取图片文件名
+        $basename = addslashes(basename($_POST['image']));
+        $file_name = substr($basename, 0, strrpos($basename, '.'));
+
+        $upfile = $img->upload_image('image', "$file_name"); // 上传的文件域
+        $file = $images_dir . $upfile;
+        // $img->make_thumb($upfile, 100, 100); // 生成缩略图
+
+        $up_file = ", image='$file'";
+    }
+
+    if(empty($up_file) && !empty($_POST['file'])){
+        $up_file =  ", image='".trim(str_replace('http://'.$_SERVER['HTTP_HOST'],'',$_POST['file']),'/')."'";
+    }
     /* 判断是站内还是站外导航 */
     if ($_POST['nav_menu']) {
         $nav_menu = explode(',', $_POST['nav_menu']);
@@ -131,8 +173,9 @@ elseif ($rec == 'update') {
     } else {
         $update = ", guide='$_POST[guide]'";
     }
-    
-    $sql = "UPDATE " . $dou->table('nav') . " SET nav_name = '$_POST[nav_name]'" . $update . ", parent_id = '$_POST[parent_id]', type = '$_POST[type]', sort = '$_POST[sort]',nav_alias = '$_POST[nav_alias]' WHERE id = '$_POST[id]'";
+
+
+    $sql = "UPDATE " . $dou->table('nav') . " SET nav_name = '$_POST[nav_name]'" . $update . ", parent_id = '$_POST[parent_id]', type = '$_POST[type]', sort = '$_POST[sort]',nav_alias = '$_POST[nav_alias]' $up_file WHERE id = '$_POST[id]'";
 
     $dou->query($sql);
     

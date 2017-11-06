@@ -71,7 +71,8 @@ elseif ($rec == 'add') {
     
     // CSRF防御令牌生成
     $smarty->assign('token', $firewall->set_token('article_category_add'));
-    
+
+    $smarty->assign('homePosition',$dou->get_home_position());
     // 赋值给模板
     $smarty->assign('form_action', 'insert');
     $smarty->assign('article_category', $dou->get_category_nolevel('article_category'));
@@ -91,8 +92,12 @@ elseif ($rec == 'insert') {
         
     // CSRF防御令牌验证
     $firewall->check_token($_POST['token'], 'article_category_add');
-    
-    $sql = "INSERT INTO " . $dou->table('article_category') . " (cat_id, unique_id, parent_id, cat_name, keywords, description, sort,custom_url)" . " VALUES (NULL, '$_POST[unique_id]', '$_POST[parent_id]', '$_POST[cat_name]', '$_POST[keywords]', '$_POST[description]', '$_POST[sort]','$_POST[custom_url]')";
+    $position = '';
+    if(isset($_POST['homePosition']) && !empty($_POST['homePosition'])){
+        $position = implode(',',$_POST['homePosition']);
+    }
+    $_POST['template'] = isset($_POST['template']) && !empty($_POST['template']) ? $_POST['template'] :'default';
+    $sql = "INSERT INTO " . $dou->table('article_category') . " (cat_id, unique_id, parent_id, cat_name, keywords, description, sort,custom_url,home_position,template)" . " VALUES (NULL, '$_POST[unique_id]', '$_POST[parent_id]', '$_POST[cat_name]', '$_POST[keywords]', '$_POST[description]', '$_POST[sort]','$_POST[custom_url]','$position','$_POST[template]')";
     
     $dou->query($sql);
     
@@ -119,7 +124,9 @@ elseif ($rec == 'edit') {
     
     // CSRF防御令牌生成
     $smarty->assign('token', $firewall->set_token('article_category_edit'));
-    
+
+    $smarty->assign('selectPosition',explode(',',$cat_info['home_position']));
+    $smarty->assign('homePosition',$dou->get_home_position());
     // 赋值给模板
     $smarty->assign('form_action', 'update');
     $smarty->assign('article_category', $dou->get_category_nolevel('article_category', '0', '0', $cat_id));
@@ -140,9 +147,13 @@ elseif ($rec == 'update') {
         
     // CSRF防御令牌验证
     $firewall->check_token($_POST['token'], 'article_category_edit');
-    
-    $sql = "update " . $dou->table('article_category') . " SET cat_name = '$_POST[cat_name]', unique_id = '$_POST[unique_id]', parent_id = '$_POST[parent_id]', keywords = '$_POST[keywords]' ,description = '$_POST[description]', sort = '$_POST[sort]',custom_url = '$_POST[custom_url]' WHERE cat_id = '$_POST[cat_id]'";
-    
+    $position = '';
+    if(isset($_POST['homePosition']) && !empty($_POST['homePosition'])){
+        $position = implode(',',$_POST['homePosition']);
+    }
+    $_POST['theme'] = isset($_POST['template']) && !empty($_POST['template']) ? $_POST['template'] :'default';
+    $sql = "update " . $dou->table('article_category') . " SET cat_name = '$_POST[cat_name]', unique_id = '$_POST[unique_id]', parent_id = '$_POST[parent_id]', keywords = '$_POST[keywords]' ,description = '$_POST[description]', sort = '$_POST[sort]',custom_url = '$_POST[custom_url]',home_position='$position',template = '$_POST[template]' WHERE cat_id = '$_POST[cat_id]'";
+
 	$dou->query($sql);
     
     $dou->create_admin_log($_LANG['article_category_edit'] . ': ' . $_POST['cat_name']);
@@ -157,7 +168,7 @@ elseif ($rec == 'update') {
 elseif ($rec == 'del') {
     $cat_id = $check->is_number($_REQUEST['cat_id']) ? $_REQUEST['cat_id'] : $dou->dou_msg($_LANG['illegal'], 'article_category.php');
     $cat_name = $dou->get_one("SELECT cat_name FROM " . $dou->table('article_category') . " WHERE cat_id = '$cat_id'");
-    $is_parent = $dou->get_one("SELECT id FROM " . $dou->table('article') . " WHERE cat_id = '$cat_id'") . $dou->get_one("SELECT cat_id FROM " . $dou->table('article_category') . " WHERE parent_id = '$cat_id'");
+    $is_parent = $dou->get_one("SELECT id FROM " . $dou->table('article') . " WHERE cat_id = '$cat_id'") . $dou->get_one("SELECT cat_id FROM " . $dou->table('article_category') . " WHERE parent_id = '$cat_id' And stype='1'");
     
     if ($is_parent) {
         $_LANG['article_category_del_is_parent'] = preg_replace('/d%/Ums', $cat_name, $_LANG['article_category_del_is_parent']);

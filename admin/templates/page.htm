@@ -58,18 +58,22 @@
       <tr>
        <td align="right">{$lang.page_content}</td>
        <td>
-        <!-- KindEditor -->
-        <script charset="utf-8" src="include/kindeditor/kindeditor.js"></script>
-        <script charset="utf-8" src="include/kindeditor/lang/zh_CN.js"></script>
+        <!-- UEditor -->
+        <script type="text/javascript" charset="utf-8" src="include/ueditor/ueditor.config.js"></script>
+        <script type="text/javascript" charset="utf-8" src="include/ueditor/ueditor.all.js"></script>
+        <link rel="stylesheet" type="text/css" href="include/ueditor/themes/default/css/ueditor.css"/>
+
+
         <script>
-        {literal}
-         var editor;
-         KindEditor.ready(function(K) {
-             editor = K.create('#content');
-         });
-        {/literal}
+            {literal}
+            $(function(){
+                var ue = new baidu.editor.ui.Editor();
+                ue.render("content");
+            })
+
+            {/literal}
         </script>
-        <!-- /KindEditor -->
+        <!-- /UEditor -->
         <textarea id="content" name="content" style="width:780px;height:400px;" class="textArea">{$page.content}</textarea>
        </td>
       </tr>

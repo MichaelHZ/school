@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>图片列表</title>
+	<link href="style/reset_css.css" rel="stylesheet" />
+	<link href="style/all.css" rel="stylesheet" />
+	<script src="js/jquery.js"></script>
+	<script src="js/load.js"></script>
+	<!--[if lt IE 9]>  
+		<script language="javascript" type="text/javascript" src="js/html5.js"></script>
+	<![endif]-->
+</head>
+	<body class="huibg">
+	<header id="header">
+    	<div class="center">
+                <div id="logo">
+                    <a href="#" > <img src="images/logo.png" alt="description " /></a>
+                </div>
+                <!-- logo结束 -->
+                <nav id="menu">
+                            <ul>
+                                <li><a href="#">学校首页</a></li>
+                                <li><a href="#">新闻中心</a>
+                                <ol>
+                                    <li><a href="#">公告</a></li>
+                                    <li><a href="#">校园新闻</a></li>
+                                    <li><a href="#">媒体报道</a></li>
+                                    <span class="arrow_bom"></span>
+                                </ol>
+                                </li>
+                                <li><a href="#">学校概述</a></li>
+                                <li><a href="#">慈心教师</a></li>
+                                <li><a href="#">旧山学子</a></li>
+                                <li><a href="#">教育教学</a></li>
+                                <li><a href="#">家校共同体</a></li>
+                                <li><a href="#">党团工会</a></li>
+                                <li><a href="#">校园博客</a></li>
+                            </ul>
+        
+                </nav>
+                <!-- menu结束 -->
+        </div>
+    <span class="line"></span>
+	</header>
+	<!-- header结束 -->
+
+	<div id="Banner2">
+		<img src="images/banner3.jpg" alt="description " />
+		<div class="weizi"><div>您现在的位置：<a href="#">首页</a> &gt; <a href="#">留言板</a> &gt; <a href="#">查看留言</a></div></div>
+    
+    </div>
+	<!-- Banner2结束 -->
+
+
+
+	<div id="container2">
+		<aside id="sidebarFenlei">
+					<h4 class="blueTitle"><em>新闻中心 </em> news </h4>
+					<ul class="SortList3">
+						<li><a href="#">学校首页</a></li>
+						<li><a href="#" class="change">新闻中心</a>
+						<ol>
+							<li><a href="#">校园公告</a></li>
+							<li class="change2"><a href="#">校园新闻</a></li>
+							<li><a href="#">媒体报道</a></li>
+						</ol>
+						</li>
+						<li><a href="#">学校概述</a></li>
+						<li><a href="#">慈心教师</a></li>
+						<li><a href="#">旧山学子</a></li>
+						<li><a href="#">教育教学</a></li>
+						<li><a href="#">家校共同体</a>
+                        
+						<ol>
+							<li><a href="#">校园公告</a></li>
+							<li><a href="#">校园新闻</a></li>
+							<li><a href="#">媒体报道</a></li>
+						</ol>
+                        </li>
+						<li><a href="#">党团工会</a></li>
+						<li><a href="#">校园博客</a></li>
+					</ul>
+		<span class="bombg"></span>
+		</aside>
+		<!-- sidebarFenlei结束 -->
+
+		<article id="neirong2">
+
+                <div id="Location">
+                   <i class="icon_"></i> 您现在的位置：<a href="#">学校首页 </a> &gt; <a href="#">校园博客 </a>  &gt; <a href="#">语文 </a>
+                </div>
+                <!-- Location结束 -->
+                <section id="PhotoShow">
+                    <ul class="PhotoList">
+                        <li>
+                            <a href="#" class="photo" > <img src="temp_img/93072.jpg" alt="description " /> </a>
+                            <div class="text">
+                                <strong>张喜波 </strong>
+                                <span>世界上没有才能的人是没有的。问题在于教育者要去发现每一位学生的禀赋、兴趣、爱好和特长，为他们的表现和发展提供充分的条件和正确引导。 </span>
+                            </div>
+                         </li>
+                        <li>
+                            <a href="#" class="photo" > <img src="temp_img/93073.jpg" alt="description " /> </a>
+                            <div class="text">
+                                <strong>张喜波 </strong>
+                                <span>世界上没有才能的人是没有的。问题在于教育者要去发现每一位学生的禀赋、兴趣、爱好和特长，为他们的表现和发展提供充分的条件和正确引导。 </span>
+                            </div>
+                         </li>
+                        <li>
+                            <a href="#" class="photo" > <img src="temp_img/93074.jpg" alt="description " /> </a>
+                            <div class="text">
+                                <strong>张喜波 </strong>
+                                <span>世界上没有才能的人是没有的。问题在于教育者要去发现每一位学生的禀赋、兴趣、爱好和特长，为他们的表现和发展提供充分的条件和正确引导。 </span>
+                            </div>
+                         </li>
+                        <li>
+                            <a href="#" class="photo" > <img src="temp_img/93071.jpg" alt="description " /> </a>
+                            <div class="text">
+                                <strong>张喜波 </strong>
+                                <span>世界上没有才能的人是没有的。问题在于教育者要去发现每一位学生的禀赋、兴趣、爱好和特长，为他们的表现和发展提供充分的条件和正确引导。 </span>
+                            </div>
+                         </li>
+
+
+
+                        <li>
+                            <a href="#" class="photo" > <img src="temp_img/93073.jpg" alt="description " /> </a>
+                            <div class="text">
+                                <strong>张喜波 </strong>
+                                <span>世界上没有才能的人是没有的。问题在于教育者要去发现每一位学生的禀赋、兴趣、爱好和特长，为他们的表现和发展提供充分的条件和正确引导。 </span>
+                            </div>
+                         </li>
+                        <li>
+                            <a href="#" class="photo" > <img src="temp_img/93074.jpg" alt="description " /> </a>
+                            <div class="text">
+                                <strong>张喜波 </strong>
+                                <span>世界上没有才能的人是没有的。问题在于教育者要去发现每一位学生的禀赋、兴趣、爱好和特长，为他们的表现和发展提供充分的条件和正确引导。 </span>
+                            </div>
+                         </li>
+                        <li>
+                            <a href="#" class="photo" > <img src="temp_img/93072.jpg" alt="description " /> </a>
+                            <div class="text">
+                                <strong>张喜波 </strong>
+                                <span>世界上没有才能的人是没有的。问题在于教育者要去发现每一位学生的禀赋、兴趣、爱好和特长，为他们的表现和发展提供充分的条件和正确引导。 </span>
+                            </div>
+                         </li>
+                        <li>
+                            <a href="#" class="photo" > <img src="temp_img/93071.jpg" alt="description " /> </a>
+                            <div class="text">
+                                <strong>张喜波 </strong>
+                                <span>世界上没有才能的人是没有的。问题在于教育者要去发现每一位学生的禀赋、兴趣、爱好和特长，为他们的表现和发展提供充分的条件和正确引导。 </span>
+                            </div>
+                         </li>
+
+
+                        <li>
+                            <a href="#" class="photo" > <img src="temp_img/93073.jpg" alt="description " /> </a>
+                            <div class="text">
+                                <strong>张喜波 </strong>
+                                <span>世界上没有才能的人是没有的。问题在于教育者要去发现每一位学生的禀赋、兴趣、爱好和特长，为他们的表现和发展提供充分的条件和正确引导。 </span>
+                            </div>
+                         </li>
+                        <li>
+                            <a href="#" class="photo" > <img src="temp_img/93072.jpg" alt="description " /> </a>
+                            <div class="text">
+                                <strong>张喜波 </strong>
+                                <span>世界上没有才能的人是没有的。问题在于教育者要去发现每一位学生的禀赋、兴趣、爱好和特长，为他们的表现和发展提供充分的条件和正确引导。 </span>
+                            </div>
+                         </li>
+                        <li>
+                            <a href="#" class="photo" > <img src="temp_img/93071.jpg" alt="description " /> </a>
+                            <div class="text">
+                                <strong>张喜波 </strong>
+                                <span>世界上没有才能的人是没有的。问题在于教育者要去发现每一位学生的禀赋、兴趣、爱好和特长，为他们的表现和发展提供充分的条件和正确引导。 </span>
+                            </div>
+                         </li>
+                        <li>
+                            <a href="#" class="photo" > <img src="temp_img/93074.jpg" alt="description " /> </a>
+                            <div class="text">
+                                <strong>张喜波 </strong>
+                                <span>世界上没有才能的人是没有的。问题在于教育者要去发现每一位学生的禀赋、兴趣、爱好和特长，为他们的表现和发展提供充分的条件和正确引导。 </span>
+                            </div>
+                         </li>
+
+
+                    </ul>
+                    
+                    <span class="clear"></span>
+                                     
+                                <div class="pages">
+                                        <span class="btn unclick">&laquo;上一页 </span>
+                                        <a href="#" class="change">1</a>
+                                        <a href="#">2</a>
+                                        <a href="#">3</a>
+                                        <a href="#">4</a>
+                                        <a href="#">...</a>
+                                        <a href="#" class="btn">下一页 &raquo;</a>
+                                </div>
+                
+               </section>
+                <!-- PhotoShow结束 -->
+                         
+                
+		</article>
+		<!-- neirong2结束 -->
+
+
+		<span class="clear"></span>
+		<span class="float_pic9"></span>
+		<span class="float_pic10"></span>
+	</div>
+	<!-- container2结束 -->
+
+	<footer id="footer2">
+    	<div class="center">
+           	<a href="#" class="bomlogo"><img src="images/bomlogo.png" > </a>
+            <div class="text">
+                    <p>Copyright &copy; 2012-2017  常熟市报慈小学  版权所有     地址：江苏省苏州市常熟市湘江西路288号</p>
+                    <p>苏ICP备10217989号    技术支持：漫有目的</p>
+           
+            
+            </div>
+		</div>
+        <span  class="footerbg"></span>
+	</footer>
+	<!-- footer2结束 -->
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

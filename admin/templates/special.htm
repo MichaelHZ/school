@@ -1,0 +1,445 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta  {$IS_CREATE}http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{$lang.home}{if $ur_here} - {$ur_here} {/if}</title>
+<meta name="Copyright" content="Douco Design." />
+<link href="templates/public.css" rel="stylesheet" type="text/css">
+{include file="javascript.htm"}
+<script type="text/javascript" src="images/jquery.autotextarea.js"></script>
+</head>
+<body>
+<div id="dcWrap">
+ {include file="header.htm"}
+ <div id="dcLeft">{include file="menu.htm"}</div>
+ <div id="dcMain">
+   {include file="ur_here.htm"}
+   <div class="mainBox" style="{$workspace.height}">
+   <!-- {if $rec eq 'auditing'} 文章审核 -->
+    <!-- {if $if_sort} -->
+    <div class="homeSortRight">
+     <ul class="homeSortBg">
+      {$sort_bg}
+     </ul>
+     <ul class="homeSortList">
+      <!-- {foreach from=$sort name=sort item=article} -->
+      <li>
+       <em>{$article.title}</em>
+       <a href="article.php?rec=del_sort&id={$article.id}" title="{$lang.sort_cancel}">X</a>
+      </li>
+      <!-- {/foreach} -->
+     </ul>
+    </div>
+    <!-- {/if} -->
+    <div id="list"{if $if_sort} class="homeSortLeft"{/if}>
+    <form name="action" method="post" action="special.php?rec=action">
+    <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+     <tr>
+      <th width="22" align="center"><input name='chkall' type='checkbox' id='chkall' onclick='selectcheckbox(this.form)' value='check'></th>
+      <th width="40" align="center">{$lang.record_id}</th>
+      <th align="left">{$lang.article_name}</th>
+      <th width="150" align="center">{$lang.article_category}</th>
+      <th width="80" align="center">{$lang.add_time}</th>
+      <th width="120" align="center">审核状态</th>
+     </tr>
+     <!-- {foreach from=$article_list item=article} -->
+     <tr>
+      <td align="center"><input type="checkbox" name="checkbox[]" value="{$article.id}" /></td>
+      <td align="center">{$article.id}</td>
+      <td><a href="article.php?rec=edit&id={$article.id}">{$article.title}</a><!-- {if $article.image} --> <a href="../{$article.image}" target="_blank"><img src="images/icon_picture.png" width="16" height="16" align="absMiddle"></a><!-- {/if} --></td>
+      <td align="center"><!-- {if $article.cat_name} --><a href="special.php?cat_id={$article.cat_id}">{$article.cat_name}</a><!-- {else} -->{$lang.uncategorized}<!-- {/if} --></td>
+      
+      <td align="center">{$article.add_time}</td>
+      <td align="center">
+       {if $article.auditing}已审核{else}未审核{/if}
+      </td>
+     </tr>
+     <!-- {/foreach} -->
+    </table>
+    <div class="action">
+     <select name="action" onchange="douAction()">
+      <option value="auditing_all" selected>审核</option>
+     </select>
+     <input name="submit" class="btn" type="submit" value="{$lang.btn_execute}" />
+    </div>
+    </form>
+    </div>
+    <div class="clear"></div>
+    {include file="pager.htm"}
+    <!-- {/if} -->
+    <!-- {if $rec eq 'default'} 文章列表 -->
+	
+    {if $IS_CREATE}  
+    	{if $process_auth.ckboxCreate_add}
+    	<h3><a href="{$action_link.href}" class="actionBtn add">{$action_link.text}</a>{$ur_here}</h3>
+    	{/if}
+    {elseif $IS_GROUP}
+     	{if $process_auth.ckboxGroup_add}
+    	<h3><a href="{$action_link.href}" class="actionBtn add">{$action_link.text}</a>{$ur_here}</h3>
+    	{/if}
+    {else}
+     	{if $process_auth.ckboxCatAuth_add}
+    	<h3><a href="{$action_link.href}" class="actionBtn add">{$action_link.text}</a>{$ur_here}</h3>
+    	{elseif $IS_ADMIN}
+    	<h3><a href="{$action_link.href}" class="actionBtn add">{$action_link.text}</a>{$ur_here}</h3>
+    	{/if}
+    {/if}
+    <div class="filter">
+    <form action="special.php" method="post">
+	 {if $IS_ADMIN}
+     <select name="cat_id" >
+      <option value="0">{$lang.uncategorized}</option>
+      <!-- {foreach from=$article_category item=cate} -->
+      <!-- {if $cate.cat_id eq $cat_id} -->
+      <option value="{$cate.cat_id}" selected="selected">{$cate.mark} {$cate.cat_name}</option>
+      <!-- {else} -->
+      <option value="{$cate.cat_id}">{$cate.mark} {$cate.cat_name}</option>
+      <!-- {/if} -->
+      <!-- {/foreach} -->
+     </select>
+	 {else}
+	   <!-- {foreach from=$article_category item=cate} -->
+	  <!-- {if $cate.cat_id eq $cat_id} -->
+	  <!-- 
+	  {$cate.cat_name} 
+	  -->
+	  <input name="cat_id" type="text" class="inpMain" value="{$cate.cat_id}" size="20" hidden />
+	  <!-- {/if} -->
+	  <!-- {/foreach} -->
+	 {/if}
+     <input name="keyword" type="text" class="inpMain" value="{$keyword}" size="20" />
+	 
+     <input name="submit" class="btnGray" type="submit" value="{$lang.btn_filter}" />
+    </form>
+    <span>
+	<!--{if $IS_ADMIN}}-->
+    <!-- {if $if_sort} -->
+	
+    <a class="btnGray" href="special.php?rec=sort">{$lang.sort_close}</a>
+	
+    <!-- {else} -->
+	
+    <a class="btnGray" href="special.php?rec=sort">{$lang.sort_article}</a>
+
+    <!-- {/if} -->
+	<!--{/if}-->
+    </span>
+    </div>
+	<!--{if $IS_ADMIN}}-->
+    <!-- {if $if_sort} -->
+	
+    <div class="homeSortRight">
+     <ul class="homeSortBg">
+      {$sort_bg}
+     </ul>
+     <ul class="homeSortList">
+      <!-- {foreach from=$sort name=sort item=article} -->
+      <li>
+       <em>{$article.title}</em>
+       <a href="special.php?rec=del_sort&id={$article.id}" title="{$lang.sort_cancel}">X</a>
+      </li>
+      <!-- {/foreach} -->
+     </ul>
+    </div>
+    <!-- {/if} -->
+	<!--{/if}-->
+    <div id="list"{if $if_sort} class="homeSortLeft"{/if}>
+    <form name="action" method="post" action="special.php?rec=action">
+    <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+     <tr>
+      <th width="22" align="center"><input name='chkall' type='checkbox' id='chkall' onclick='selectcheckbox(this.form)' value='check'></th>
+      <th width="40" align="center">{$lang.record_id}</th>
+      <th align="left">{$lang.article_name}</th>
+      <th width="150" align="center">{$lang.article_category}</th>
+	  <th width="150" align="center">所属</th>
+      <th width="80" align="center">{$lang.add_time}</th>
+	   <th width="80" align="center">口令状态</th>
+      <th width="120" align="center">{$lang.handler}</th>
+     </tr>
+     <!-- {foreach from=$article_list item=article} -->
+     <tr>
+      <td align="center"><input type="checkbox" name="checkbox[]" value="{$article.id}" /></td>
+      <td align="center">{$article.id}</td>
+      <td><a href="special.php?rec=edit&id={$article.id}">{$article.title}</a><!-- {if $article.image} --> <a href="../{$article.image}" target="_blank"><img src="images/icon_picture.png" width="16" height="16" align="absMiddle"></a><!-- {/if} --></td>
+      <td align="center"><!-- {if $article.cat_name} --><a href="special.php?cat_id={$article.cat_id}">{$article.cat_name}</a><!-- {else} -->{$lang.uncategorized}<!-- {/if} --></td>
+	  <td align="center">{$article.own}</td>
+      <td align="center">{$article.add_time}</td>
+	   <td align="center">
+        {if $article.is_password}<img   class="active" data_id = "{$article.cat_id}" data_val="1" src="/admin/images/yes.gif">{else}<img class="active" data_id = "{$article.cat_id}" data_val="0" src="/admin/images/no.gif">{/if}
+       </td>
+      <td align="center">
+       <!-- {if $if_sort} -->
+       <a href="special.php?rec=set_sort&id={$article.id} ">{$lang.sort_btn}</a>
+       <!-- {else} -->
+       {if $IS_ADMIN}
+       		<a href="special.php?rec=edit&id={$article.id}">{$lang.edit}</a>
+       		| 
+       			<a href="special.php?rec=del&id={$article.id}">{$lang.del}</a>
+       			 {if $IS_CREATE}
+       		|
+        		<a href="create.php?cid={$article.id}">创建</a> 	
+        		{/if}
+       {elseif $IS_CREATE}
+       		{if $process_auth.ckboxCreate_edit}
+       			<a href="special.php?rec=edit&id={$article.id}">{$lang.edit}</a>
+       		{/if}
+       		{if $process_auth.ckboxCreate_del}
+       			| 
+       			<a href="special.php?rec=del&id={$article.id}">{$lang.del}</a>
+       		{/if}
+        	{if $process_auth.ckboxCreate_add}
+        		|
+        		<a href="create.php?cid={$article.id}">创建</a>
+        	{/if}
+    
+       {else}
+       		{if $process_auth.ckboxCat_edit}
+       			<a href="special.php?rec=edit&id={$article.id}">{$lang.edit}</a>
+       		{/if}
+       		{if $process_auth.ckboxCat_del}
+       			| 
+       			<a href="special.php?rec=del&id={$article.id}">{$lang.del}</a>
+       		{/if}
+       
+        {/if}
+       <!-- {/if} -->
+      </td>
+     </tr>
+     <!-- {/foreach} -->
+    </table>
+    <div class="action">
+     <select name="action" onchange="douAction()">
+      <option value="0">{$lang.select}</option>
+      <option value="del_all">{$lang.del}</option>
+	  {if $IS_ADMIN}}
+      <option value="category_move">{$lang.category_move}</option>
+	  {/if}
+     </select>
+     <select name="new_cat_id" style="display:none">
+      <option value="0">{$lang.uncategorized}</option>
+      <!-- {foreach from=$article_category item=cate} -->
+      <!-- {if $cate.cat_id eq $cat_id} -->
+      <option value="{$cate.cat_id}" selected="selected">{$cate.mark} {$cate.cat_name}</option>
+      <!-- {else} -->
+      <option value="{$cate.cat_id}">{$cate.mark} {$cate.cat_name}</option>
+      <!-- {/if} -->
+      <!-- {/foreach} -->
+     </select>
+     <input name="submit" class="btn" type="submit" value="{$lang.btn_execute}" />
+    </div>
+    </form>
+    </div>
+    <div class="clear"></div>
+	 {literal}
+      <style>
+      	.active{cursor:pointer;}
+      </style>
+      <script>
+      	$(function(){
+      		yes = '/admin/images/yes.gif';
+      		no = '/admin/images/no.gif';
+      		$(".active").click(function(){
+      			val = $(this).attr("data_val");
+      			id = $(this).attr("data_id");
+      			obj = $(this);
+      			$.post("/admin/special_category.php",{rec:'active',val:val,id:id},function(data){
+      				   if(data == 'success'){
+      					   if(val == 1){
+      						 obj.attr("src",no).attr('data_val',0);
+      					   }else{
+      						 obj.attr("src",yes).attr('data_val',1);
+      					   }
+      				   }else{
+      					 alert(data); 
+      				   }
+      				   
+      				
+      			});
+      		});
+	 	})
+      </script>
+    {/literal}
+    {include file="pager.htm"}
+    <!-- {/if} -->
+    <!-- {if $rec eq 'add' || $rec eq 'edit'} 文章添加或编辑 -->
+    <h3><a href="{$action_link.href}" class="actionBtn">{$action_link.text}</a>{$ur_here}</h3>
+    <form action="special.php?rec={$form_action}" method="post" enctype="multipart/form-data">
+     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+      <tr>
+       <td width="90" align="right">{$lang.article_name}</td>
+       <td>
+        <input type="text" name="title" value="{$article.title}" size="80" class="inpMain" />
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.article_category}</td>
+       <td>
+	    {if $IS_ADMIN}
+        <select name="cat_id" >
+         <option value="0">{$lang.uncategorized}</option>
+         <!-- {foreach from=$article_category item=cate} -->
+         <!-- {if $cate.cat_id eq $article.cat_id} -->
+         <option value="{$cate.cat_id}" selected="selected">{$cate.mark} {$cate.cat_name}</option>
+         <!-- {elseif $cat_id eq $cate.cat_id} -->
+
+         <option value="{$cate.cat_id}" selected="selected">{$cate.mark} {$cate.cat_name}</option>
+         <!-- {else} -->
+         <option value="{$cate.cat_id}">{$cate.mark} {$cate.cat_name}</option>
+         <!-- {/if} -->
+         <!-- {/foreach} -->
+        </select>
+		{else}
+		 <!-- {foreach from=$article_category item=cate} -->
+         <!-- {if $cate.cat_id eq $article.cat_id} -->
+		 <input type="text" name="" value="{$cate.cat_name}" size="80" class="inpFlie" readonly />
+		 <input type="text" name="cat_id" value="{$cate.cat_id}" hidden /> 
+		 <!-- {elseif $cat_id eq $cate.cat_id} -->
+		 <input type="text" name="" value="{$cate.cat_name}" size="80" class="inpFlie" readonly />
+		 <input type="text" name="cat_id" value="{$cate.cat_id}" hidden /> 
+		 <!-- {/if} -->
+		  <!-- {/foreach} -->
+		{/if}
+       </td>
+      </tr>
+      <tr>
+       <td width="90" align="right">{$lang.article_source}</td>
+       <td>
+        <input type="text" name="source" value="{$article.source}" size="80" class="inpFlie" /> 
+        <span>{$lang.article_micromail}</span>
+        <span><input name='micromail' type='checkbox' id='micromail'   
+        {if $article.micromail} checked='true' {/if}  value='1' {if $rec eq 'add'}checked='true'  {/if} /> </span>
+         <span>创建</span>
+        <span><input name='ctype' type='checkbox' id='ctype'   
+        {if $article.ctype} checked='true' {/if}  value='1' {if $rec eq 'add'}  {/if} /> </span>
+       </td>
+      </tr>
+      <!-- {if $article.defined} -->
+      
+      <tr>
+       <td align="right" valign="top">{$lang.article_defined}</td>
+       <td>
+        <textarea name="defined" id="defined" cols="50" class="textAreaAuto" style="height:{$article.defined_count}0px">{$article.defined}</textarea>
+        <script type="text/javascript">
+         {literal}
+          $("#defined").autoTextarea({maxHeight:300});
+         {/literal}
+        </script>
+        </td>
+      </tr>
+      <!-- {/if} -->
+      <tr>
+       <td align="right" valign="top">{$lang.article_content}</td>
+       <td>
+        <!-- UEditor -->
+       <script type="text/javascript" charset="utf-8" src="include/ueditor/ueditor.config.js"></script>
+       <script type="text/javascript" charset="utf-8" src="include/ueditor/ueditor.all.js"></script>
+       <link rel="stylesheet" type="text/css" href="include/ueditor/themes/default/css/ueditor.css"/>
+
+
+        <script>
+        {literal}
+        $(function(){
+            var ue = new baidu.editor.ui.Editor();
+            ue.render("content");
+        })
+
+
+        {/literal}
+        </script>
+        <!-- /UEditor -->
+
+        <textarea id="content" name="content" style="width:820px;height:400px;" class="textArea">{$article.content}</textarea>{if $article.image}<a href="../{$article.image|ltrim:'/'}" target="_blank"><img src="/{$article.image|ltrim:'/'}" width="150px;" ></a>{else}<img src="images/icon_no.png">{/if}
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.thumb}</td>
+       <td>
+	   
+        <input type="file" name="image" size="38" class="inpFlie" /> <input  id="thumbimg" type="text"  size="80" name="file" class="inpFlie"{if $article.image}  value="{$article.image}" {/if}/>
+        </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.keywords}</td>
+       <td>
+        <input type="text" name="keywords" value="{$article.keywords}" size="114" class="inpMain" />
+       </td>
+      </tr>
+      <tr>
+       <td align="right">自定义链接</td>
+       <td>
+        <input type="text" name="custom_url" value="{$article.custom_url}" size="114" class="inpMain" />
+       </td>
+      </tr>
+      <tr>
+       <td align="right">自定义时间</td>
+       <td>
+        <input type="text" name="add_time" value="{if $article.add_time}{$article.add_time|date_format:'%Y-%m-%d %H:%M:%S'}{else}{$cur_time|date_format:'%Y-%m-%d %H:%M:%S'}{/if}" size="114" class="inpMain" />
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.description}</td>
+       <td>
+        <textarea name="description" cols="115" rows="3" class="textArea" />{$article.description}</textarea>
+       </td>
+      </tr>
+	  <tr>
+       <td align="right">口令</td>
+       <td>
+         <input type="text" name="password" value="{if $article.password}{$article.password}{else}cssm{/if}" size="114" class="inpMain" />
+       </td>
+      </tr>
+      <tr>
+       <td></td>
+       <td>
+        <input type="hidden" name="token" value="{$token}" />
+        <input type="hidden" name="image" value="{$article.image}">
+        <input type="hidden" name="id" value="{$article.id}">
+		{if $IS_SELF || $IS_ADMIN}
+        <input name="submit" class="btn" type="submit" value="{$lang.btn_submit}" />
+		{/if}
+       </td>
+      </tr>
+     </table>
+    </form>
+    <!-- {/if} -->
+    
+   </div>
+ </div>
+ {include file="footer.htm"}
+ </div>
+<!-- {if $rec eq 'default'} 文章列表 -->
+<script type="text/javascript">
+{literal}
+onload = function()
+{
+  document.forms['action'].reset();
+}
+
+function douAction()
+{
+    var frm = document.forms['action'];
+
+    frm.elements['new_cat_id'].style.display = frm.elements['action'].value == 'category_move' ? '' : 'none';
+}
+{/literal}
+</script>
+<!-- {/if} -->
+<!-- {if $rec eq 'auditing'} 文章审核 -->
+<script type="text/javascript">
+{literal}
+onload = function()
+{
+  document.forms['action'].reset();
+}
+
+function douAction()
+{
+    var frm = document.forms['action'];
+
+    frm.elements['new_cat_id'].style.display = frm.elements['action'].value == 'category_move' ? '' : 'none';
+}
+{/literal}
+</script>
+<!-- {/if} -->
+</body>
+</html>

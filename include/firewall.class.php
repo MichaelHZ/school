@@ -164,11 +164,13 @@ class Firewall {
 	 * +----------------------------------------------------------
 	 */
 	function get_legal_id($module, $id = '', $unique_id = '') {
+
 		// 如果有设置则验证合法性，验证通过的情况包括为空和赋值合法，分类页允许ID为空，详细页（包括单页面）不允许ID为空
-		if ((isset ( $id ) && ! $GLOBALS ['check']->is_number ( $id )) || (isset ( $unique_id ) && ! $GLOBALS ['check']->is_unique_id ( $unique_id )))
+		if ((isset ( $id ) && ! $GLOBALS ['check']->is_number ( $id )) || (!empty ( $unique_id ) && ! $GLOBALS ['check']->is_unique_id ( $unique_id )))
 			return - 1;
-		
-		if (isset ( $unique_id )) {
+
+		if (!empty ( $unique_id )) {
+
 			if ($module == 'page') {
 				$get_id = $GLOBALS ['dou']->get_one ( "SELECT id FROM " . $GLOBALS ['dou']->table ( $module ) . " WHERE unique_id = '$unique_id'" );
 			} else {
@@ -182,13 +184,17 @@ class Firewall {
 				}
 			}
 		} else {
+
 			if (isset ( $id )) {
 				if (strpos ( $module, 'category' )) {
+
 					if ($id === '0')
 						return 0; // 分类页允许ID为0
 					$get_id = $GLOBALS ['dou']->get_one ( "SELECT cat_id FROM " . $GLOBALS ['dou']->table ( $module ) . " WHERE cat_id = '$id'" );
 				} else {
+
 					$get_id = $GLOBALS ['dou']->get_one ( "SELECT id FROM " . $GLOBALS ['dou']->table ( $module ) . " WHERE id = '$id'" );
+
 				}
 			} else {
 				// $unique_id和$id都没设置只可能为分类主页或者是详细页没有输入id

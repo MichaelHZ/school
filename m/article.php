@@ -1,16 +1,5 @@
 <?php
-/**
- * DouPHP
- * --------------------------------------------------------------------------------------------------
- * 版权所有 2013-2015 漳州豆壳网络科技有限公司，并保留所有权利。
- * 网站地址: http://www.douco.com
- * --------------------------------------------------------------------------------------------------
- * 这不是一个自由软件！您只能在遵守授权协议前提下对程序代码进行修改和使用；不允许对程序代码以任何形式任何目的的再发布。
- * 授权协议：http://www.douco.com/license.html
- * --------------------------------------------------------------------------------------------------
- * Author: DouCo
- * Release Date: 2015-10-16
- */
+
 define('IN_DOUCO', true);
 
 require (dirname(__FILE__) . '/include/init.php');
@@ -108,6 +97,17 @@ $smarty->assign('cur_nav', $cur_nav);
 $smarty->assign('cat_root', $root);
 $smarty->assign('cat_two', $two);
 $smarty->assign('cat_child', $child);
+
+$sql = "Select user_id,nick_name From ".$dou->table('admin')." Where status = 1 order by sort,user_id asc ";
+$query = $dou->query($sql);
+$user_list = array();
+while($row = $dou->fetch_array($query)){
+
+    $user_list[$row['user_id']] = $row['nick_name'];
+
+}
+$smarty->assign('userList',$user_list);
+
 // 访问统计
 $click = $article['click'] + 1;
 $dou->query("update " . $dou->table('article') . " SET click = '$click' WHERE id = '$id'");

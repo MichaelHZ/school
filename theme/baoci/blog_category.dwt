@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="keywords" content="{$keywords}"/>
+    <meta name="description" content="{$description}"/>
+    <title>{$page_title}</title>
+    <link href="images/style/reset_css.css" rel="stylesheet"/>
+    <link href="images/style/all.css" rel="stylesheet"/>
+
+    <script src="images/js/jquery.js"></script>
+    <script src="images/js/jqueryslider.js"></script>
+	<script src="images/js/jquery.jcarousellite.js"></script>
+    <script src="images/js/load.js"></script>
+    <!--[if lt IE 9]>
+    <script language="javascript" type="text/javascript" src="images/js/html5.js"></script>
+    <![endif]-->
+</head>
+<body class="huibg">
+{include file="inc/header.tpl"}
+<!-- header结束 -->
+
+<div id="Banner2">
+	<img src="images/banner3.jpg" alt="description " />
+	<div class="weizi"><div>您现在的位置：<a href="/">学校首页 </a> &gt; <a href="/blog_index.php">校园博客 </a>  &gt; <a href="{$cat_one.url}">{$cat_one.cat_name} </a></div></div>
+
+</div>
+<!-- banner结束 -->
+
+	
+
+	<div id="Location">
+		<i class="icon_"></i> 您现在的位置：<a href="/">学校首页 </a> &gt; <a href="/blog_index.php">校园博客 </a>  &gt; <a href="{$cat_one.url}">{$cat_one.cat_name} </a>
+		<span class="float_pic9"></span>
+		<span class="float_pic10"></span>
+	</div>
+	<!-- Location结束 -->
+
+	<nav id="BlogMenu">
+    <div class="center">
+		<ul>
+			<li> <a href="/blog_index.php">博客首页</a></li>
+			{foreach from=$blog_category_list name=blog_category_list item=category}
+			<li {if $category.cat_id == $cat_one.cat_id} class="change"{/if}><a href="{$category.url}">{$category.cat_name}</a></li>
+			{/foreach}
+
+		</ul>
+        <span class="clear"></span>
+        <i class="icon_ewm"><div class="ewm"><img src="images/ewm3.jpg"></div></i>
+	</div>
+    </nav>
+	<!-- BlogMenu结束 -->
+
+	<section id="Recommend" class="clear_">
+    	<div id="RecommendGundong">
+                <ul class="PictureList">
+                    {foreach from=$top_list name=top_list item=list}
+                    <li><a href="{$list.url}" class="photo"><img src="{$list.image}" alt="description " /><i class="icon_fdj"></i> </a><em>{$list.title}</em></li>
+                    {/foreach}
+
+                </ul>
+    
+        
+        </div>
+        
+	</section>
+	<!-- Recommend结束 -->
+
+	<div id="container">
+		<article id="neirong">
+        	<div id="blogList">
+
+
+             <div class="pagenav" style="display: none">
+				 <!-- {foreach from=$pager.cur_paper  item=v} -->
+				 <a href="{$v.url}">{$v.index}</a>
+				 <!-- {/foreach} -->
+
+              </div>          
+                <a href="javascript:void(0)" class="btn_readmore">更多 </a>
+            </div>
+            
+            
+            <a href="#" class="btn_backtop"></a>
+            
+		</article>
+		<!-- neirong结束 -->
+
+		<aside id="sidebar">
+			<nav id="Course">
+				<!-- {foreach from=$blog_category_list name=blog_category_list item=category} -->
+
+                {if $category.cat_id == $cat_one.cat_id}
+							<h4 class="SldeTitle2"><span>{$category.cat_name} </span></h4>
+							<ul class="Course">
+
+								<!-- {foreach from=$category.child  item=child} -->
+
+								<li {if $child.cat_id == $cat_two.cat_id}class="change"{/if}><a href="{$child.url}">{$child.cat_name}</a></li>
+
+								<!-- {/foreach} -->
+							</ul>
+                {/if}
+				<!-- {/foreach} -->
+							<span class="clear"></span>
+			</nav>
+			<!-- Course结束 -->
+
+			<section id="blogDoc">
+							<h4 class="SideTitle"><span>热门博文 </span></h4>
+							<ul class="DocList">
+                                {foreach from=$view_list name=view_list item=list}
+									<li><a href="{$list.url}">{$list.title}</a>{if $list.image}[图]{/if}</li>
+                                {/foreach}
+
+							</ul>
+
+			</section>
+			<!-- blogDoc结束 -->
+
+			<div id="EWM">
+				<img src="images/0.jpg" alt="description " class="bgpic" />
+				<div class="erweima">
+				<img src="images/ewm3.jpg" alt="description " /> <span> 关注我们</span>
+				</div>
+			</div>
+			<!-- EWM结束 -->
+
+		</aside>
+		<!-- sidebar结束 -->
+
+		<span class="clear"></span>
+	</div>
+	<!-- container结束 -->
+
+{include file="inc/footer2.tpl"}
+	<!-- footer2结束 -->
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

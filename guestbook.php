@@ -189,7 +189,8 @@ if ($rec == 'insert') {
 	} elseif (! check_guestbook ( $_POST ['content'], 300 )) {
 		$wrong ['content'] = preg_replace ( '/d%/Ums', $include_chinese, $_LANG ['guestbook_content_wrong'] );
 	}
-	
+
+
 	// 判断验证码
 	if ($_CFG ['captcha'] && md5 ( $captcha . DOU_SHELL ) != $_SESSION ['captcha'])
 		$wrong ['captcha'] = $_LANG ['captcha_wrong'];

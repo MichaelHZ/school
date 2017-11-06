@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="keywords" content="{$keywords}"/>
+    <meta name="description" content="{$description}"/>
+    <title>{$page_title}</title>
+    <link href="images/style/reset_css.css" rel="stylesheet"/>
+    <link href="images/style/all.css" rel="stylesheet"/>
+    <script src="images/js/jquery.js"></script>
+    <script src="images/js/load.js"></script>
+    <!--[if lt IE 9]>
+    <script language="javascript" type="text/javascript" src="js/html5.js"></script>
+    <![endif]-->
+</head>
+	<body class="huibg">
+    {include file="inc/header.tpl"}
+
+	<!-- header结束 -->
+
+    {include file="inc/banner.tpl"}
+	<!-- Banner2结束 -->
+
+
+
+	<div id="container2">
+		<aside id="sidebarFenlei">
+            <!-- {foreach from=$article_category item=left_nav} -->
+            {if $get_cat.two == $left_nav.cat_id}
+                <h4 class="blueTitle"><em>{$left_nav.cat_name}  </em> {$left_nav.unique_id} </h4>
+            {/if}
+            <!-- {/foreach} -->
+					<ul class="SortList3">
+                        <!-- {foreach from=$article_category item=left_nav} -->
+                        <li {if $get_cat.two == $left_nav.cat_id}class="change"{/if}><a
+                                    href="{if $left_nav.child == ''}{$left_nav.url}{else}#{/if}">{$left_nav.cat_name}</a>
+                            {if $left_nav.child}
+                                <ol>
+                                    <!-- {foreach from=$left_nav.child item=child} -->
+                                    <li {if $child.cur}class="change2"{/if} ><a
+                                                href="{if $child.custom_url}{$child.custom_url}?cat_id={$child.cat_id}{else}{$child.url}{/if}">{$child.cat_name}</a>
+                                    </li>
+                                    {if $child.cur}
+
+                                    {/if}
+                                    <!-- {/foreach} -->
+                                </ol>
+                            {/if}
+                        </li>
+                        <!-- {/foreach} -->
+					</ul>
+		<span class="bombg"></span>
+		</aside>
+		<!-- sidebarFenlei结束 -->
+
+		<article id="neirong2">
+
+                <div id="Location">
+                    <i class="icon_"></i> 您现在的位置：<a href="/">首页</a> &gt; <a
+                            href="{$cat_root.url}">{$cat_root.cat_name}</a> {if  $get_cat.two != $get_cat.root}&gt;<a
+                        href="{$cat_two.url}">{$cat_two.cat_name}</a>{if $get_cat.two != $get_cat.child && $get_cat.two != $get_cat.root} &gt; {$cat_child.cat_name}{/if}{/if}
+                </div>
+                <!-- Location结束 -->
+                
+                
+                <section id="docContent">
+                        <header class="doc_header">
+                            <h1> {$article.title}</h1>
+                            <div class="values">
+                                <span>发布时间：{$article.add_time} </span><span>发布者：{$article.source} </span><span>阅读量：{$article.click} </span>
+                            </div>
+                            
+                            <div class="share">
+                            <div class="bdsharebuttonbox">
+                                <a class="bds_more" href="#" data-cmd="more"></a>
+                                <a title="分享到QQ空间" class="bds_qzone" href="#" data-cmd="qzone"></a>
+                                <a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a>
+                                <a title="分享到腾讯微博" class="bds_tqq" href="#" data-cmd="tqq"></a>
+                                <a title="分享到人人网" class="bds_renren" href="#" data-cmd="renren"></a>
+                                <a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a>
+                            </div>
+                        
+                        <script>
+                        {literal}
+                        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};
+                        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                        {/literal}
+                        </script>                            </div>
+                            
+                            
+                            </header>
+                    <div class="content">
+                        <!-- 文章内容开始 -->
+                        {$article.content}
+                        <!-- 文章内容结束 -->
+                            </div>
+                           <nav id="PrevNext">
+                               <p>{$lang.article_previous}：{if $lift.previous}<a href="{$lift.previous.url}">{$lift.previous.title}</a>{else}没有了{/if}</p>
+                               <p>{$lang.article_next}：{if $lift.next}<a href="{$lift.next.url}">{$lift.next.title}</a>{else}没有了{/if}</p>
+                                <a href="{$cat_two.url}" class="btn_more">查看更多 +</a>
+                            </nav>
+                            <!-- PrevNext结束 -->
+
+                </section>
+                <!-- docContent结束 -->
+            
+     
+                
+		</article>
+		<!-- neirong2结束 -->
+
+
+		<span class="clear"></span>
+		<span class="float_pic9"></span>
+		<span class="float_pic10"></span>
+	</div>
+	<!-- container2结束 -->
+
+	<footer id="footer2">
+    	<div class="center">
+           	<a href="#" class="bomlogo"><img src="images/bomlogo.png" > </a>
+            <div class="text">
+                    <p>Copyright &copy; 2012-2017  常熟市报慈小学  版权所有     地址：江苏省苏州市常熟市湘江西路288号</p>
+                    <p>苏ICP备10217989号    技术支持：漫有目的</p>
+           
+            
+            </div>
+		</div>
+        <span  class="footerbg"></span>
+	</footer>
+	<!-- footer2结束 -->
+
+</body>
+</html>

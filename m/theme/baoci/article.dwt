@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="keywords" content="{$keywords}"/>
+	<meta name="description" content="{$description}"/>
+	<title>{$page_title}</title>
+	<link href="images/style/reset_css.css" rel="stylesheet" />
+	<link href="images/style/all.css" rel="stylesheet" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="blank" />
+	<meta name="format-detection" content="telephone=no" />
+	
+	
+	
+
+</head>
+<body>
+	<section id="docContent">
+		<header class="docHeader"> 
+        		<h1>{$article.title}</h1>
+                <div class="values">
+                    <time>{$article.add_time} </time> <span>{$userList[$article.user_id]} </span> <a href="/">常熟市报慈小学 </a>
+                </div>
+		</header> 
+        <div class="content_">
+            {$article.content}
+		</div>
+        
+        <div class="tongji"><span>阅读<ins>{$article.click}</ins></span>  <!--<span><i class="icon_zan"></i> <ins>5</ins></span>--> </div>
+	</section>
+	<!-- docContent结束 -->
+
+	<script src="images/js/jquery.js"></script>
+	<script src="images/js/load.js"></script>
+</body>
+</html>

@@ -489,7 +489,7 @@
 	.MusicRecordList li a{ display:none;width:174px;height:191px;position:absolute;top:2px;right:3px;background:url(../redbg3.png) repeat left top;z-index:1500;}
 	.MusicRecordList li a .icon_video{width:42px;height:42px;position:absolute;top:50%;left:50%;margin-top:-21px;margin-left:-21px;background:url(../icon_video.png) no-repeat left top;}
 	.MusicRecordList li a .icon_video:hover{background-position:left bottom;}
-/*- - - - - - - - -样式属音乐专辑-内页.html - - - - - - - -*/
+/*- - - - - - - - -样式属音乐专辑-article.dwt - - - - - - - -*/
 	/*音乐列表*/
 	.Musiclist{padding-top:10px;border-top:1px solid #cccccc;}
 	.Musiclist li{height:47px;line-height:47px;overflow:hidden;font-size:14px;border-bottom:1px solid #f6f6f6;}

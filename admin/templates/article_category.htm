@@ -92,6 +92,32 @@
        </td>
       </tr>
       <tr>
+       <td height="35" align="right">首页位置</td>
+       <td>
+
+        <div id="homePosition">
+         {if $cat_info.home_position neq ''}
+
+         {foreach from=$selectPosition item=selectPosition}
+         <span style='border:1px solid #c9c9c9;padding: 2px;cursor: pointer;margin-right:1em; '><input type='hidden' value='{$selectPosition}' name='homePosition[]'>{$homePosition[$selectPosition].position_name}</span>
+         {/foreach}
+         {/if}
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td height="35" align="right">位置选择</td>
+       <td>
+
+
+        <div id="selectPosition">
+         <!-- {foreach from=$homePosition item=homePosition} -->
+         <span id="{$homePosition.id}p" style="border:1px solid #c9c9c9;padding: 2px;cursor: pointer;">{$homePosition.position_name}</span>&nbsp;&nbsp;
+         <!-- {/foreach} -->
+        </div>
+       </td>
+      </tr>
+      <tr>
        <td align="right">{$lang.parent}</td>
        <td>
         <select name="parent_id">
@@ -133,6 +159,12 @@
        </td>
       </tr>
       <tr>
+       <td align="right">模版</td>
+       <td>
+        <input type="text" name="template" value="{$cat_info.template}" size="40" class="inpMain" />
+       </td>
+      </tr>
+      <tr>
        <td></td>
        <td>
         <input type="hidden" name="token" value="{$token}" />
@@ -149,4 +181,23 @@
  </div>
 
 </body>
+<script type="text/javascript">
+    {literal}
+    $(function(){
+        $('#selectPosition span').click(function(){
+            var sid = parseInt($(this).attr('id'));
+
+            if('undefined' != typeof($('#'+sid+'s').val()) &&  $('#'+sid+'s').val() != ''){
+                return false;
+            }
+            var sname = $(this).html();
+            $('#homePosition').append("<span style='border:1px solid #c9c9c9;padding: 2px;cursor: pointer;margin-right:1em; '><input type='hidden' value='"+sid+"' id='"+sid+"s' name='homePosition[]'>"+sname+"</span>");
+        });
+
+        $('#homePosition').on('click','span',function(){
+            $(this).remove();
+        })
+    })
+    {/literal}
+</script>
 </html>

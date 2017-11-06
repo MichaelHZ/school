@@ -221,8 +221,9 @@ class DbMysql {
         if ($limited == true) {
             $sql = trim($sql . ' LIMIT 1');
         }
-        
+
         $res = $this->query($sql);
+
         if ($res !== false) {
             $row = mysql_fetch_assoc($res);
             
@@ -248,6 +249,7 @@ class DbMysql {
     function fetch_array_all($table, $order_by = '',$where = '') {
         $order_by = $order_by ? " ORDER BY " . $order_by : '';
         $query = $this->query("SELECT * FROM " . $table .$where.$order_by);
+
         while ($row = $this->fetch_assoc($query)) {
             $data[] = $row;
         }

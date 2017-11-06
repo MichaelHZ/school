@@ -177,7 +177,7 @@ p.cue {
  background-color: #FFF;
  padding: 4px 5px;
  color: #999;
- font-size: 12x;
+ font-size: 12px;
  line-height: 20px;
  -webkit-appearance: none;
 }
@@ -189,11 +189,11 @@ p.cue {
  -webkit-appearance: none;
 }
 .textArea {
- border: 1px solid #DBDBDB;
+ /*border: 1px solid #DBDBDB;*/
  background-color: #FFF;
  padding: 4px 5px;
  color: #999;
- font-size: 12x;
+ font-size: 12px;
  line-height: 20px;
  -webkit-appearance: none;
 }
@@ -202,7 +202,7 @@ p.cue {
  background-color: #FFF;
  padding: 0;
  color: #999;
- font-size: 12x;
+ font-size: 12px;
  line-height: 20px;
  resize: none;
  min-height: 40px;
@@ -1209,7 +1209,7 @@ select {
  background: url(../images/icon_picture_big.png) no-repeat left bottom;
 }
 #maskBox #success {
- background: #60BBFF url();
+ background: #60BBFF;
  display: none;
  width: 60px;
  padding: 0 10px;

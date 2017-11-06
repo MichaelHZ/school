@@ -10,7 +10,7 @@
  * --------------------------------------------------------------------------------------------------
  * Author: DouCo
  * Release Date: 2015-10-16
- */
+ *
 define('IN_DOUCO', true);
 
 require (dirname(__FILE__) . '/include/init.php');

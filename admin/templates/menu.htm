@@ -52,10 +52,26 @@
 		<!-- {/foreach} -->
 	</ul>
 	<!-- {/if} -->
-	
-	<ul class="bot">
+	<ul>
+		<li {if $cur eq 'blog_category'} class="cur"{/if}><a href="blog_category.php"><i
+			class="blog_list"></i><em>博客栏目</em></a></li>
 		<li {if $cur eq 'blog_list'} class="cur"{/if}><a href="blog_list.php"><i
-				class="blog_list"></i><em>博客推荐</em></a></li>
+			class="blog_list"></i><em>博客推荐</em></a></li>
+	</ul>
+	<ul>
+		<li {if $cur eq 'research_category'} class="cur"{/if}><a href="research_category.php"><i
+			class="blog_list"></i><em>课研栏目</em></a></li>
+		<li {if $cur eq 'research'} class="cur"{/if}><a href="research.php"><i
+			class="blog_list"></i><em>课研文章</em></a></li>
+	</ul>
+	<ul>
+		<li {if $cur eq 'special_category'} class="cur"{/if}><a href="special_category.php"><i
+			class="blog_list"></i><em>特课栏目</em></a></li>
+		<li {if $cur eq 'special'} class="cur"{/if}><a href="special.php"><i
+			class="blog_list"></i><em>特课文章</em></a></li>
+	</ul>
+	<ul class="bot">
+
 		<li {if $cur eq 'backup'} class="cur"{/if}><a href="backup.php"><i
 				class="backup"></i><em>{$lang.backup}</em></a></li>
 		<li {if $cur eq 'mobile'} class="cur"{/if}><a href="mobile.php"><i
@@ -77,7 +93,7 @@
 </div>
 {else}
 <nav id="nav">
-	<a href="http://www.cssmxx.com" class="logo"><img src="images/logo.png" /> </a>
+	<a href="" class="logo"><img src="images/logo.png" /> </a>
 
     
 	<ul>

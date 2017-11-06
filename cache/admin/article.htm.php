@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.26, created on 2017-09-28 10:37:22
+<?php /* Smarty version 2.6.26, created on 2017-11-02 22:28:40
          compiled from article.htm */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'date_format', 'article.htm', 377, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'ltrim', 'article.htm', 354, false),array('modifier', 'date_format', 'article.htm', 379, false),)), $this); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -481,6 +481,9 @@ unset($_smarty_tpl_vars);
          <span>创建</span>
         <span><input name='ctype' type='checkbox' id='ctype'   
         <?php if ($this->_tpl_vars['article']['ctype']): ?> checked='true' <?php endif; ?>  value='1' <?php if ($this->_tpl_vars['rec'] == 'add'): ?>  <?php endif; ?> /> </span>
+           <span>首页显示</span>
+           <span><input name='homeshow' type='checkbox' id='homeshow'
+                        <?php if ($this->_tpl_vars['article']['homeshow']): ?> checked='true' <?php endif; ?>  value='1' <?php if ($this->_tpl_vars['rec'] == 'add'): ?>  <?php endif; ?> /> </span>
        </td>
       </tr>
       <?php if ($this->_tpl_vars['article']['defined']): ?>
@@ -505,29 +508,28 @@ unset($_smarty_tpl_vars);
        <td align="right" valign="top"><?php echo $this->_tpl_vars['lang']['article_content']; ?>
 </td>
        <td>
-        <!-- KindEditor -->
-        <script charset="utf-8" src="include/kindeditor/kindeditor.js"></script>
-        <script charset="utf-8" src="include/kindeditor/lang/zh_CN.js"></script>
+        <!-- UEditor -->
+       <script type="text/javascript" charset="utf-8" src="include/ueditor/ueditor.config.js"></script>
+       <script type="text/javascript" charset="utf-8" src="include/ueditor/ueditor.all.js"></script>
+       <link rel="stylesheet" type="text/css" href="include/ueditor/themes/default/css/ueditor.css"/>
+
+
         <script>
         <?php echo '
-         var editor;
-         KindEditor.ready(function(K) {
-             editor = K.create(\'#content\');
-         });
-		 $(function(){
-		    $(".ke-content").blur(function(){
-				img = $(".ke-content").children().eq(0);
-				alert(img);
-			});
-			
-		 })
+        $(function(){
+            var ue = new baidu.editor.ui.Editor();
+            ue.render("content");
+        })
+
+
         '; ?>
 
         </script>
-        <!-- /KindEditor -->
-        <textarea id="content" name="content" style="width:780px;height:400px;" class="textArea"><?php echo $this->_tpl_vars['article']['content']; ?>
-</textarea><?php if ($this->_tpl_vars['article']['image']): ?><a href="../<?php echo $this->_tpl_vars['article']['image']; ?>
-" target="_blank"><img src="/<?php echo $this->_tpl_vars['article']['image']; ?>
+        <!-- /UEditor -->
+
+        <textarea id="content" name="content" style="width:820px;height:400px;" class="textArea"><?php echo $this->_tpl_vars['article']['content']; ?>
+</textarea><?php if ($this->_tpl_vars['article']['image']): ?><a href="../<?php echo ((is_array($_tmp=$this->_tpl_vars['article']['image'])) ? $this->_run_mod_handler('ltrim', true, $_tmp, '/') : ltrim($_tmp, '/')); ?>
+" target="_blank"><img src="/<?php echo ((is_array($_tmp=$this->_tpl_vars['article']['image'])) ? $this->_run_mod_handler('ltrim', true, $_tmp, '/') : ltrim($_tmp, '/')); ?>
 " width="150px;" ></a><?php else: ?><img src="images/icon_no.png"><?php endif; ?>
        </td>
       </tr>

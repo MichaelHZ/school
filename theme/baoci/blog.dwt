@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Blog-内容页</title>
+	<link href="images/style/reset_css.css" rel="stylesheet" />
+	<link href="images/style/all.css" rel="stylesheet" />
+	<script src="images/js/jquery.js"></script>
+    <script src="images/js/jquery.jcarousellite.js"></script>
+	<script src="images/js/load.js"></script>
+	<!--[if lt IE 9]>  
+		<script language="javascript" type="text/javascript" src="images/js/html5.js"></script>
+	<![endif]-->
+</head>
+<body class="huibg">
+{include file="inc/header.tpl"}
+<!-- header结束 -->
+
+	<div id="Banner2">
+		<img src="images/banner3.jpg" alt="description " />
+		<div class="weizi"><div>您现在的位置：<a href="/">学校首页 </a> &gt; <a href="/blog_index.php">校园博客 </a>  &gt; <a href="{$cat_one.url}">{$cat_one.cat_name} </a></div></div>
+    
+    </div>
+	<!-- Banner2结束 -->
+
+	
+
+	<div id="Location">
+		<i class="icon_"></i> 您现在的位置：<a href="/">学校首页 </a> &gt; <a href="/blog_index.php">校园博客 </a>  &gt; <a href="{$cat_one.url}">{$cat_one.cat_name} </a>
+		<span class="float_pic9"></span>
+		<span class="float_pic10"></span>
+	</div>
+	<!-- Location结束 -->
+
+	<nav id="BlogMenu">
+    <div class="center">
+		<ul>
+            <li> <a href="/blog_index.php">博客首页</a></li>
+            {foreach from=$blog_category_list name=blog_category_list item=category}
+                <li {if $category.cat_id == $cat_one.cat_id} class="change"{/if}><a href="{$category.url}">{$category.cat_name}</a></li>
+            {/foreach}
+		</ul>
+        <span class="clear"></span>
+        <i class="icon_ewm"><div class="ewm"><img src="images/ewm3.jpg"></div></i>
+	</div>
+    </nav>
+	<!-- BlogMenu结束 -->
+
+	<section id="Recommend" class="clear_">
+    	<div id="RecommendGundong">
+                <ul class="PictureList">
+                    {foreach from=$top_list name=top_list item=list}
+                        <li><a href="{$list.url}" class="photo"><img src="{$list.image}" alt="description " /><i class="icon_fdj"></i> </a><em>{$list.title}</em></li>
+                    {/foreach}
+                </ul>
+    
+        
+        </div>
+        
+	</section>
+	<!-- Recommend结束 -->
+
+	<div id="container">
+		<article id="neirong">
+  
+                <section id="docContent">
+                        <header class="doc_header">
+
+
+                            <h1> {$article.title}</h1>
+                            <div class="values">
+                                <span>发布时间：{$article.add_time} </span><span>发布者：{$nick_name.nick_name} </span><span>阅读量：{$article.click} </span>
+                            </div>
+                            
+                            <div class="share">
+                            <div class="bdsharebuttonbox">
+                                <a class="bds_more" href="#" data-cmd="more"></a>
+                                <a title="分享到QQ空间" class="bds_qzone" href="#" data-cmd="qzone"></a>
+                                <a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a>
+                                <a title="分享到腾讯微博" class="bds_tqq" href="#" data-cmd="tqq"></a>
+                                <a title="分享到人人网" class="bds_renren" href="#" data-cmd="renren"></a>
+                                <a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a>
+                            </div>
+                        
+                        <script>
+                        {literal}
+                        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};
+                        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                        {/literal}
+                        </script>                            </div>
+                            
+                            
+                            </header><div class="content">
+                        <!-- 文章内容开始 -->
+                        {$article.content}
+                        <!-- 文章内容结束 -->
+                            </div>
+                           <nav id="PrevNext">
+
+                               <p>{$lang.article_previous}：{if $lift.previous}<a href="{$lift.previous.url}">{$lift.previous.title}</a>{else}没有了{/if}</p>
+                               <p>{$lang.article_next}：{if $lift.next}<a href="{$lift.next.url}">{$lift.next.title}</a>{else}没有了{/if}</p>
+                                <a href="/blog_category.php?id={$cat_two.cat_id}" class="btn_more">查看更多 +</a>
+                            </nav>
+                            <!-- PrevNext结束 -->
+
+                </section>
+                <!-- docContent结束 -->
+  
+  
+            
+            <a href="#" class="btn_backtop"></a>
+            
+		</article>
+		<!-- neirong结束 -->
+
+		<aside id="sidebar">
+			<nav id="Course">
+                <!-- {foreach from=$blog_category_list name=blog_category_list item=category} -->
+
+                {if $category.cat_id == $cat_one.cat_id}
+                    <h4 class="SldeTitle2"><span>{$category.cat_name} </span></h4>
+                    <ul class="Course">
+
+                        <!-- {foreach from=$category.child  item=child} -->
+
+                        <li {if $child.cat_id == $cat_two.cat_id}class="change"{/if}><a href="{$child.url}">{$child.cat_name}</a></li>
+
+                        <!-- {/foreach} -->
+                    </ul>
+                {/if}
+                <!-- {/foreach} -->
+							<span class="clear"></span>
+			</nav>
+			<!-- Course结束 -->
+
+			<section id="blogDoc">
+							<h4 class="SideTitle"><span>热门博文 </span></h4>
+							<ul class="DocList">
+                                {foreach from=$view_list name=view_list item=list}
+                                    <li><a href="{$list.url}">{$list.title}</a>{if $list.image}[图]{/if}</li>
+                                {/foreach}
+							</ul>
+
+			</section>
+			<!-- blogDoc结束 -->
+
+			<div id="EWM">
+				<img src="images/0.jpg" alt="description " class="bgpic" />
+				<div class="erweima">
+				<img src="images/ewm3.jpg" alt="description " /> <span> 关注我们</span>
+				</div>
+			</div>
+			<!-- EWM结束 -->
+
+		</aside>
+		<!-- sidebar结束 -->
+
+		<span class="clear"></span>
+	</div>
+	<!-- container结束 -->
+    {include file="inc/footer2.tpl"}
+	<!-- footer2结束 -->
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

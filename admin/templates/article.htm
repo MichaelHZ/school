@@ -311,6 +311,9 @@
          <span>创建</span>
         <span><input name='ctype' type='checkbox' id='ctype'   
         {if $article.ctype} checked='true' {/if}  value='1' {if $rec eq 'add'}  {/if} /> </span>
+           <span>首页显示</span>
+           <span><input name='homeshow' type='checkbox' id='homeshow'
+                        {if $article.homeshow} checked='true' {/if}  value='1' {if $rec eq 'add'}  {/if} /> </span>
        </td>
       </tr>
       <!-- {if $article.defined} -->
@@ -330,26 +333,25 @@
       <tr>
        <td align="right" valign="top">{$lang.article_content}</td>
        <td>
-        <!-- KindEditor -->
-        <script charset="utf-8" src="include/kindeditor/kindeditor.js"></script>
-        <script charset="utf-8" src="include/kindeditor/lang/zh_CN.js"></script>
+        <!-- UEditor -->
+       <script type="text/javascript" charset="utf-8" src="include/ueditor/ueditor.config.js"></script>
+       <script type="text/javascript" charset="utf-8" src="include/ueditor/ueditor.all.js"></script>
+       <link rel="stylesheet" type="text/css" href="include/ueditor/themes/default/css/ueditor.css"/>
+
+
         <script>
         {literal}
-         var editor;
-         KindEditor.ready(function(K) {
-             editor = K.create('#content');
-         });
-		 $(function(){
-		    $(".ke-content").blur(function(){
-				img = $(".ke-content").children().eq(0);
-				alert(img);
-			});
-			
-		 })
+        $(function(){
+            var ue = new baidu.editor.ui.Editor();
+            ue.render("content");
+        })
+
+
         {/literal}
         </script>
-        <!-- /KindEditor -->
-        <textarea id="content" name="content" style="width:780px;height:400px;" class="textArea">{$article.content}</textarea>{if $article.image}<a href="../{$article.image}" target="_blank"><img src="/{$article.image}" width="150px;" ></a>{else}<img src="images/icon_no.png">{/if}
+        <!-- /UEditor -->
+
+        <textarea id="content" name="content" style="width:820px;height:400px;" class="textArea">{$article.content}</textarea>{if $article.image}<a href="../{$article.image|ltrim:'/'}" target="_blank"><img src="/{$article.image|ltrim:'/'}" width="150px;" ></a>{else}<img src="images/icon_no.png">{/if}
        </td>
       </tr>
       <tr>

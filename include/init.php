@@ -113,7 +113,7 @@ if (!defined('EXIT_INIT')) {
     $smarty->assign("open", $_OPEN = $_MODULE['open']); // 模块开启状态
     $_DISPLAY = unserialize($_CFG['display']); // 显示设置
     $_DEFINED = unserialize($_CFG['defined']); // 自定义属性
-    
+    $smarty->assign ( '_CFG', $_CFG );  // 全局设置
     // Smarty 过滤器
     function remove_html_comments($source, & $smarty) {
         global $_CFG;

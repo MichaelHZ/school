@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2017-09-28 10:09:30
+<?php /* Smarty version 2.6.26, created on 2017-10-29 19:44:45
          compiled from menu.htm */ ?>
 <?php if (NEWTEMP != true): ?>
 <div id="menu">
@@ -80,10 +80,26 @@ Cat"></i><em><?php echo $this->_tpl_vars['menu']['lang_category']; ?>
 		<?php endforeach; endif; unset($_from); ?>
 	</ul>
 	<?php endif; ?>
-	
-	<ul class="bot">
+	<ul>
+		<li <?php if ($this->_tpl_vars['cur'] == 'blog_category'): ?> class="cur"<?php endif; ?>><a href="blog_category.php"><i
+			class="blog_list"></i><em>博客栏目</em></a></li>
 		<li <?php if ($this->_tpl_vars['cur'] == 'blog_list'): ?> class="cur"<?php endif; ?>><a href="blog_list.php"><i
-				class="blog_list"></i><em>博客推荐</em></a></li>
+			class="blog_list"></i><em>博客推荐</em></a></li>
+	</ul>
+	<ul>
+		<li <?php if ($this->_tpl_vars['cur'] == 'research_category'): ?> class="cur"<?php endif; ?>><a href="research_category.php"><i
+			class="blog_list"></i><em>课研栏目</em></a></li>
+		<li <?php if ($this->_tpl_vars['cur'] == 'research'): ?> class="cur"<?php endif; ?>><a href="research.php"><i
+			class="blog_list"></i><em>课研文章</em></a></li>
+	</ul>
+	<ul>
+		<li <?php if ($this->_tpl_vars['cur'] == 'special_category'): ?> class="cur"<?php endif; ?>><a href="special_category.php"><i
+			class="blog_list"></i><em>特课栏目</em></a></li>
+		<li <?php if ($this->_tpl_vars['cur'] == 'special'): ?> class="cur"<?php endif; ?>><a href="special.php"><i
+			class="blog_list"></i><em>特课文章</em></a></li>
+	</ul>
+	<ul class="bot">
+
 		<li <?php if ($this->_tpl_vars['cur'] == 'backup'): ?> class="cur"<?php endif; ?>><a href="backup.php"><i
 				class="backup"></i><em><?php echo $this->_tpl_vars['lang']['backup']; ?>
 </em></a></li>
@@ -111,7 +127,7 @@ Cat"></i><em><?php echo $this->_tpl_vars['menu']['lang_category']; ?>
 </div>
 <?php else: ?>
 <nav id="nav">
-	<a href="http://www.cssmxx.com" class="logo"><img src="images/logo.png" /> </a>
+	<a href="" class="logo"><img src="images/logo.png" /> </a>
 
     
 	<ul>

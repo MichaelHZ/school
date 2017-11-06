@@ -1,0 +1,21 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+                <div data-page-content="1"> 
+
+								<ul class="DocList">
+                                    {foreach from=$article_list_sid item=article}
+									<li><a href="{$article.url}">{$article.title}</a></li>
+                                    {/foreach}
+
+								</ul>
+
+                </div>
+
+</body>
+</html>

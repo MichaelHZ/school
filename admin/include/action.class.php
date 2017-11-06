@@ -583,5 +583,7 @@ class Action extends Common {
         $GLOBALS['smarty']->display('dou_msg.htm');
         exit();
     }
+
+    
 }
 ?>

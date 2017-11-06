@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="keywords" content="{$keywords}" />
+	<meta name="description" content="{$description}" />
+	<title>{$page_title}</title>
+	<link href="images/style/reset_css.css" rel="stylesheet" />
+	<link href="images/style/all.css" rel="stylesheet" />
+	<script src="images/js/jquery.js"></script>
+    <script src="images/js/jqueryslider.js"></script>
+	<script src="images/js/load.js"></script>
+	<!--[if lt IE 9]>  
+		<script language="javascript" type="text/javascript" src="images/js/html5.js"></script>
+	<![endif]-->
+</head>
+<body class="huibg">
+    {include file="inc/header.tpl"}
+	<!-- header结束 -->
+
+	<div id="Banner2">
+		<img src="images/banner3.jpg" alt="description " />
+		<div class="weizi"><div>您现在的位置：<a href="/">学校首页</a> &gt; <a href="#">校园博客</a></div></div>
+    
+    </div>
+	<!-- Banner2结束 -->
+
+	
+
+	<div id="Location">
+		<i class="icon_"></i> 您现在的位置：<a href="/">学校首页 </a> &gt; <a href="#">校园博客 </a>
+		<span class="float_pic9"></span>
+		<span class="float_pic10"></span>
+	</div>
+	<!-- Location结束 -->
+	<nav id="BlogMenu">
+    <div class="center">
+		<ul>
+			<li class="change"> <a href="#">博客首页</a></li>
+			{foreach from=$blog_category name=blog_category item=cate}
+			<li><a href="{$cate.url}">{$cate.cat_name}</a></li>
+			{/foreach}
+
+		</ul>
+        <span class="clear"></span>
+        <i class="icon_ewm"><div class="ewm"><img src="images/ewm3.jpg"></div></i>
+	</div>
+    </nav>
+	<!-- BlogMenu结束 -->
+	<div id="Blog_m1">
+		<div id="playBanner">
+        	<h4>News</h4>
+			<div class="conbox">
+				    {foreach from=$news_top name=news_top item=news}
+                    <div class="Slide_"> <a title="{$news.title}" href="{$news.url}"> <img src="{$news.image}" class="mainpic"><strong>{$news.title}</strong></a></div>
+                    {/foreach}
+
+			</div>
+
+		</div>
+		<!-- playBanner结束 -->
+
+		<section id="new">
+			<h3 class="huiTitle"><i class="icon1"></i>最新资源 </h3> 
+            <ul class="doclist2">
+                {foreach from=$resource_top name=resource_top item=news}
+				<li><time>{$news.add_time}</time> <span> {$news.cat_name}</span> <a href="{$news.url}">{$news.title}{if $new.images}(图){/if}</a></li>
+                {/foreach}
+
+			</ul>
+		</section>
+		<!-- new结束 -->
+
+		<section id="userLogin">
+			<h3><i class="icon2"></i> 博客会员登录 </h3>
+			<form action="" class="Loginform" method="post">
+                    <label> <input name="txt" type="text" class="text username" placeholder="请输入会员名" /></label>
+                    <label> <input name="password" type="password" class="text password" placeholder="请输入密码"/></label>
+                    <label> <input name="txt" type="text" class="text"  placeholder="请输入验证码"/> <div class="yzm"><img src=""></div></label>
+                    <button class="btn_login"  type="submit">登录</button>
+			</form>
+            <i class="icon"><img src="images/icon_login.png"> </i>
+		</section>
+		<!-- userLogin结束 -->
+
+
+		<span class="clear"></span>
+	</div>
+	<!-- Blog_m1结束 -->
+
+	<div id="Blog_m2">
+		<nav id="SidebarNav">
+			<h3 class="SideTitle3"> <span>教师名录 </span> </h3>
+
+			<dl>
+                {foreach from=$member_list item=row}
+					<dt>{$row.job_name}</dt>
+					<dd>
+                        {foreach from=$row.member item=member}
+							<a href="blog_category.php?id={$member.user_id}" style="display:inline-block;" target="_blank">{$member.nick_name} |</a>
+                        {/foreach}
+					</dd>
+                {/foreach}
+			</dl>
+		</nav>
+		<!-- SidebarNav结束 -->
+
+		<section id="column" class="clear_">
+					<div class="columnbox">
+						<h4 class="SubTitle"><span> 语 文</span></h4>
+						<ul class="list">
+                            {foreach from=$list[18] name=news_list item=news}
+								<li><time>{$news.add_time}</time><a href="{$news.url}">{$news.title}{if $new.images}(图){/if}</a></li>
+                            {/foreach}
+
+						</ul>
+					</div>
+                    
+                    
+					<div class="columnbox">
+						<h4 class="SubTitle"><span> 数学</span></h4>
+						<ul class="list">
+                            {foreach from=$list[19] name=news_list item=news}
+								<li><time>{$news.add_time}</time><a href="{$news.url}">{$news.title}{if $new.images}(图){/if}</a></li>
+                            {/foreach}
+						</ul>
+					</div>
+                    
+                    
+                    
+					<div class="columnbox">
+						<h4 class="SubTitle"><span> 英语</span></h4>
+						<ul class="list">
+                            {foreach from=$list[20] name=news_list item=news}
+								<li><time>{$news.add_time}</time><a href="{$news.url}">{$news.title}{if $new.images}(图){/if}</a></li>
+                            {/foreach}
+						</ul>
+					</div>
+                    
+                    
+					<div class="columnbox">
+						<h4 class="SubTitle"><span> 艺术</span></h4>
+						<ul class="list">
+                            {foreach from=$list[21] name=news_list item=news}
+								<li><time>{$news.add_time}</time><a href="{$news.url}">{$news.title}{if $new.images}(图){/if}</a></li>
+                            {/foreach}
+
+						</ul>
+					</div>
+                    
+                    
+                    
+					<div class="columnbox">
+						<h4 class="SubTitle"><span> 体育</span></h4>
+						<ul class="list">
+                            {foreach from=$list[22] name=news_list item=news}
+								<li><time>{$news.add_time}</time><a href="{$news.url}">{$news.title}{if $new.images}(图){/if}</a></li>
+                            {/foreach}
+						</ul>
+					</div>
+                    
+                    
+					<div class="columnbox">
+						<h4 class="SubTitle"><span> 思品</span></h4>
+						<ul class="list">
+                            {foreach from=$list[23] name=news_list item=news}
+								<li><time>{$news.add_time}</time><a href="{$news.url}">{$news.title}{if $new.images}(图){/if}</a></li>
+                            {/foreach}
+						</ul>
+					</div>
+                    
+                    
+                    
+				
+                    
+					<div class="columnbox2">
+						<h4 class="SubTitle"><span> 综合</span></h4>
+						<ul class="list row2">
+                            {foreach from=$list[24] name=news_list item=news}
+								<li><time>{$news.add_time}</time><a href="{$news.url}">{$news.title}{if $new.images}(图){/if}</a></li>
+                            {/foreach}
+						</ul>
+					</div>
+
+		</section>
+		<!-- column结束 -->
+
+		<span class="clear"></span>
+		<!-- 清除浮动 -->
+	</div>
+	<!-- Blog_m2结束 -->
+
+    {include file="inc/footer2.tpl"}
+	<!-- footer2结束 -->
+
+</body>
+</html>

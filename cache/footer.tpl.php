@@ -1,51 +1,114 @@
-<?php /* Smarty version 2.6.26, created on 2017-09-28 10:09:30
+<?php /* Smarty version 2.6.26, created on 2017-10-15 15:35:13
          compiled from inc/footer.tpl */ ?>
+<footer id="footer">
+    	<div class="center">
+                <div id="lianxi">
+                    <div class="bomlogo">
+                    <a href="#" > <img src="http://www.bc.com/theme/baoci/images/bomlogo.png" alt="description " /></a>
+                    </div>
+                        <p>常熟市报慈小学      版权所有</p>
+                        <p>地       址：江苏省苏州市常熟市湘江西路288号</p>
+                        <p>备案号：888888       技术支持：常熟市报慈小学</p>
+                    <ul>
+                        <li><img src="http://www.bc.com/theme/baoci/images/ewm.jpg" alt="description " />关注微信公众号</li>
+                        <li><img src="http://www.bc.com/theme/baoci/images/ewm2.jpg" alt="description " />扫一扫，手机端</li>
+                        <li><img src="http://www.bc.com/theme/baoci/images/dw.png" alt="description " />苏ICP备 10217989号</li>
+                    </ul>
+                </div>
+                <!-- lianxi结束 -->
+        
+                <section id="LeaveMessage">
+                    <form  class="form"  id="form1">
+                    <h5><em>在线留言 </em> <span> 我们会在三个工作日内回复！</span></h5>
+                    <dl>
+                        <dt>姓 &nbsp; &nbsp;  名 :</dt>
+                        <dd><input name="name" type="text" class="text1" id="name_" value="" /> <span class="must">*</span> </dd>
+                        <dl class="tel">
+                            <dt>电 &nbsp;话:</dt>
+                            <dd><input name="tel" type="text" class="text2" id="tel_" value=""/> <span class="must">*</span> </dd>
+                        </dl>
+                        
+                        
+                        
+                        <dt>邮  &nbsp; &nbsp;  箱:</dt>
+                        
+                        <dd><input name="email" type="text" class="text1" id="mail_" value=""/> <span class="must">*</span> </dd>
+                        
+                        
+                        <dl class="yzm">
+                            <dt>验证码：</dt>
+                            <dd><input name="captcha" type="text" class="text0" id="yzm_" value=""/> <img src="<?php echo $this->_tpl_vars['site']['root_url']; ?>
+captcha.php" class="yzmpic" id="vcode" alt="<?php echo $this->_tpl_vars['lang']['captcha']; ?>
+" border="1" onClick="refreshimage()" title="<?php echo $this->_tpl_vars['lang']['captcha_refresh']; ?>
+"> <span class="must">*</span> </dd>
+                        </dl>
+                        
+                        
+                        <dt>我要留言:</dt>
+                        
+                        
+                        <dd><textarea name="textarea" cols="" rows="" id="problem_" value=""> </textarea> <span class="must">*</span> </dd>
+                        <dd> 
+                         <input name="btn" class="btn_send" type="submit" value="提交" />
+                         <input name="btn" class="btn_reset" type="reset" value="重置" />
+                          <input type="hidden" name="token" value="<?php echo $this->_tpl_vars['token']; ?>
+" id="token_" />
+                         </dd>
+                </dl>
+                    </form>
+            </section>
 
-	<footer id="footer">
+            <script>
+                <?php echo '
+                $(function(){
+
+                    $("#form1").submit(function(){
+                        name = $("#name_").val();
+                        if(name == \'称呼\' || name == \'\'){
+                            alert(\'称呼不能为空\');
+                            return false;
+                        }
+
+                        email = $("#mail_").val();
+                        if(email == \'邮箱\' || email == \'\'){
+                            email = \'\';
+                        }
+                        tel = $("#tel_").val();
+                        if(tel == \'手机\' || tel == \'\'){
+                            tel = \'\';
+                        }
+                        captcha = $("#yzm_").val();
+                        if(captcha == \'验证码\' || captcha == \'\'){
+                            alert(\'验证码不能为空\');
+                            return false;
+                        }
+                        content = $("#problem_").val();
+                        if( content == \'\'){
+                            alert(\'内容不能为空\');
+                            return false;
+                        }
+                        token = $("#token_").val();
+                        $.post(
+                            \'/guestbook.php?rec=ajax_insert\',{
+                                name:name,
+                                email: email,
+                                tel: tel,
+                                captcha: captcha,
+                                content: $("#problem_").val(),
+                                token : token
+                            },function(data){
+                                alert(data);
+                            },\'json\')
+                        return false;
+                    })
+                })
+
+                '; ?>
+
+            </script>
+            <!-- LeaveMessage结束 -->
     
-    <div class="center">
-	   <?php $_from = $this->_tpl_vars['nav_bottom_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['nav_bottom_list'] = array('total' => count($_from), 'iteration' => 0);
-if ($this->_foreach['nav_bottom_list']['total'] > 0):
-    foreach ($_from as $this->_tpl_vars['nav']):
-        $this->_foreach['nav_bottom_list']['iteration']++;
-?>
-		<dl <?php if ($this->_tpl_vars['nav']['index'] == 6): ?>class="margin_left"<?php endif; ?> >
-			<dt><?php echo $this->_tpl_vars['nav']['nav_name']; ?>
-</dt>
-			<dd>
-			<?php $_from = $this->_tpl_vars['nav']['child']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
-    foreach ($_from as $this->_tpl_vars['child']):
-?>
-			<a href="<?php echo $this->_tpl_vars['child']['url']; ?>
-">&gt;<?php echo $this->_tpl_vars['child']['nav_name']; ?>
-</a> 
-			<?php endforeach; endif; unset($_from); ?>
-		</dd>
-		</dl>
-		<?php endforeach; endif; unset($_from); ?>
 		<span class="clear"></span>
-    
-		<div class="erweima">
-		    <a href="http://www.cssmxx.com/admin/" class="ewm_link"> </a>
-            <img src="http://www.cssmxx.com/theme/school/images/erweima.jpg" alt="图片描述" class="ewm" />
-            <img src="http://www.cssmxx.com/theme/school/images/school_txt.png" alt="图片描述" class="name" />
-            
 		</div>
-    </div>
-    
+        <span  class="footerbg"></span>
 	</footer>
-	<!-- footer结束 -->
-
-
-
-	<footer id="copyright">
-            <div class="center">
-            	<span class="bomlogo"><a href="http://www.manyoo.net/" target="_blank"><img src="http://www.cssmxx.com/theme/school/images/1.gif"></a> <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259598198'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1259598198%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script> 
-				<span class=""><a href="http://www.cssmxx.com/index.php" target="_blank">回到怀旧版“石梅网”</a></span>
-				</span>
-                <p>Copyright &copy; 常熟市石梅小学 All rights reserved. <a href="http://www.miitbeian.gov.cn" target="_blank">苏ICP备08004760号</a> <a href="http://bszs.conac.cn/sitename?method=show&id=20CAC33A69E823FBE053022819AC6F7E" target="_blank"><img src="http://www.cssmxx.com/theme/school/images/shiyedanwei.png" alt="事业单位" class="name" /></a></p>
-                <span class="icon"><a href="/article.php?id=528"></a></span>
-				 
-            </div>
-	</footer>
-	

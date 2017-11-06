@@ -1,19 +1,11 @@
 <?php
-/**
- * DouPHP
- * --------------------------------------------------------------------------------------------------
- * 版权所有 2013-2015 漳州豆壳网络科技有限公司，并保留所有权利。
- * 网站地址: http://www.douco.com
- * --------------------------------------------------------------------------------------------------
- * 这不是一个自由软件！您只能在遵守授权协议前提下对程序代码进行修改和使用；不允许对程序代码以任何形式任何目的的再发布。
- * 授权协议：http://www.douco.com/license.html
- * --------------------------------------------------------------------------------------------------
- * Author: DouCo
- * Release Date: 2015-10-16
- */
+
 define('IN_DOUCO', true);
 
 require (dirname(__FILE__) . '/include/init.php');
+require  (dirname(__FILE__) . '/include/tool.class.php');
+
+$tool = new Tool();
 
 // rec操作项的初始化
 $rec = $check->is_rec($_REQUEST['rec']) ? $_REQUEST['rec'] : 'default';
@@ -173,13 +165,26 @@ elseif ($rec == 'insert') {
         for($i = 0; $i < 6; $i++) {
             $file_name .= chr(mt_rand(97, 122));
         }
-        
+        $litpic = $basename = addslashes(basename($_POST['image']));
         // 其中image指的是上传的文本域名称，$file_name指的是生成的图片文件名
         $upfile = $img->upload_image('image', $file_name);
         $file = $images_dir . $upfile;
         // $img->make_thumb($upfile, 100, 100); // 生成缩略图
     }
-    
+    $body = $_POST['content'];
+    $description = $_POST['$description'];
+    $keywords = $_POST['keywords'];
+
+    //分析body里的内容
+    $body = $tool->AnalyseHtmlBody($body,$description,$litpic,$keywords,'htmltext');
+    if(empty($up_file) && !empty($litpic)){
+        $file = $litpic;
+        $up_file = ", image='$file'";
+    }
+    if(empty($up_file) && !empty($_POST['file'])){
+        $up_file =  ", image='".trim(str_replace('http://'.$_SERVER['HTTP_HOST'],'',$_POST['file']),'/')."'";
+    }
+
    if(!empty($_POST['file'])){
 	  $file = trim(str_replace('http://'.$_SERVER['HTTP_HOST'],'',$_POST['file']),'/');
    }
@@ -202,10 +207,11 @@ elseif ($rec == 'insert') {
     $add_time = !empty($_POST['add_time'])? strtotime($_POST['add_time']) : time();
     $_POST['micromial'] =  $_POST['micromial'] ? $_POST['micromial'] : 0;
     $_POST['ctype'] =  $_POST['ctype'] ? $_POST['ctype'] : 0;
+
     if($_USER['group_id'] > 2){
-    	$sql = "INSERT INTO " . $dou->table('article') . " (id, cat_id, title, defined, content, image ,keywords, add_time, description,source,micromail,custom_url,ctype,user_id,password,is_password)" . " VALUES (NULL, '$_POST[cat_id]', '$_POST[title]', '$_POST[defined]', '$_POST[content]', '$file', '$_POST[keywords]', '$add_time', '$_POST[description]','$_POST[source]','$_POST[micromail]','$_POST[custom_url]','$_POST[ctype]','$_USER[user_id]','$_POST[password]','$is_password')";
+    	$sql = "INSERT INTO " . $dou->table('article') . " (id, cat_id, title, defined, content, image ,keywords, add_time, description,source,micromail,custom_url,ctype,user_id,password,is_password,homeshow)" . " VALUES (NULL, '$_POST[cat_id]', '$_POST[title]', '$_POST[defined]', '$body', '$file', '$keywords', '$add_time', '$description','$_POST[source]','$_POST[micromail]','$_POST[custom_url]','$_POST[ctype]','$_USER[user_id]','$_POST[password]','$is_password','$_POST[homeshow]')";
     }else{
-    	$sql = "INSERT INTO " . $dou->table('article') . " (id, cat_id, title, defined, content, image ,keywords, add_time, description,source,micromail,custom_url,ctype,user_id,auditing,password,is_password)" . " VALUES (NULL, '$_POST[cat_id]', '$_POST[title]', '$_POST[defined]', '$_POST[content]', '$file', '$_POST[keywords]', '$add_time', '$_POST[description]','$_POST[source]','$_POST[micromail]','$_POST[custom_url]','$_POST[ctype]','$_USER[user_id]','1','$_POST[password]','$is_password')";
+    	$sql = "INSERT INTO " . $dou->table('article') . " (id, cat_id, title, defined, content, image ,keywords, add_time, description,source,micromail,custom_url,ctype,user_id,auditing,password,is_password,homeshow)" . " VALUES (NULL, '$_POST[cat_id]', '$_POST[title]', '$_POST[defined]', '$body', '$file', '$keywords', '$add_time', '$description','$_POST[source]','$_POST[micromail]','$_POST[custom_url]','$_POST[ctype]','$_USER[user_id]','1','$_POST[password]','$is_password','$_POST[homeshow]')";
     }
     
     $dou->query($sql);
@@ -259,11 +265,24 @@ elseif ($rec == 'edit') {
 elseif ($rec == 'update') {
     if (empty($_POST['title']))
         $dou->dou_msg($_LANG['article_name'] . $_LANG['is_empty']);
-        
+
+
+    //处理上传的缩略图
+    if(empty($ddisremote))
+    {
+        $ddisremote = 0;
+    }
+
+    $litpic = '';
+
+
     // 上传图片生成
     if ($_FILES['image']['name'] != "") {
+//        $picname = $_FILES['image']['name'];
+//        $litpic = GetDDImage('none',$picname,$ddisremote);
+
         // 获取图片文件名
-        $basename = addslashes(basename($_POST['image']));
+        $litpic = $basename = addslashes(basename($_POST['image']));
         $file_name = substr($basename, 0, strrpos($basename, '.'));
         
         $upfile = $img->upload_image('image', "$file_name"); // 上传的文件域
@@ -272,7 +291,18 @@ elseif ($rec == 'update') {
         
         $up_file = ", image='$file'";
     }
-	
+
+
+    $body = $_POST['content'];
+    $description = $_POST['$description'];
+    $keywords = $_POST['keywords'];
+
+    //分析body里的内容
+    $body = $tool->AnalyseHtmlBody($body,$description,$litpic,$keywords,'htmltext');
+    if(empty($up_file) && !empty($litpic)){
+        $file = $litpic;
+        $up_file = ", image='$file'";
+    }
    if(empty($up_file) && !empty($_POST['file'])){
 	  $up_file =  ", image='".trim(str_replace('http://'.$_SERVER['HTTP_HOST'],'',$_POST['file']),'/')."'";
    }
@@ -284,7 +314,7 @@ elseif ($rec == 'update') {
     $_POST['micromial'] =  $_POST['micromial'] ? $_POST['micromial'] : 0;
     $_POST['ctype'] =  $_POST['ctype'] ? $_POST['ctype'] : 0;
     $add_time = !empty($_POST['add_time'])? strtotime($_POST['add_time']) : time();
-    $sql = "UPDATE " . $dou->table('article') . " SET cat_id = '$_POST[cat_id]', title = '$_POST[title]', defined = '$_POST[defined]' ,content = '$_POST[content]'" . $up_file . ", keywords = '$_POST[keywords]', description = '$_POST[description]',source='$_POST[source]',micromail='$_POST[micromail]',custom_url = '$_POST[custom_url]',add_time='$add_time',ctype='$_POST[ctype]',password = '$_POST[password]' WHERE id = '$_POST[id]' ";
+    $sql = "UPDATE " . $dou->table('article') . " SET cat_id = '$_POST[cat_id]', title = '$_POST[title]', defined = '$_POST[defined]' ,content = '$body'" . $up_file . ", keywords = '$keywords', description = '$description',source='$_POST[source]',micromail='$_POST[micromail]',custom_url = '$_POST[custom_url]',add_time='$add_time',ctype='$_POST[ctype]',password = '$_POST[password]',homeshow='$_POST[homeshow]' WHERE id = '$_POST[id]' ";
 	
     $dou->query($sql);
     

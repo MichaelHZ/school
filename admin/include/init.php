@@ -27,11 +27,13 @@ if (PHP_VERSION >= '5.1') {
 }
 
 include_once ('../data/config.php');
-
 // 定义常量
 define('ROOT_PATH', str_replace(ADMIN_PATH . '/include/init.php', '', str_replace('\\', '/', __FILE__)));
 define('ROOT_URL', preg_replace('/' . ADMIN_PATH . '\//Ums', '', dirname('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']) . "/"));
 define('IS_ADMIN', true);
+
+$cfg_basehost = ROOT_URL;
+$cfg_basedir = ROOT_PATH;
 
 if (!file_exists(ROOT_PATH . "data/system.dou")) {
     header("Location: ../install/index.php\n");
@@ -135,7 +137,8 @@ $baby_id_all = '7'.$dou->dou_child_id('article_category', '7');
 $baby_id_all  = explode(',',$baby_id_all);
 *********************************************************************************/
 // 创建栏目ID和子栏目ID
-$create_id_all = '8'.$dou->dou_child_id('article_category', '8');
+
+$create_id_all = '';
 $create_id_all  = explode(',',$create_id_all);
 // 集团栏目ID和子栏目ID
 $group_id_all = $backup_group_id = '9'.$dou->dou_child_id('article_category', '9');

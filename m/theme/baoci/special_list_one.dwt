@@ -1,0 +1,34 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+</head>
+
+<body>
+
+
+<div data-page-content="1">
+
+
+    {foreach from=$article_list item=c}
+        <div class="Project">
+            <h4><a href="{$c.url}">{$c.title} </a></h4>
+            <h5>{$c.description}</h5>
+            {if $c.child}
+                <ul>
+                    {foreach from=$c.child item=sub}
+                        <li><a href="{$sub.url}">{$sub.title}</a></li>
+                    {/foreach}
+
+                </ul>
+            {/if}
+        </div>
+    {/foreach}
+
+
+</div>
+
+
+</body>
+</html>

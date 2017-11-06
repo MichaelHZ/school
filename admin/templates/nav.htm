@@ -56,7 +56,7 @@
       </ul>
       <div class="items">
         <div id="nav_add">
-         <form action="nav.php?rec=insert" method="post">
+         <form action="nav.php?rec=insert" method="post" enctype="multipart/form-data" >
           <table width="100%" border="0" cellpadding="5" cellspacing="1" class="tableBasic">
            <tr>
             <td width="80" height="35" align="right">{$lang.nav_system}</td>
@@ -80,6 +80,12 @@
             <td>
              <input type="text" id="nav_alias" name="nav_alias" value="" size="40" class="inpMain" />
             </td>
+           </tr>
+           <tr>
+           <td width="80" height="35" align="right">栏目图</td>
+           <td>
+            <input type="file" id="image" name="image" value="" size="40" class="inpMain" />
+           </td>
            </tr>
            <tr>
             <td height="35" align="right">{$lang.nav_type}</td>
@@ -106,6 +112,7 @@
               右浮动栏</label>
             </td>
            </tr>
+
            <tr>
             <td height="35" align="right">{$lang.parent}</td>
             <td id="parent">
@@ -135,7 +142,7 @@
          </form>
         </div>
         <div id="nav_defined">
-         <form action="nav.php?rec=insert" method="post">
+         <form action="nav.php?rec=insert" method="post" enctype="multipart/form-data">
           <table width="100%" border="0" cellpadding="5" cellspacing="1" class="tableBasic">
            <tr>
             <td width="80" height="35" align="right">{$lang.nav_name}</td>
@@ -147,6 +154,12 @@
             <td width="80" height="35" align="right">别名</td>
             <td>
              <input type="text" name="nav_alias" value="" size="40" class="inpMain" />
+            </td>
+           </tr>
+           <tr>
+            <td width="80" height="35" align="right">栏目图</td>
+            <td>
+             <input type="file" id="image" name="image" value="" size="40" class="inpMain" />
             </td>
            </tr>
            <tr>
@@ -212,7 +225,7 @@
     </div>
     <!-- {/if} -->
     <!-- {if $rec eq 'edit'} 导航编辑 -->
-    <form action="nav.php?rec=update" method="post">
+    <form action="nav.php?rec=update" method="post" enctype="multipart/form-data">
      <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
       <tr>
        <th colspan="2">&nbsp;</th>
@@ -243,6 +256,18 @@
        </td>
       </tr>
       <tr>
+       <td width="80" height="35" align="right">栏目图</td>
+       <td>
+        <input type="file" id="image" name="image" value="" size="40" class="inpMain" />
+       </td>
+      </tr>
+      <tr>
+       <td width="80" height="35" align="right"></td>
+
+
+       <td>{if !empty($nav_info.image)}<span><img width="100px" src="/{$nav_info.image}"></span>{/if}</td>
+      </tr>
+      <tr>
       <td height="35" align="right">{$lang.nav_type}</td>
       <td>
        <label for="type_0">
@@ -262,6 +287,7 @@
        <input type="radio" name="type" id="type_5" value="index"{if $nav_info.type eq 'index'} checked="true"{/if} onChange="dou_callback('nav.php?rec=nav_select&id={$nav_info.id}', 'type', this.value, 'parent')">右浮动栏</label>
       </td>
      </tr>
+
      <tr>
        <td height="35" align="right">{$lang.nav_link}</td>
        <td>
@@ -300,6 +326,7 @@
       </tr>
      </table>
     </form>
+
     <!-- {/if} -->
    </div>
  </div>

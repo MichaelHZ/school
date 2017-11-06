@@ -1,184 +1,178 @@
-<?php /* Smarty version 2.6.26, created on 2017-09-28 10:10:00
+<?php /* Smarty version 2.6.26, created on 2017-10-13 21:52:14
          compiled from article.dwt */ ?>
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8" />
-	<title><?php echo $this->_tpl_vars['page_title']; ?>
+    <meta charset="utf-8"/>
+    <meta name="keywords" content="<?php echo $this->_tpl_vars['keywords']; ?>
+"/>
+    <meta name="description" content="<?php echo $this->_tpl_vars['description']; ?>
+"/>
+    <title><?php echo $this->_tpl_vars['page_title']; ?>
 </title>
-	<meta name="keywords" content="<?php echo $this->_tpl_vars['keywords']; ?>
-" />
-	<meta name="description" content="<?php echo $this->_tpl_vars['description']; ?>
-" />
-	<link href="http://www.cssmxx.com/theme/school/images/style/reset_css.css" rel="stylesheet" />
-	<link href="http://www.cssmxx.com/theme/school/images/style/all.css" rel="stylesheet" />
-    <script src="http://www.cssmxx.com/theme/school/images/js/jquery.js"></script>
-    <script src="http://www.cssmxx.com/theme/school/images/js/jquery.easing.1.3.js"></script>
-    <script src="http://www.cssmxx.com/theme/school/images/js/jquerycookie.js"></script>
-    <script src="http://www.cssmxx.com/theme/school/images/js/load.js"></script>
-    
-    
-	<!--[if IE]>
-	<script src="http://www.cssmxx.com/theme/school/images/js/html5.js"></script>
-	<![endif]-->
+    <link href="http://www.bc.com/theme/baoci/images/style/reset_css.css" rel="stylesheet"/>
+    <link href="http://www.bc.com/theme/baoci/images/style/all.css" rel="stylesheet"/>
+    <script src="http://www.bc.com/theme/baoci/images/js/jquery.js"></script>
+    <script src="http://www.bc.com/theme/baoci/images/js/load.js"></script>
+    <!--[if lt IE 9]>
+    <script language="javascript" type="text/javascript" src="js/html5.js"></script>
+    <![endif]-->
 </head>
-<body>
-	 <?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => "inc/header2.tpl", 'smarty_include_vars' => array()));
+	<body class="huibg">
+    <?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include(array('smarty_include_tpl_file' => "inc/header.tpl", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
-	<!-- header2结束 -->
-	<div id="banner2">
-		<img src="<?php echo $this->_tpl_vars['banner_info']['banner']; ?>
-" alt="图片描述" />
-	</div>
-	<!-- banner2结束 -->
-    
-    
-    <h2 class="maintitle"><?php echo $this->_tpl_vars['banner_info']['words']; ?>
- </h2>
-                  <div id="weizi">
-                        <p><span> 您现在的位置：</span><a href="/">首页</a> &gt; <a href="<?php echo $this->_tpl_vars['cat_root']['url']; ?>
-"><?php echo $this->_tpl_vars['cat_root']['cat_name']; ?>
-</a> &gt;<a href="<?php echo $this->_tpl_vars['cat_two']['url']; ?>
-"><?php echo $this->_tpl_vars['cat_two']['cat_name']; ?>
-</a><?php if ($this->_tpl_vars['get_cat']['two'] != $this->_tpl_vars['get_cat']['child'] && $this->_tpl_vars['get_cat']['two'] != $this->_tpl_vars['get_cat']['root']): ?> &gt; <?php echo $this->_tpl_vars['cat_child']['cat_name']; ?>
-<?php endif; ?></p>
-                    </div>
-                    <!-- weizi结束 -->
-    
-	<div id="container">
-		<aside id="sidebar">
-					  <?php $_from = $this->_tpl_vars['article_category']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+
+	<!-- header结束 -->
+
+    <?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include(array('smarty_include_tpl_file' => "inc/banner.tpl", 'smarty_include_vars' => array()));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+	<!-- Banner2结束 -->
+
+
+
+	<div id="container2">
+		<aside id="sidebarFenlei">
+            <?php $_from = $this->_tpl_vars['article_category']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['left_nav']):
 ?>
-		            <?php if ($this->_tpl_vars['get_cat']['two'] == $this->_tpl_vars['left_nav']['cat_id']): ?>
-					<h3 class="SideTitle"><span><?php echo $this->_tpl_vars['left_nav']['unique_id']; ?>
-</span><strong><?php echo $this->_tpl_vars['left_nav']['cat_name']; ?>
- </strong></h3>
-					<?php endif; ?>
-					<?php endforeach; endif; unset($_from); ?>
-					 
-					<ul class="NavList">
-					    <?php $_from = $this->_tpl_vars['article_category']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+            <?php if ($this->_tpl_vars['get_cat']['two'] == $this->_tpl_vars['left_nav']['cat_id']): ?>
+                <h4 class="blueTitle"><em><?php echo $this->_tpl_vars['left_nav']['cat_name']; ?>
+  </em> <?php echo $this->_tpl_vars['left_nav']['unique_id']; ?>
+ </h4>
+            <?php endif; ?>
+            <?php endforeach; endif; unset($_from); ?>
+					<ul class="SortList3">
+                        <?php $_from = $this->_tpl_vars['article_category']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['left_nav']):
 ?>
-						<li <?php if ($this->_tpl_vars['get_cat']['two'] == $this->_tpl_vars['left_nav']['cat_id']): ?>class="change"<?php endif; ?>><a href="<?php if ($this->_tpl_vars['left_nav']['child'] == ''): ?><?php echo $this->_tpl_vars['left_nav']['url']; ?>
+                        <li <?php if ($this->_tpl_vars['get_cat']['two'] == $this->_tpl_vars['left_nav']['cat_id']): ?>class="change"<?php endif; ?>><a
+                                    href="<?php if ($this->_tpl_vars['left_nav']['child'] == ''): ?><?php echo $this->_tpl_vars['left_nav']['url']; ?>
 <?php else: ?>#<?php endif; ?>"><?php echo $this->_tpl_vars['left_nav']['cat_name']; ?>
 </a>
-						      <?php if ($this->_tpl_vars['left_nav']['child']): ?>
+                            <?php if ($this->_tpl_vars['left_nav']['child']): ?>
                                 <ol>
                                     <?php $_from = $this->_tpl_vars['left_nav']['child']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['child']):
 ?>
-                                    <li <?php if ($this->_tpl_vars['child']['cur']): ?>class="hovers"<?php endif; ?> ><a href="<?php if ($this->_tpl_vars['child']['custom_url']): ?><?php echo $this->_tpl_vars['child']['custom_url']; ?>
+                                    <li <?php if ($this->_tpl_vars['child']['cur']): ?>class="change2"<?php endif; ?> ><a
+                                                href="<?php if ($this->_tpl_vars['child']['custom_url']): ?><?php echo $this->_tpl_vars['child']['custom_url']; ?>
 ?cat_id=<?php echo $this->_tpl_vars['child']['cat_id']; ?>
 <?php else: ?><?php echo $this->_tpl_vars['child']['url']; ?>
 <?php endif; ?>"><?php echo $this->_tpl_vars['child']['cat_name']; ?>
-</a></li>
+</a>
+                                    </li>
                                     <?php if ($this->_tpl_vars['child']['cur']): ?>
-                                   
+
                                     <?php endif; ?>
-                                	<?php endforeach; endif; unset($_from); ?>
-                                </ol>  
-                                <?php endif; ?>                      
+                                    <?php endforeach; endif; unset($_from); ?>
+                                </ol>
+                            <?php endif; ?>
                         </li>
                         <?php endforeach; endif; unset($_from); ?>
-                       
 					</ul>
-                    
-                    
-                    
-                    <span class="topbg"></span>
-                    <span class="bompic"><img src="http://www.cssmxx.com/theme/school/images/nav_bom1.png"></span>
-
+		<span class="bombg"></span>
 		</aside>
-		<!-- sidebar结束 -->
+		<!-- sidebarFenlei结束 -->
 
-		<article id="neirong">
-                    <div id="DocContent">
-                        <h1 class="doc_title"><?php echo $this->_tpl_vars['article']['title']; ?>
+		<article id="neirong2">
+
+                <div id="Location">
+                    <i class="icon_"></i> 您现在的位置：<a href="/">首页</a> &gt; <a
+                            href="<?php echo $this->_tpl_vars['cat_root']['url']; ?>
+"><?php echo $this->_tpl_vars['cat_root']['cat_name']; ?>
+</a> <?php if ($this->_tpl_vars['get_cat']['two'] != $this->_tpl_vars['get_cat']['root']): ?>&gt;<a
+                        href="<?php echo $this->_tpl_vars['cat_two']['url']; ?>
+"><?php echo $this->_tpl_vars['cat_two']['cat_name']; ?>
+</a><?php if ($this->_tpl_vars['get_cat']['two'] != $this->_tpl_vars['get_cat']['child'] && $this->_tpl_vars['get_cat']['two'] != $this->_tpl_vars['get_cat']['root']): ?> &gt; <?php echo $this->_tpl_vars['cat_child']['cat_name']; ?>
+<?php endif; ?><?php endif; ?>
+                </div>
+                <!-- Location结束 -->
+                
+                
+                <section id="docContent">
+                        <header class="doc_header">
+                            <h1> <?php echo $this->_tpl_vars['article']['title']; ?>
 </h1>
-                        <ul class="doc_value">
-                            <li><?php echo $this->_tpl_vars['lang']['add_time']; ?>
-：<?php echo $this->_tpl_vars['article']['add_time']; ?>
-</li>
-                            <li>来源：<?php echo $this->_tpl_vars['article']['source']; ?>
-</li>
-                            <li><?php echo $this->_tpl_vars['lang']['click']; ?>
-：<?php echo $this->_tpl_vars['article']['click']; ?>
- </li>
-                        </ul>
-                        <div class="content">
+                            <div class="values">
+                                <span>发布时间：<?php echo $this->_tpl_vars['article']['add_time']; ?>
+ </span><span>发布者：<?php echo $this->_tpl_vars['article']['source']; ?>
+ </span><span>阅读量：<?php echo $this->_tpl_vars['article']['click']; ?>
+ </span>
+                            </div>
+                            
+                            <div class="share">
+                            <div class="bdsharebuttonbox">
+                                <a class="bds_more" href="#" data-cmd="more"></a>
+                                <a title="分享到QQ空间" class="bds_qzone" href="#" data-cmd="qzone"></a>
+                                <a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a>
+                                <a title="分享到腾讯微博" class="bds_tqq" href="#" data-cmd="tqq"></a>
+                                <a title="分享到人人网" class="bds_renren" href="#" data-cmd="renren"></a>
+                                <a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a>
+                            </div>
+                        
+                        <script>
+                        <?php echo '
+                        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};
+                        with(document)0[(getElementsByTagName(\'head\')[0]||body).appendChild(createElement(\'script\')).src=\'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=\'+~(-new Date()/36e5)];
+                        '; ?>
+
+                        </script>                            </div>
+                            
+                            
+                            </header><div class="content">
                         <!-- 文章内容开始 -->
                         <?php echo $this->_tpl_vars['article']['content']; ?>
 
                         <!-- 文章内容结束 -->
-                        </div>
-                
-                    </div>
-                    <!-- DocContent结束 -->
-                
-                    <div id="PrevNext">
-                    <p><?php echo $this->_tpl_vars['lang']['article_previous']; ?>
+                            </div>
+                           <nav id="PrevNext">
+                               <p><?php echo $this->_tpl_vars['lang']['article_previous']; ?>
 ：<?php if ($this->_tpl_vars['lift']['previous']): ?><a href="<?php echo $this->_tpl_vars['lift']['previous']['url']; ?>
 "><?php echo $this->_tpl_vars['lift']['previous']['title']; ?>
 </a><?php else: ?>没有了<?php endif; ?></p>
-                    <p><?php echo $this->_tpl_vars['lang']['article_next']; ?>
+                               <p><?php echo $this->_tpl_vars['lang']['article_next']; ?>
 ：<?php if ($this->_tpl_vars['lift']['next']): ?><a href="<?php echo $this->_tpl_vars['lift']['next']['url']; ?>
 "><?php echo $this->_tpl_vars['lift']['next']['title']; ?>
 </a><?php else: ?>没有了<?php endif; ?></p>
-                
-                    </div>
-                    <!-- PrevNext结束 -->
-                
-                    <div id="Share">
-                                <!-- Baidu Button BEGIN -->
-                                <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
-                                <span class="bds_more">分享到：</span>
-                                <a class="bds_qzone"></a>
-                                <a class="bds_tsina"></a>
-                                <a class="bds_tqq"></a>
-                                <a class="bds_renren"></a>
-                                <a class="bds_t163"></a>
-                                <a class="shareCount"></a>
-                                </div>
-                                <script type="text/javascript" id="bdshare_js" data="type=tools&uid=627946" ></script>
-                                <script type="text/javascript" id="bdshell_js"></script>
-                                <script type="text/javascript">
-                                document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
-                                </script>
-                                <!-- Baidu Button END -->                    
-                    
-                        <a href="<?php echo $this->_tpl_vars['cat_two']['url']; ?>
-" class="btn_more">更多动态&gt;</a>
-                    </div>
-                    <!-- Share结束 -->
-                
-             
-             
-             
-             
+                                <a href="<?php echo $this->_tpl_vars['cat_two']['url']; ?>
+" class="btn_more">查看更多 +</a>
+                            </nav>
+                            <!-- PrevNext结束 -->
+
+                </section>
+                <!-- docContent结束 -->
+            
+     
                 
 		</article>
-		<!-- neirong结束 -->
+		<!-- neirong2结束 -->
+
 
 		<span class="clear"></span>
-        <span class="icon_hua"></span>
-        <span class="icon_hua2"></span>
+		<span class="float_pic9"></span>
+		<span class="float_pic10"></span>
 	</div>
-	<!-- container结束 -->
+	<!-- container2结束 -->
 
-
-	<span class="container_bg"></span>
-
-
-	<?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => "inc/footer.tpl", 'smarty_include_vars' => array()));
-$this->_tpl_vars = $_smarty_tpl_vars;
-unset($_smarty_tpl_vars);
- ?>
+	<footer id="footer2">
+    	<div class="center">
+           	<a href="#" class="bomlogo"><img src="http://www.bc.com/theme/baoci/images/bomlogo.png" > </a>
+            <div class="text">
+                    <p>Copyright &copy; 2012-2017  常熟市报慈小学  版权所有     地址：江苏省苏州市常熟市湘江西路288号</p>
+                    <p>苏ICP备10217989号    技术支持：漫有目的</p>
+           
+            
+            </div>
+		</div>
+        <span  class="footerbg"></span>
+	</footer>
+	<!-- footer2结束 -->
 
 </body>
 </html>
