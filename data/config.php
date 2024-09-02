@@ -16,13 +16,13 @@
 $dbhost   = "localhost";
 
 // database name
-$dbname   = "baoci";
+$dbname   = "";
 
 // database username
-$dbuser   = "root";
+$dbuser   = "";
 
 // database password
-$dbpass   = "Harrypotter2017";
+$dbpass   = "";
 
 // table prefix
 $prefix   = "sm_";
